@@ -14,6 +14,7 @@ export const siteConfig = {
     twitter: "https://twitter.com/JMironovStudio",
     linkedin: "https://linkedin.com/in/jeremymironov",
     facebook: "https://facebook.com",
+    github: "https://github.com/Jeremy-Mironov",
   },
   navLinks: [
     { text: "Home", href: "/" },
