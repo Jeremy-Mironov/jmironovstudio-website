@@ -25,8 +25,8 @@ export const siteConfig = {
     { text: "Contact", href: "/contact" },
   ],
   contact: {
-    email: "[ADD EMAIL HERE]",
-    phone: "[ADD PHONE HERE]",
+    email: "Jeremymironov@gmail.com",
+    phone: "(971) 326-7264",
     location: "Vancouver, WA",
   },
 };
