@@ -3,84 +3,210 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getImage } from "astro:assets";
 import Content2 from "@/components/widgets/Content2.astro";
 import Values from "@/components/widgets/Values.astro";
+import Features from "@/components/widgets/Features.astro";
+import CTASection from "@/components/widgets/CTASection.astro";
 import aboutImage from "@/assets/images/about-office.webp";
 
 const metadata = {
-  title: "About us",
+  title: "About JMironov Studio | Web Design, SEO & Digital Marketing",
   description:
-    "Learn more about our vision, values, and the team behind Astro Starter Pro.",
+    "Learn about Jeremy Mironov and JMironov Studio, a Vancouver WA web design, SEO, and digital marketing studio for local businesses.",
 };
-
-const values = [
-  {
-    title: "Innovation",
-    description:
-      "Curabitur dignissim, felis non sollicitudin molestie, urna mauris pellentesque velit, ut eleifend.",
-  },
-  {
-    title: "Commitment",
-    description:
-      "Aenean condimentum finibus mauris, a fermentum justo pan eget. Sed ultricies, neque quis.",
-  },
-  {
-    title: "Quality",
-    description:
-      "Donec sed orci tincidunt, aliquam nisl a, condimentum nunc. Nulla varius ex nec ante feugiat.",
-  },
-  {
-    title: "Transparency",
-    description:
-      "Phasellus tristique, elit dapibus cursus facilisis, lorem augue fringilla nunc, vitae fermentum.",
-  },
-  {
-    title: "Teamwork",
-    description:
-      "In hac habitasse platea dictumst. Vivamus adipiscing fermentum quam volutpat aliquam. Integer et.",
-  },
-  {
-    title: "Excellence",
-    description:
-      "Fusce at massa nec sapien auctor gravida in in tellus. Vivamus a tristique metus, et molestie.",
-  },
-];
 
 const optimizedImage = await getImage({
   src: aboutImage,
   format: "webp",
 });
+
+const tools = [
+  {
+    title: "WordPress & Elementor",
+    description:
+      "Custom websites built for local businesses that need easy content management.",
+    icon: "lucide:layout-template",
+    iconClass: "bg-blue-500/10 text-blue-400",
+  },
+  {
+    title: "Astro",
+    description:
+      "Fast, modern static sites for businesses that need high performance and custom structure.",
+    icon: "lucide:zap",
+    iconClass: "bg-orange-500/10 text-orange-400",
+  },
+  {
+    title: "Google Ads",
+    description:
+      "Search campaign setup, keyword strategy, conversion tracking, and optimization.",
+    icon: "lucide:target",
+    iconClass: "bg-green-500/10 text-green-400",
+  },
+  {
+    title: "Meta Ads",
+    description:
+      "Facebook and Instagram lead generation campaigns for local service businesses.",
+    icon: "lucide:layout-grid",
+    iconClass: "bg-purple-500/10 text-purple-400",
+  },
+  {
+    title: "GA4 & Google Tag Manager",
+    description:
+      "Analytics and tag management setup so you understand where leads are coming from.",
+    icon: "lucide:chart-bar",
+    iconClass: "bg-yellow-500/10 text-yellow-400",
+  },
+  {
+    title: "Google Search Console",
+    description:
+      "Search performance monitoring and technical SEO issue identification.",
+    icon: "lucide:search",
+    iconClass: "bg-red-500/10 text-red-400",
+  },
+  {
+    title: "Microsoft Clarity",
+    description:
+      "Behavior tracking and heatmaps to understand how visitors use your website.",
+    icon: "lucide:mouse-pointer-2",
+    iconClass: "bg-teal-500/10 text-teal-400",
+  },
+  {
+    title: "CRM & Automation",
+    description:
+      "Google Sheets workflows, CRM integrations, and simple automation for lead follow-up.",
+    icon: "lucide:workflow",
+    iconClass: "bg-indigo-500/10 text-indigo-400",
+  },
+  {
+    title: "Local SEO",
+    description:
+      "Google Business Profile optimization, service area pages, and local keyword strategy.",
+    icon: "lucide:map-pin",
+    iconClass: "bg-pink-500/10 text-pink-400",
+  },
+];
+
+const values = [
+  {
+    title: "Implementation Over Advice",
+    description:
+      "I build things. When you hire me, I set up the website, configure the tracking, run the ads, and build the automation — not just tell you what to do.",
+  },
+  {
+    title: "Marketing Built Into the Website",
+    description:
+      "Good websites are built with marketing in mind from the start — proper structure, clear service pages, fast load times, and forms that work.",
+  },
+  {
+    title: "Honest About What Works",
+    description:
+      "I will tell you if something is not a good investment for your business size or situation. The goal is results, not selling more services.",
+  },
+  {
+    title: "Simple Systems for Small Teams",
+    description:
+      "Local businesses do not need enterprise tools. I build simple, practical systems that a small team can actually use and maintain.",
+  },
+];
 ---
 
 <BaseLayout {metadata}>
   <link slot="head" rel="preload" href={optimizedImage.src} as="image" />
+
+  <!-- Intro -->
   <Content2
-    title="Our Vision"
-    description={[
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    ]}
     tagline="About"
+    title="Hi, I'm Jeremy Mironov"
+    description={[
+      "I run JMironov Studio, a small digital marketing and web development studio based in Vancouver, WA.",
+      "I help local service businesses — contractors, remodelers, flooring companies, and similar businesses — get more leads through better websites, local SEO, advertising, tracking, and simple automation systems.",
+    ]}
     image={aboutImage}
-    imageAlt="Modern web development office"
+    imageAlt="JMironov Studio workspace"
     actions={[
       {
-        text: "Contact Us",
+        text: "Book a Free Consultation",
         href: "/contact",
         variant: "primary",
-        icon: "lucide:mail",
+        icon: "lucide:calendar",
       },
       {
-        text: "View Details",
-        href: "#",
+        text: "View Services",
+        href: "/services",
         variant: "secondary",
         icon: "lucide:arrow-right",
       },
     ]}
   />
+
+  <!-- Background -->
+  <div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="bg-card border border-border rounded-3xl p-8 shadow-sm">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 text-primary text-sm font-semibold mb-4"
+      >
+        Background
+      </div>
+      <h2 class="text-2xl font-bold text-foreground mb-4">
+        Technical and Marketing Together
+      </h2>
+      <div class="space-y-4 text-muted-foreground leading-relaxed">
+        <p>
+          My background is in computer science and web development. I have been
+          building websites and working on digital marketing for several years,
+          primarily focused on local and small service businesses.
+        </p>
+        <p>
+          Most marketing agencies are strong on strategy but hand off the
+          technical work. Most web developers build clean sites but do not think
+          about how customers find them. I work at the intersection of both —
+          websites built with marketing in mind, not just pages that look good.
+        </p>
+        <p>
+          I understand how websites are built, how Google ranks local
+          businesses, how ad campaigns are structured, and how to set up
+          tracking that actually shows you where your leads are coming from.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Positioning quote -->
+  <div class="mx-auto max-w-3xl px-4 py-6 sm:px-6 lg:px-8 text-center">
+    <blockquote
+      class="text-xl md:text-2xl font-medium text-foreground leading-relaxed"
+    >
+      "I build websites with marketing in mind — not just pages that look good,
+      but websites structured to help people find your business, understand your
+      services, and contact you."
+    </blockquote>
+    <p class="mt-4 text-sm text-muted-foreground">
+      — Jeremy Mironov, JMironov Studio
+    </p>
+  </div>
+
+  <!-- Tools -->
+  <Features
+    tagline="Tools & Platforms"
+    title="What I Work With"
+    subtitle="The tools and platforms I use regularly across web development, SEO, advertising, analytics, and automation."
+    features={tools}
+  />
+
+  <!-- Values -->
   <Values
+    tagline="My Approach"
+    title="How I Work"
+    subtitle="A few principles that guide how I approach projects."
     items={values}
-    columns={3}
-    tagline="Our Values"
-    title="What Defines Us"
-    subtitle="Principles that guide our daily work"
+    columns={2}
+  />
+
+  <!-- CTA -->
+  <CTASection
+    title="Let's Talk About Your Business"
+    subtitle="If you are a local service business in Vancouver WA or the Portland Metro area and need help with your website, SEO, ads, or lead follow-up — book a free consultation."
+    primaryText="Book a Free Consultation"
+    primaryHref="/contact"
+    secondaryText="View Services"
+    secondaryHref="/services"
   />
 </BaseLayout>

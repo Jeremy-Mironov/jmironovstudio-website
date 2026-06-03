@@ -1,0 +1,55 @@
+---
+import WidgetWrapper from "./WidgetWrapper.astro";
+import Headline from "@/components/ui/Headline.astro";
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  id?: string;
+  classes?: Record<string, string>;
+}
+
+const {
+  items,
+  title = "Frequently Asked Questions",
+  subtitle,
+  tagline,
+  id,
+  classes = {},
+} = Astro.props;
+
+const { container: containerClassProp = "" } = classes;
+---
+
+<WidgetWrapper id={id} containerClass={containerClassProp}>
+  <Headline
+    title={title}
+    subtitle={subtitle}
+    tagline={tagline}
+    classes={{ container: "max-w-3xl mx-auto text-center" }}
+  />
+  <div class="max-w-3xl mx-auto space-y-4">
+    {
+      items.map((item) => (
+        <details class="bg-card border border-border rounded-2xl p-6 group open:shadow-sm transition-all">
+          <summary class="flex items-center justify-between cursor-pointer text-foreground font-semibold text-base leading-relaxed list-none">
+            <span>{item.question}</span>
+            <span class="text-primary ml-4 shrink-0 text-xl font-light transition-transform group-open:rotate-45 select-none">
+              +
+            </span>
+          </summary>
+          <p class="mt-4 text-muted-foreground leading-relaxed text-sm">
+            {item.answer}
+          </p>
+        </details>
+      ))
+    }
+  </div>
+</WidgetWrapper>

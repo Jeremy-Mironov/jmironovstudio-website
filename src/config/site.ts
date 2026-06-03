@@ -1,26 +1,32 @@
 import ogImage from "@/assets/og-image.png";
 
 export const siteConfig = {
-  name: "Astro Starter Pro",
+  name: "JMironov Studio",
   description:
-    "Starter template optimized for SEO and performance. A solid foundation to start your projects with best practices.",
-  url: "https://astrostarterpro.com",
+    "Web design, SEO, Google Ads, and digital marketing for local businesses in Vancouver WA and Portland Metro.",
+  url: "https://www.jmironovstudio.com",
   lang: "en",
   locale: "en_US",
-  author: "Devgelo",
-  twitter: "@Devgelo",
+  author: "Jeremy Mironov",
+  twitter: "@JMironovStudio",
   ogImage: ogImage,
   socialLinks: {
-    twitter: "https://twitter.com",
-    github: "https://github.com/devgelo-labs/astro-starter-pro",
-    discord: "https://discord.com",
+    twitter: "https://twitter.com/JMironovStudio",
+    linkedin: "https://linkedin.com/in/jeremymironov",
+    facebook: "https://facebook.com",
   },
   navLinks: [
     { text: "Home", href: "/" },
-    { text: "About", href: "/about" },
     { text: "Services", href: "/services" },
+    { text: "Pricing", href: "/pricing" },
+    { text: "Work", href: "/work" },
+    { text: "About", href: "/about" },
     { text: "Blog", href: "/blog" },
     { text: "Contact", href: "/contact" },
-    { text: "Widgets", href: "/widgets" },
   ],
+  contact: {
+    email: "[ADD EMAIL HERE]",
+    phone: "[ADD PHONE HERE]",
+    location: "Vancouver, WA",
+  },
 };

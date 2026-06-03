@@ -1,128 +1,123 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import ServiceList from "@/components/widgets/ServiceList.astro";
 import Content from "@/components/widgets/Content.astro";
-import Content2 from "@/components/widgets/Content2.astro";
-import webDevImg from "@/assets/images/services/web-dev.webp";
-import seoImg from "@/assets/images/services/seo.webp";
-import consultingImg from "@/assets/images/services/consulting.webp";
+import ServiceList from "@/components/widgets/ServiceList.astro";
+import Features from "@/components/widgets/Features.astro";
+import CTASection from "@/components/widgets/CTASection.astro";
 
 const services = [
   {
-    title: "Web Development",
-    description: "Static and dynamic sites built for the modern era.",
+    title: "Website Design & Development",
+    description:
+      "Modern, fast, SEO-friendly websites for local service businesses. WordPress, Elementor, and Astro builds with conversion-focused structure and lead capture.",
     icon: "lucide:globe",
+    href: "/services/website-design-development",
   },
   {
-    title: "SEO Optimization",
-    description: "We ensure your content is found by those looking for it.",
+    title: "SEO & Local SEO",
+    description:
+      "Keyword research, on-page SEO, Google Business Profile optimization, service area pages, and technical SEO basics to help local customers find you.",
     icon: "lucide:search",
+    href: "/services/seo-local-seo",
   },
   {
-    title: "IT Consulting",
-    description: "Technical advice to scale your projects to the next level.",
-    icon: "lucide:rocket",
+    title: "Google Ads",
+    description:
+      "Search campaign setup, keyword strategy, ad copy, conversion tracking, and ongoing optimization for local service businesses.",
+    icon: "lucide:target",
+    href: "/services/google-ads",
+  },
+  {
+    title: "Meta Ads",
+    description:
+      "Facebook and Instagram lead generation campaigns with creative strategy, lead form structure, and campaign setup and testing.",
+    icon: "lucide:layout-grid",
+    href: "/services/meta-ads",
+  },
+  {
+    title: "Tracking & Analytics",
+    description:
+      "GA4 setup, Google Tag Manager, Search Console, phone click tracking, form submission tracking, and Microsoft Clarity behavior review.",
+    icon: "lucide:chart-bar",
+    href: "/services/tracking-analytics",
+  },
+  {
+    title: "CRM & Automation",
+    description:
+      "Lead capture workflows, follow-up systems, Google Sheets and CRM integrations, and simple automation to help you stop losing leads.",
+    icon: "lucide:workflow",
+    href: "/services/crm-automation",
   },
 ];
+
+const approachItems = [
+  {
+    icon: "lucide:layers",
+    title: "Foundation First",
+    description:
+      "A solid website, clear service pages, and proper tracking are set up before adding paid traffic.",
+    iconClass: "bg-blue-500/10 text-blue-400",
+  },
+  {
+    icon: "lucide:activity",
+    title: "Then Drive Traffic",
+    description:
+      "Once the foundation is in place, Google Ads, local SEO, or Meta Ads bring in qualified visitors.",
+    iconClass: "bg-green-500/10 text-green-400",
+  },
+  {
+    icon: "lucide:refresh-cw",
+    title: "Track and Improve",
+    description:
+      "Conversion tracking and reporting show what is working, so we can optimize over time.",
+    iconClass: "bg-purple-500/10 text-purple-400",
+  },
+];
+
 const metadata = {
-  title: "Services",
+  title: "Digital Marketing Services for Local Businesses | JMironov Studio",
   description:
-    "Discover our web development, SEO optimization, and technology consulting services.",
+    "Website design, SEO, local SEO, Google Ads, Meta Ads, tracking, and automation services for local businesses in Vancouver WA and Portland Metro.",
 };
 ---
 
 <BaseLayout {metadata}>
   <Content
     tagline="Services"
-    title="Our Services"
+    title="Services for Local Businesses"
     description={[
-      "Comprehensive solutions designed to maximize the potential of your digital presence.",
+      "JMironov Studio offers web design, SEO, advertising, tracking, and automation services built specifically for local service businesses in Vancouver WA and the Portland Metro area.",
     ]}
   />
+
   <ServiceList services={services} classes={{ container: "pt-0 md:pt-0" }} />
-  <Content
-    tagline="Web Development"
-    title="Modern Web Development"
-    description={[
-      "We specialize in building fast, secure, and scalable websites using the latest technologies. We transform your vision into an impactful digital experience.",
-    ]}
-    classes={{ container: "pb-0 md:pb-0" }}
+
+  <Features
+    tagline="How It Fits Together"
+    title="A Connected Approach"
+    subtitle="Each service is more effective when the other pieces are in place. Here is the general order that makes sense."
+    features={approachItems}
   />
-  <Content2
-    items={[
-      {
-        title: "Responsive Design",
-        description:
-          "Your site will look perfect on any device, from mobiles to desktop screens.",
-      },
-      {
-        title: "Optimized Performance",
-        description:
-          "Fast loading to improve user experience and SEO positioning.",
-      },
-    ]}
-    image={webDevImg}
-    imageAlt="Modern Web Development"
-    classes={{ container: "pt-0 md:pt-0" }}
-  >
-    <Fragment>
-      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Modern Web Development
-      </h3>
-      We specialize in building fast, secure, and scalable websites using the latest
-      technologies. We transform your vision into an impactful digital experience.
-    </Fragment>
-  </Content2>
 
-  <Content2
-    isReversed={true}
-    items={[
-      {
-        title: "SEO Audit",
-        description:
-          "We deeply analyze your website to identify technical and content improvement opportunities.",
-      },
-      {
-        title: "Content Strategy",
-        description:
-          "We create relevant content plans that attract and retain your target audience.",
-      },
-    ]}
-    image={seoImg}
-    imageAlt="SEO Strategies"
-  >
-    <Fragment>
-      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        SEO Optimization
-      </h3>
-      We help your business get found by the right people. Our organic positioning
-      strategies are designed to improve your organic visibility.
-    </Fragment>
-  </Content2>
+  <!-- Service areas note -->
+  <div class="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
+    <div
+      class="bg-card border border-border rounded-2xl p-6 text-center shadow-sm"
+    >
+      <p class="text-sm text-muted-foreground">
+        <span class="font-semibold text-foreground">Service area:</span> Vancouver
+        WA, Clark County, Portland Metro, and broader Washington and Oregon for digital
+        services.
+      </p>
+    </div>
+  </div>
 
-  <Content2
-    items={[
-      {
-        title: "Digital Transformation",
-        description:
-          "We guide you in adopting new technologies to optimize your business processes.",
-      },
-      {
-        title: "Software Architecture",
-        description:
-          "We design robust and scalable systems prepared for future growth.",
-      },
-    ]}
-    image={consultingImg}
-    imageAlt="Technology Consulting"
-  >
-    <Fragment>
-      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Technology Consulting
-      </h3>
-      We accompany you in critical decision-making. We evaluate your current infrastructure
-      and design personalized roadmaps to take your company to the next technological
-      level.
-    </Fragment>
-  </Content2>
+  <CTASection
+    title="Not Sure Where to Start?"
+    subtitle="Book a free consultation and we'll talk through your situation — website, SEO, ads, tracking, or all of the above."
+    primaryText="Book a Free Consultation"
+    primaryHref="/contact"
+    secondaryText="View Pricing"
+    secondaryHref="/pricing"
+  />
 </BaseLayout>

@@ -1,0 +1,351 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Content from "@/components/widgets/Content.astro";
+import CTASection from "@/components/widgets/CTASection.astro";
+
+const metadata = {
+  title: "Website, SEO & Marketing Pricing | JMironov Studio",
+  description:
+    "View starting prices for websites, SEO, Google Ads, tracking, and automation services for local businesses in Vancouver WA and Portland Metro.",
+};
+
+const websitePackages = [
+  {
+    name: "Starter Website",
+    price: "$1,500–$2,500",
+    type: "One-time",
+    description: "For a simple professional website with essential pages.",
+    features: [
+      "Up to 5 pages",
+      "Mobile-friendly design",
+      "Basic on-page SEO setup",
+      "Contact form",
+      "Fast load speed",
+      "Google Analytics connection",
+    ],
+  },
+  {
+    name: "Local Business Website",
+    price: "$2,500–$5,000",
+    type: "One-time",
+    description:
+      "For service businesses that need a stronger website with better lead capture.",
+    features: [
+      "Up to 10 pages",
+      "Service pages with local SEO structure",
+      "Conversion-focused layout",
+      "Lead capture forms",
+      "Google Maps / location integration",
+      "GA4 + basic conversion tracking",
+      "Google Search Console setup",
+    ],
+    highlight: true,
+  },
+  {
+    name: "Custom Growth Website",
+    price: "$5,000+",
+    type: "One-time",
+    description:
+      "For businesses that need custom layouts, landing pages, and stronger lead strategy.",
+    features: [
+      "Custom page count",
+      "Landing pages for ads",
+      "Advanced content structure",
+      "Full tracking and conversion setup",
+      "SEO content strategy",
+      "CRM or form integration",
+      "Ongoing support available",
+    ],
+  },
+];
+
+const seoPackages = [
+  {
+    name: "SEO Starter",
+    price: "$500–$900/month",
+    features: [
+      "Keyword research",
+      "On-page SEO",
+      "Google Business Profile basics",
+      "Monthly reporting",
+    ],
+  },
+  {
+    name: "Local SEO Growth",
+    price: "$900–$1,500/month",
+    features: [
+      "Everything in Starter",
+      "Service area pages",
+      "Local citation building",
+      "Blog content",
+      "Competitor gap analysis",
+    ],
+    highlight: true,
+  },
+  {
+    name: "Custom SEO Campaign",
+    price: "$1,500+/month",
+    features: [
+      "Custom keyword strategy",
+      "Advanced technical SEO",
+      "Content calendar",
+      "Link building",
+      "Priority support",
+    ],
+  },
+];
+
+const otherServices = [
+  {
+    name: "Google Ads",
+    items: [
+      { label: "Campaign Setup", price: "$500–$1,500 one-time" },
+      { label: "Monthly Management", price: "$500–$1,500/month" },
+    ],
+    note: "Ad spend budget is separate and paid directly to Google.",
+  },
+  {
+    name: "Tracking & Analytics",
+    items: [
+      { label: "Basic Tracking Setup", price: "$300–$700 one-time" },
+      { label: "Advanced Tracking Setup", price: "$700–$1,500+ one-time" },
+    ],
+    note: "Includes GA4, GTM, and conversion events setup.",
+  },
+  {
+    name: "CRM & Automation",
+    items: [
+      { label: "Simple Lead Workflow", price: "$500–$1,000 one-time" },
+      { label: "Custom Automation System", price: "$1,000–$2,500+ one-time" },
+    ],
+    note: "Includes lead capture, follow-up automation, and basic CRM setup.",
+  },
+  {
+    name: "Meta Ads",
+    items: [
+      { label: "Campaign Setup", price: "$500–$1,000 one-time" },
+      { label: "Monthly Management", price: "$500–$1,200/month" },
+    ],
+    note: "Ad spend budget is separate and paid directly to Meta.",
+  },
+];
+---
+
+<BaseLayout {metadata}>
+  <Content
+    tagline="Pricing"
+    title="Clear Starting Prices"
+    description={[
+      "Prices below are starting ranges. Final pricing depends on the number of pages, content needs, tracking requirements, advertising complexity, and automation setup. Every project is scoped individually.",
+    ]}
+  />
+
+  <!-- Website Packages -->
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-foreground">
+        Website Packages
+      </h2>
+      <p class="text-muted-foreground mt-2">
+        One-time project pricing for local business websites.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {
+        websitePackages.map((pkg) => (
+          <div
+            class:list={[
+              "bg-card border rounded-2xl p-8 shadow-sm flex flex-col",
+              pkg.highlight
+                ? "border-primary shadow-lg shadow-primary/10 relative"
+                : "border-border",
+            ]}
+          >
+            {pkg.highlight && (
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                  Most Popular
+                </span>
+              </div>
+            )}
+            <div class="mb-6">
+              <h3 class="text-xl font-bold text-foreground mb-1">{pkg.name}</h3>
+              <p class="text-3xl font-extrabold text-primary mt-2">
+                {pkg.price}
+              </p>
+              <p class="text-xs text-muted-foreground mt-1">{pkg.type}</p>
+              <p class="text-sm text-muted-foreground mt-3">
+                {pkg.description}
+              </p>
+            </div>
+            <ul class="space-y-2 flex-1 mb-6">
+              {pkg.features.map((f) => (
+                <li class="flex items-start gap-2 text-sm text-muted-foreground">
+                  <svg
+                    class="w-4 h-4 text-primary shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="/contact"
+              class:list={[
+                "block text-center rounded-xl px-6 py-3 text-sm font-semibold transition-all",
+                pkg.highlight
+                  ? "bg-primary text-white hover:bg-primary/90 shadow-sm"
+                  : "bg-muted text-foreground border border-border hover:bg-muted/80",
+              ]}
+            >
+              Get a Quote
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- SEO Packages -->
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-foreground">
+        SEO Packages
+      </h2>
+      <p class="text-muted-foreground mt-2">
+        Monthly SEO management for local service businesses.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {
+        seoPackages.map((pkg) => (
+          <div
+            class:list={[
+              "bg-card border rounded-2xl p-8 shadow-sm flex flex-col",
+              pkg.highlight
+                ? "border-primary shadow-lg shadow-primary/10 relative"
+                : "border-border",
+            ]}
+          >
+            {pkg.highlight && (
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                  Most Popular
+                </span>
+              </div>
+            )}
+            <div class="mb-6">
+              <h3 class="text-xl font-bold text-foreground mb-1">{pkg.name}</h3>
+              <p class="text-2xl font-extrabold text-primary mt-2">
+                {pkg.price}
+              </p>
+            </div>
+            <ul class="space-y-2 flex-1 mb-6">
+              {pkg.features.map((f) => (
+                <li class="flex items-start gap-2 text-sm text-muted-foreground">
+                  <svg
+                    class="w-4 h-4 text-primary shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="/contact"
+              class:list={[
+                "block text-center rounded-xl px-6 py-3 text-sm font-semibold transition-all",
+                pkg.highlight
+                  ? "bg-primary text-white hover:bg-primary/90 shadow-sm"
+                  : "bg-muted text-foreground border border-border hover:bg-muted/80",
+              ]}
+            >
+              Get Started
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Other Services -->
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-foreground">
+        Additional Services
+      </h2>
+      <p class="text-muted-foreground mt-2">
+        Google Ads, Meta Ads, tracking, and automation pricing.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        otherServices.map((service) => (
+          <div class="bg-card border border-border rounded-2xl p-6 shadow-sm">
+            <h3 class="text-lg font-bold text-foreground mb-4">
+              {service.name}
+            </h3>
+            <div class="space-y-3 mb-4">
+              {service.items.map((item) => (
+                <div class="flex items-center justify-between">
+                  <span class="text-sm text-muted-foreground">
+                    {item.label}
+                  </span>
+                  <span class="text-sm font-semibold text-foreground">
+                    {item.price}
+                  </span>
+                </div>
+              ))}
+            </div>
+            {service.note && (
+              <p class="text-xs text-muted-foreground border-t border-border pt-3 mt-3">
+                {service.note}
+              </p>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Pricing note -->
+  <div class="mx-auto max-w-3xl px-4 py-4 sm:px-6 lg:px-8">
+    <div class="bg-muted/50 border border-border rounded-2xl p-6 text-center">
+      <p class="text-sm text-muted-foreground leading-relaxed">
+        <span class="font-semibold text-foreground">Note:</span> Prices are starting
+        ranges. Final pricing depends on the number of pages, content needs, tracking
+        requirements, advertising complexity, and automation setup. All projects are
+        scoped individually after an initial consultation.
+      </p>
+    </div>
+  </div>
+
+  <CTASection
+    title="Get a Custom Quote"
+    subtitle="Every business is different. Book a free consultation and I'll give you a clear scope and price for your specific situation."
+    primaryText="Book a Free Consultation"
+    primaryHref="/contact"
+    secondaryText="View Services"
+    secondaryHref="/services"
+  />
+</BaseLayout>

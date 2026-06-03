@@ -1,0 +1,172 @@
+---
+import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+
+const data = {
+  metadata: {
+    title: "CRM & Lead Automation for Local Businesses | JMironov Studio",
+    description:
+      "Simple lead capture workflows, follow-up automation, and CRM setup for local service businesses in Vancouver WA. Stop losing leads with better systems.",
+  },
+  hero: {
+    tagline: "CRM & Automation",
+    headline: "Stop Losing Leads With a Simple Follow-Up System",
+    subheadline:
+      "JMironov Studio builds simple, practical lead capture and follow-up systems for contractors, remodelers, flooring companies, and local service businesses in Vancouver WA — so no lead falls through the cracks.",
+    primaryCTA: { text: "Book a Free Consultation", href: "/contact" },
+    secondaryCTA: { text: "Map Out Your Lead Flow", href: "/contact" },
+    trustLine: "Vancouver WA • Portland Metro • Built for Small Teams",
+    visual: "crm" as const,
+  },
+  problems: [
+    {
+      icon: "lucide:triangle-alert",
+      title: "Leads come in but never get followed up properly",
+      description:
+        "A new lead arrives through your website form at 9pm. By the next morning, they've already called two other businesses.",
+    },
+    {
+      icon: "lucide:clock",
+      title: "No consistent follow-up system for your team",
+      description:
+        "Follow-up happens when someone remembers, not consistently. Most sales require multiple contacts — most businesses make one or none.",
+    },
+    {
+      icon: "lucide:table-2",
+      title: "Tracking leads in a spreadsheet that never gets updated",
+      description:
+        "Manual spreadsheets are error-prone and get abandoned when business picks up. You can't manage what you can't see.",
+    },
+    {
+      icon: "lucide:eye-off",
+      title: "No visibility into your pipeline or open quotes",
+      description:
+        "Without a clear system, you can't see how many leads are open, which need follow-up today, and which quotes are sitting unanswered.",
+    },
+  ],
+  solutions: [
+    {
+      icon: "lucide:bell",
+      title: "Immediate lead notification when a form is submitted",
+      description:
+        "An automated notification goes to you (and your team) within minutes of a new lead — so no one waits hours before you know about it.",
+    },
+    {
+      icon: "lucide:mail",
+      title: "Automated follow-up sequence after a new lead",
+      description:
+        "A simple email or text sequence that goes out automatically — confirming you received their inquiry and setting expectations for next steps.",
+    },
+    {
+      icon: "lucide:table-2",
+      title: "Google Sheets lead tracker (no complex tools required)",
+      description:
+        "A structured Google Sheets setup for tracking leads, quotes, and job status — simple enough that your team will actually use it.",
+    },
+    {
+      icon: "lucide:database",
+      title: "CRM setup and integration with your website forms",
+      description:
+        "Setup of a simple CRM connected to your website forms so every lead is automatically recorded without manual data entry.",
+    },
+    {
+      icon: "lucide:workflow",
+      title: "Form-to-notification and form-to-CRM connections",
+      description:
+        "Zapier or native integrations that send lead data to email, text, Slack, or your CRM the moment someone submits a form.",
+    },
+    {
+      icon: "lucide:settings-2",
+      title: "Simple automation designed for small teams",
+      description:
+        "Workflows built around how your business actually operates — not enterprise tools that require a full-time admin to maintain.",
+    },
+  ],
+  included: [
+    "Lead flow audit — how leads currently come in and where they go",
+    "Lead notification setup (email + optional SMS)",
+    "Automated acknowledgment email to new leads",
+    "Follow-up reminder sequence (1–2 touchpoints)",
+    "Google Sheets lead tracker (or CRM setup if preferred)",
+    "Form-to-notification integration (Zapier or native)",
+    "Lead status organization (New, Contacted, Quoted, Won, Lost)",
+    "Team training walkthrough — how to use the system",
+    "Testing and confirmation the full flow works end-to-end",
+    "Documentation of what was set up and how to maintain it",
+  ],
+  pricing: [
+    {
+      name: "Simple Lead Workflow",
+      price: "$500–$1,000",
+      period: "one-time",
+      bestFor: "Small teams that need basic lead capture and notification",
+      items: [
+        "Lead notification setup",
+        "Auto-acknowledgment email",
+        "Follow-up reminder",
+        "Google Sheets tracker",
+        "Basic Zapier integration",
+      ],
+    },
+    {
+      name: "Custom Automation System",
+      price: "$1,000–$2,500+",
+      period: "one-time",
+      bestFor:
+        "Businesses that need a full CRM, multi-step automation, and lead tracking",
+      items: [
+        "CRM setup (Go High Level, HubSpot, or similar)",
+        "Multi-step follow-up sequences",
+        "Pipeline stage automation",
+        "Custom Zapier integrations",
+        "Lead source tracking",
+        "Team training and documentation",
+      ],
+      highlighted: true,
+    },
+  ],
+  faq: [
+    {
+      question: "Do I need complex CRM software?",
+      answer:
+        "Not necessarily. For many small service businesses, a well-structured Google Sheets tracker combined with automated email notifications is enough to stop losing leads. I match the tool to your team size and comfort level.",
+    },
+    {
+      question: "What tools do you use for automation?",
+      answer:
+        "It depends on the project. Common tools include Zapier for connecting apps, Google Sheets for tracking, and simple email tools for follow-up sequences. I recommend tools that are practical and don't require a full-time admin to maintain.",
+    },
+    {
+      question: "How long does setup take?",
+      answer:
+        "A simple lead notification and Sheets workflow can be set up in a few days. More complex CRM integrations with multi-step automation typically take 1–2 weeks.",
+    },
+    {
+      question: "Can this connect to my existing website forms?",
+      answer:
+        "Yes. As long as your website has a contact form, it can be connected to a notification system, CRM, or automation workflow regardless of what platform your site is built on.",
+    },
+    {
+      question: "What if I already have a CRM but don't use it?",
+      answer:
+        "If you have a CRM that isn't being used, I can help configure it properly and connect it to your website and ads so it actually becomes part of your daily workflow.",
+    },
+    {
+      question: "Can you help set up Meta Ads lead form notifications?",
+      answer:
+        "Yes. Meta lead form leads can also be routed into your CRM or notification system so they're treated the same as website form leads.",
+    },
+    {
+      question: "Do you work only with businesses in Vancouver WA?",
+      answer:
+        "My primary service area is Vancouver WA, Clark County, and the Portland Metro area. Automation and CRM setup can be done remotely for businesses anywhere in Washington and Oregon.",
+    },
+    {
+      question: "What is the most important first step?",
+      answer:
+        "The most important first step is making sure new leads get an immediate notification so you can follow up within minutes. Even before a full CRM, getting that instant alert in place makes a big difference.",
+    },
+  ],
+};
+---
+
+<ServiceLandingLayout {...data} />

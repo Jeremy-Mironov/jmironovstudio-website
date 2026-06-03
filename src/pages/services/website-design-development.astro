@@ -1,0 +1,190 @@
+---
+import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+
+const data = {
+  metadata: {
+    title:
+      "Website Design & Development for Local Businesses | JMironov Studio",
+    description:
+      "Professional websites for contractors, remodelers, flooring companies, and local service businesses in Vancouver WA. Mobile-friendly, SEO-ready, and built to generate leads.",
+  },
+  hero: {
+    tagline: "Website Design & Development",
+    headline:
+      "Professional Websites Built to Help Local Businesses Get More Leads",
+    subheadline:
+      "JMironov Studio designs and builds modern, fast, conversion-focused websites for contractors, remodelers, flooring companies, and local service businesses in Vancouver WA and the Portland Metro area.",
+    primaryCTA: { text: "Book a Free Consultation", href: "/contact" },
+    secondaryCTA: { text: "Get a Free Website Audit", href: "/contact" },
+    trustLine:
+      "Vancouver WA • Local Business Friendly • WordPress, Astro & Elementor",
+    visual: "website" as const,
+  },
+  problems: [
+    {
+      icon: "lucide:circle-alert",
+      title: "Your website looks outdated or unprofessional",
+      description:
+        "Visitors judge your business in seconds. An outdated site signals that your business may not be trustworthy or active — even if your work is excellent.",
+    },
+    {
+      icon: "lucide:user-x",
+      title: "People visit your site but don't call",
+      description:
+        "Without clear calls to action, easy-to-find phone numbers, and working contact forms, visitors leave without contacting you.",
+    },
+    {
+      icon: "lucide:search-x",
+      title: "Your competitors show up above you on Google",
+      description:
+        "A website without proper local SEO structure will not rank for the searches that matter, even if it looks good.",
+    },
+    {
+      icon: "lucide:smartphone",
+      title: "Your site doesn't work well on phones",
+      description:
+        "Most local searches happen on mobile. A site that's hard to use on a phone costs you leads every week.",
+    },
+  ],
+  solutions: [
+    {
+      icon: "lucide:file-text",
+      title: "Clear service pages for each thing you offer",
+      description:
+        "Separate pages for each service improve both SEO rankings and how clearly visitors understand what you do.",
+    },
+    {
+      icon: "lucide:map-pin",
+      title: "Local SEO structure built in",
+      description:
+        "Service area pages, local keywords in headings and meta titles, schema markup, and Google Search Console setup from day one.",
+    },
+    {
+      icon: "lucide:smartphone",
+      title: "Mobile-first responsive design",
+      description:
+        "Designed and tested to work perfectly on phones, tablets, and desktop — where most of your local customers are searching.",
+    },
+    {
+      icon: "lucide:target",
+      title: "Strong calls to action on every page",
+      description:
+        "Book a call buttons, click-to-call phone links, and quote request forms placed where visitors are most likely to convert.",
+    },
+    {
+      icon: "lucide:mail",
+      title: "Contact forms and phone links",
+      description:
+        "Easy-to-use contact forms with confirmation, and prominent phone numbers that work with one tap on mobile.",
+    },
+    {
+      icon: "lucide:chart-bar",
+      title: "Basic tracking setup included",
+      description:
+        "GA4, Google Search Console, and phone click tracking so you know how visitors find your site and what they do when they arrive.",
+    },
+  ],
+  included: [
+    "Homepage structure and layout",
+    "Service pages — one page per major service you offer",
+    "About page and Contact page",
+    "Mobile-responsive design (phone, tablet, desktop)",
+    "SEO title tags and meta descriptions for every page",
+    "Contact form with confirmation",
+    "Click-to-call phone button for mobile visitors",
+    "Google Analytics 4 and Search Console setup",
+    "Speed optimization and basic technical SEO",
+    "Sitemap and robots.txt configuration",
+  ],
+  pricing: [
+    {
+      name: "Starter Website",
+      price: "$1,500–$2,500",
+      period: "one-time",
+      bestFor: "Simple professional websites with essential pages",
+      items: [
+        "Up to 5 pages",
+        "Mobile-friendly design",
+        "Basic on-page SEO",
+        "Contact form",
+        "GA4 setup",
+      ],
+    },
+    {
+      name: "Local Business Website",
+      price: "$2,500–$5,000",
+      period: "one-time",
+      bestFor:
+        "Service businesses that need a stronger lead-generating website",
+      items: [
+        "Up to 10 pages",
+        "Service pages with local SEO structure",
+        "Conversion-focused layout",
+        "Click-to-call + quote forms",
+        "GA4 + phone click tracking",
+        "Google Search Console setup",
+      ],
+      highlighted: true,
+    },
+    {
+      name: "Custom Growth Website",
+      price: "$5,000+",
+      period: "one-time",
+      bestFor:
+        "Businesses needing custom layouts, landing pages, and strong lead strategy",
+      items: [
+        "Custom page count",
+        "Landing pages for ads",
+        "Advanced content structure",
+        "Full tracking setup",
+        "CRM/form integration",
+        "SEO content strategy",
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "How much does a local business website cost?",
+      answer:
+        "Starting prices range from $1,500 for a simple 5-page site to $5,000+ for a custom growth-focused build. The final price depends on the number of pages, content needs, and features required.",
+    },
+    {
+      question: "Do you include SEO with website design?",
+      answer:
+        "Yes. Every website includes basic on-page SEO: proper title tags, meta descriptions, heading structure, schema markup, sitemap, and Google Search Console setup. Ongoing monthly SEO is a separate service.",
+    },
+    {
+      question: "How long does a website project usually take?",
+      answer:
+        "A standard local business website takes 3–6 weeks from kickoff to launch. Larger or custom projects take longer. Timeline depends heavily on how quickly content and feedback are provided.",
+    },
+    {
+      question: "Can you help with Google Ads after the website is launched?",
+      answer:
+        "Yes. Many clients add Google Ads management after the website launches. Having a well-structured site with proper tracking in place makes ad campaigns significantly more effective.",
+    },
+    {
+      question: "Can you set up tracking for calls and forms?",
+      answer:
+        "Yes. Phone click tracking, form submission tracking, and GA4 setup are included in Local Business Website and Custom Growth Website packages.",
+    },
+    {
+      question: "Do you work only with businesses in Vancouver WA?",
+      answer:
+        "My primary service area is Vancouver WA, Clark County, and the Portland Metro area. I can also work with businesses in Washington and Oregon for digital services.",
+    },
+    {
+      question: "Should I use WordPress or Astro?",
+      answer:
+        "WordPress with Elementor is ideal for most local service businesses — it's easy to update, familiar to many, and well-supported. Astro is best for businesses that want maximum performance and are comfortable with a developer relationship for updates.",
+    },
+    {
+      question: "Can you help improve an existing website?",
+      answer:
+        "Yes. Website audits and improvement projects are available if you have an existing site that needs updates rather than a full rebuild.",
+    },
+  ],
+};
+---
+
+<ServiceLandingLayout {...data} />

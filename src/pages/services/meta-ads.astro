@@ -1,0 +1,173 @@
+---
+import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+
+const data = {
+  metadata: {
+    title:
+      "Meta Ads (Facebook & Instagram) for Local Businesses | JMironov Studio",
+    description:
+      "Facebook and Instagram lead generation campaigns for local service businesses in Vancouver WA and Portland Metro. Campaign setup, creative strategy, lead forms, and management.",
+  },
+  hero: {
+    tagline: "Meta Ads",
+    headline: "Facebook & Instagram Ads That Generate Local Service Leads",
+    subheadline:
+      "JMironov Studio sets up and manages Meta Ads campaigns for contractors, remodelers, flooring companies, and local service businesses in Vancouver WA and Portland Metro — built around lead generation, not just awareness.",
+    primaryCTA: { text: "Book a Free Consultation", href: "/contact" },
+    secondaryCTA: { text: "Get a Free Campaign Review", href: "/contact" },
+    trustLine: "Vancouver WA • Portland Metro • Lead Generation Focus",
+    visual: "meta-ads" as const,
+  },
+  problems: [
+    {
+      icon: "lucide:users",
+      title: "Organic Facebook posts aren't generating leads",
+      description:
+        "Posting on Facebook and Instagram without paid reach rarely generates consistent leads for local service businesses — especially as organic reach has declined.",
+    },
+    {
+      icon: "lucide:image-off",
+      title: "Generic ads that don't connect with local customers",
+      description:
+        "Stock photos and vague headlines don't stop the scroll or build trust with homeowners deciding who to call for their project.",
+    },
+    {
+      icon: "lucide:target",
+      title: "Wrong campaign objective wasting your budget",
+      description:
+        "Running engagement or reach campaigns when you need leads means paying for vanity metrics — likes and views — instead of calls and quote requests.",
+    },
+    {
+      icon: "lucide:mail-x",
+      title: "Leads collected but never followed up quickly",
+      description:
+        "Meta lead forms can generate leads within hours, but without a fast follow-up system those leads go cold before you ever call them.",
+    },
+  ],
+  solutions: [
+    {
+      icon: "lucide:settings-2",
+      title: "Campaign strategy built for lead generation",
+      description:
+        "Audience targeting, campaign objectives, and ad placement selected specifically to generate calls and quote requests for local service businesses.",
+    },
+    {
+      icon: "lucide:image",
+      title: "Creative strategy and ad direction",
+      description:
+        "Guidance on what types of images and copy work for local service businesses — before-and-after work, local trust signals, and direct offers.",
+    },
+    {
+      icon: "lucide:clipboard-list",
+      title: "Lead form setup and optimization",
+      description:
+        "Instant lead forms or landing pages configured to collect name, phone, and service interest — with fast notification so you can follow up immediately.",
+    },
+    {
+      icon: "lucide:map-pin",
+      title: "Local audience and geographic targeting",
+      description:
+        "Custom audiences, lookalike audiences, and geographic targeting focused on homeowners in your service area.",
+    },
+    {
+      icon: "lucide:circle-play",
+      title: "Campaign launch with structured A/B testing",
+      description:
+        "Multiple creative variations tested from launch so early data shows what connects with your target audience.",
+    },
+    {
+      icon: "lucide:chart-bar",
+      title: "Monthly management and reporting",
+      description:
+        "Performance review, audience adjustments, budget optimization, and monthly reporting with cost-per-lead data.",
+    },
+  ],
+  included: [
+    "Audience research and targeting strategy",
+    "Campaign objective selection and structure",
+    "Ad creative direction (image selection, copy recommendations)",
+    "Lead form setup with service interest and contact fields",
+    "Geographic and demographic targeting configuration",
+    "A/B test setup for at least 2 creative variations",
+    "Facebook Pixel / Meta Pixel verification",
+    "Lead notification setup (email or CRM connection)",
+    "Monthly optimization — budget, audience, creative",
+    "Monthly report with reach, clicks, leads, and cost per lead",
+  ],
+  pricing: [
+    {
+      name: "Campaign Setup",
+      price: "$500–$1,000",
+      period: "one-time",
+      bestFor: "New campaigns needing proper structure before spending",
+      items: [
+        "Audience research",
+        "Campaign structure",
+        "Creative direction",
+        "Lead form setup",
+        "Pixel verification",
+        "Notification system",
+      ],
+    },
+    {
+      name: "Monthly Management",
+      price: "$500–$1,200",
+      period: "/month",
+      bestFor: "Ongoing optimization to improve lead quality and cost",
+      items: [
+        "Budget optimization",
+        "Audience refinement",
+        "Creative testing",
+        "Lead quality monitoring",
+        "Monthly performance report",
+        "Recommendations for next month",
+      ],
+      highlighted: true,
+    },
+  ],
+  faq: [
+    {
+      question: "Do Meta Ads work for local service businesses?",
+      answer:
+        "Yes — especially for visual services like remodeling, flooring, landscaping, and similar businesses where before-and-after photos build trust. Meta Ads work best for generating early-stage interest rather than capturing someone actively searching right now.",
+    },
+    {
+      question: "What is the difference between Meta Ads and Google Ads?",
+      answer:
+        "Google Ads targets people actively searching for your services. Meta Ads targets people based on location, demographics, and interests — they may not be searching right now but match your ideal customer profile. Many local businesses benefit from both.",
+    },
+    {
+      question: "How much ad budget do I need?",
+      answer:
+        "Most local service businesses should start with at least $300–$800/month in Meta ad spend to collect meaningful data. Ad spend is paid directly to Meta, separate from management fees.",
+    },
+    {
+      question: "How fast do Meta Ads generate leads?",
+      answer:
+        "Leads can come in within days of launching. The first 30 days are primarily data collection — learning which audiences and creatives perform. Lead quality and cost typically improve after the first month.",
+    },
+    {
+      question: "What happens to the leads I get from Meta?",
+      answer:
+        "Leads collected through Meta lead forms need immediate follow-up — ideally within minutes. I help set up a notification system so you're alerted the moment a lead comes in.",
+    },
+    {
+      question: "Can you help with follow-up after leads come in?",
+      answer:
+        "Yes. For businesses that need a follow-up system, CRM and automation setup is available as an additional service to make sure leads are contacted quickly and tracked properly.",
+    },
+    {
+      question: "Do you work only with businesses in Vancouver WA?",
+      answer:
+        "My primary service area is Vancouver WA, Clark County, and the Portland Metro area. I can work with businesses elsewhere in Washington and Oregon for campaign management.",
+    },
+    {
+      question: "Can I run Meta Ads and Google Ads at the same time?",
+      answer:
+        "Yes, and many local businesses do. Google Ads captures people actively searching; Meta Ads builds awareness and generates leads from people who match your customer profile. Running both together is often more effective than either alone.",
+    },
+  ],
+};
+---
+
+<ServiceLandingLayout {...data} />

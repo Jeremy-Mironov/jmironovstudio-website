@@ -1,0 +1,55 @@
+---
+import WidgetWrapper from "./WidgetWrapper.astro";
+import Button from "@/components/ui/Button.astro";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  primaryText?: string;
+  primaryHref?: string;
+  secondaryText?: string;
+  secondaryHref?: string;
+  id?: string;
+  classes?: Record<string, string>;
+}
+
+const {
+  title = "Ready to Get More Leads for Your Business?",
+  subtitle = "Book a free consultation and let's talk about your website, SEO, advertising, or lead follow-up.",
+  primaryText = "Book a Free Consultation",
+  primaryHref = "/contact",
+  secondaryText,
+  secondaryHref,
+  id,
+  classes = {},
+} = Astro.props;
+
+const { container: containerClassProp = "" } = classes;
+---
+
+<WidgetWrapper id={id} containerClass={`text-center ${containerClassProp}`}>
+  <div
+    class="max-w-2xl mx-auto bg-card border border-border rounded-3xl px-8 py-12 shadow-sm"
+  >
+    <h2
+      class="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4"
+    >
+      {title}
+    </h2>
+    <p class="text-lg text-muted-foreground mb-8">
+      {subtitle}
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <Button href={primaryHref} variant="primary" size="lg">
+        {primaryText}
+      </Button>
+      {
+        secondaryText && secondaryHref && (
+          <Button href={secondaryHref} variant="secondary" size="lg">
+            {secondaryText}
+          </Button>
+        )
+      }
+    </div>
+  </div>
+</WidgetWrapper>

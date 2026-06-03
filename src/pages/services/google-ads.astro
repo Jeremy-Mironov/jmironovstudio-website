@@ -1,0 +1,172 @@
+---
+import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+
+const data = {
+  metadata: {
+    title: "Google Ads for Local Service Businesses | JMironov Studio",
+    description:
+      "Google Ads setup, keyword strategy, conversion tracking, and campaign management for local businesses in Vancouver WA and Portland Metro. Know exactly which ads generate leads.",
+  },
+  hero: {
+    tagline: "Google Ads",
+    headline: "Google Ads That Generate Calls and Leads — Not Just Clicks",
+    subheadline:
+      "JMironov Studio sets up and manages Google Ads campaigns for contractors, remodelers, flooring companies, and local service businesses in Vancouver WA and Portland Metro — with conversion tracking from day one.",
+    primaryCTA: { text: "Book a Free Consultation", href: "/contact" },
+    secondaryCTA: { text: "Get a Free Campaign Audit", href: "/contact" },
+    trustLine: "Vancouver WA • Portland Metro • Tracking-First Approach",
+    visual: "google-ads" as const,
+  },
+  problems: [
+    {
+      icon: "lucide:trending-down",
+      title: "Spending money without knowing what converts",
+      description:
+        "Running ads without conversion tracking means you can't tell which keywords, ads, or landing pages are actually generating calls and quote requests.",
+    },
+    {
+      icon: "lucide:target",
+      title: "Targeting too broad or wasting budget on bad searches",
+      description:
+        "Without proper match types and negative keywords, ads show for unrelated searches and drain budget on clicks that never become leads.",
+    },
+    {
+      icon: "lucide:layout-grid",
+      title: "Sending ad traffic to a generic homepage",
+      description:
+        "Homepages are designed for everyone. A focused landing page built for one specific service converts ad traffic significantly better.",
+    },
+    {
+      icon: "lucide:search-x",
+      title: "No keyword strategy for high-intent local searches",
+      description:
+        "Generic keywords attract generic traffic. A local service business needs keywords that match how customers search when they're ready to hire.",
+    },
+  ],
+  solutions: [
+    {
+      icon: "lucide:settings-2",
+      title: "Search campaign setup built for local service businesses",
+      description:
+        "Campaign structure, ad groups, and targeting configured around the specific services and cities you serve.",
+    },
+    {
+      icon: "lucide:search",
+      title: "Keyword strategy focused on high-intent searches",
+      description:
+        "Research and selection of keywords local customers use when they're ready to hire — not when they're just browsing.",
+    },
+    {
+      icon: "lucide:circle-x",
+      title: "Negative keyword list to stop budget waste",
+      description:
+        "A structured negative keyword list prevents ads from showing for irrelevant searches like 'DIY,' 'jobs,' 'training,' and unrelated services.",
+    },
+    {
+      icon: "lucide:layout-grid",
+      title: "Landing page direction for better conversions",
+      description:
+        "Specific landing page recommendations — or a purpose-built landing page — designed to convert ad traffic into calls and quote requests.",
+    },
+    {
+      icon: "lucide:pen-line",
+      title: "Ad copy written for local customers",
+      description:
+        "Clear, specific ad copy that speaks to your service area, services offered, and what makes your business worth calling.",
+    },
+    {
+      icon: "lucide:chart-bar",
+      title: "Conversion tracking so you know what generates leads",
+      description:
+        "Phone call tracking, form submission tracking, and Google Ads conversion import — so every lead is attributed to a keyword or ad.",
+    },
+  ],
+  included: [
+    "Keyword research — high-intent local service searches",
+    "Campaign and ad group structure",
+    "Negative keyword list",
+    "Ad copy for each ad group",
+    "Geographic and schedule targeting configuration",
+    "Conversion tracking setup (phone clicks + form fills)",
+    "Landing page recommendations (or build, if needed)",
+    "Google Ads account audit if existing account is present",
+    "Monthly optimization — bids, search term pruning, ad testing",
+    "Monthly performance report with cost-per-lead data",
+  ],
+  pricing: [
+    {
+      name: "Campaign Setup",
+      price: "$500–$1,500",
+      period: "one-time",
+      bestFor: "New campaigns needing a strong foundation before spending",
+      items: [
+        "Keyword research",
+        "Campaign structure",
+        "Negative keyword list",
+        "Ad copy",
+        "Conversion tracking",
+        "Landing page review",
+      ],
+    },
+    {
+      name: "Monthly Management",
+      price: "$500–$1,500",
+      period: "/month",
+      bestFor: "Ongoing optimization to improve cost-per-lead over time",
+      items: [
+        "Bid adjustments",
+        "Search term report review",
+        "Negative keyword updates",
+        "Ad copy testing",
+        "Monthly report with lead data",
+        "Recommendations for next month",
+      ],
+      highlighted: true,
+    },
+  ],
+  faq: [
+    {
+      question: "How much should I budget for Google Ads?",
+      answer:
+        "Most local service businesses in competitive markets should budget at least $500–$1,500/month in ad spend. The right budget depends on your market, competition, and how many leads you want per month. Ad spend is paid directly to Google, separate from management fees.",
+    },
+    {
+      question: "How fast do Google Ads generate leads?",
+      answer:
+        "Google Ads can generate calls within days of launching. That said, the first 30–60 days are a data-gathering phase. Campaign performance typically improves significantly after the first 30–60 days as optimization data accumulates.",
+    },
+    {
+      question: "Why is conversion tracking so important before scaling?",
+      answer:
+        "Without conversion tracking, you are optimizing for clicks — not leads. Google's Smart Bidding algorithms optimize for conversions once you have enough data. Without it, budget optimization is guesswork.",
+    },
+    {
+      question: "Do I need a landing page or can ads go to my homepage?",
+      answer:
+        "A dedicated landing page almost always converts better than a homepage. For each major service you advertise, a focused page that matches the ad significantly improves cost-per-lead.",
+    },
+    {
+      question: "Can you help improve an existing Google Ads account?",
+      answer:
+        "Yes. If you're already running ads, I'll audit the existing account and identify what's wasting budget, what's working, and what needs to be restructured before spending more.",
+    },
+    {
+      question: "Do you work only with businesses in Vancouver WA?",
+      answer:
+        "My primary service area is Vancouver WA, Clark County, and the Portland Metro area. I can also work with businesses elsewhere in Washington and Oregon for campaign management.",
+    },
+    {
+      question: "Can you run Google Ads and SEO at the same time?",
+      answer:
+        "Yes, and many clients do both. Ads generate leads immediately while SEO builds long-term organic visibility. Having both running together is often more cost-effective than relying on just one.",
+    },
+    {
+      question: "What if I want to pause or stop the campaign?",
+      answer:
+        "You own the Google Ads account. Campaigns can be paused or stopped at any time. Monthly management is month-to-month with 30 days' notice to cancel.",
+    },
+  ],
+};
+---
+
+<ServiceLandingLayout {...data} />

@@ -1,0 +1,185 @@
+---
+import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+
+const data = {
+  metadata: {
+    title: "SEO & Local SEO for Local Businesses | JMironov Studio",
+    description:
+      "SEO and local SEO for contractors, remodelers, flooring companies, and service businesses in Vancouver WA and Portland Metro. Keyword research, on-page SEO, Google Business Profile, and service area pages.",
+  },
+  hero: {
+    tagline: "SEO & Local SEO",
+    headline: "Help Local Customers Find Your Business on Google",
+    subheadline:
+      "JMironov Studio builds local SEO strategies for contractors, flooring companies, and service businesses in Vancouver WA and Portland Metro — focused on the searches that bring in calls and quote requests.",
+    primaryCTA: { text: "Book a Free Consultation", href: "/contact" },
+    secondaryCTA: { text: "Get a Free SEO Review", href: "/contact" },
+    trustLine: "Vancouver WA • Clark County • Portland Metro • Local-First SEO",
+    visual: "seo" as const,
+  },
+  problems: [
+    {
+      icon: "lucide:search-x",
+      title: "You don't show up on Google for your services",
+      description:
+        "Potential customers search 'flooring installer near me' or 'bathroom remodeler Vancouver WA' and your business isn't on the first page.",
+    },
+    {
+      icon: "lucide:map-pin",
+      title: "Your Google Business Profile isn't optimized",
+      description:
+        "An incomplete or unclaimed GBP limits your map pack visibility — and the map pack is where most local clicks go.",
+    },
+    {
+      icon: "lucide:file-x",
+      title: "No service area or location pages",
+      description:
+        "Without dedicated pages for each city you serve, Google doesn't know your coverage area and won't rank you for those local searches.",
+    },
+    {
+      icon: "lucide:trending-down",
+      title: "Competitors rank above you for the searches that matter",
+      description:
+        "Being on page 2 of Google for your core services is effectively invisible. Most people don't scroll past the first few results.",
+    },
+  ],
+  solutions: [
+    {
+      icon: "lucide:search",
+      title: "Keyword research focused on local intent",
+      description:
+        "Research what your actual customers search — not generic terms — so content targets searches that bring in calls.",
+    },
+    {
+      icon: "lucide:file-text",
+      title: "On-page SEO for every key page",
+      description:
+        "Title tags, meta descriptions, heading structure, and internal links optimized for target keywords.",
+    },
+    {
+      icon: "lucide:map",
+      title: "Local search structure built into your site",
+      description:
+        "Location-specific signals so Google understands your service area and ranks you for local searches.",
+    },
+    {
+      icon: "lucide:building-2",
+      title: "Google Business Profile optimization",
+      description:
+        "Complete GBP setup — categories, services, photos, and description — to improve map pack visibility.",
+    },
+    {
+      icon: "lucide:map-pin",
+      title: "Service area pages for each city you serve",
+      description:
+        "Dedicated pages for Vancouver WA, Camas, Battle Ground, Portland, and other cities in your service area.",
+    },
+    {
+      icon: "lucide:pen-line",
+      title: "Content and blog topic planning",
+      description:
+        "Content ideas and topic strategy focused on local questions that attract customers before they decide who to call.",
+    },
+  ],
+  included: [
+    "Keyword research report — local and service-specific terms",
+    "On-page SEO for your core service pages (titles, meta, headings, alt text)",
+    "Google Business Profile setup or optimization",
+    "Service area page recommendations and structure",
+    "Internal linking improvements",
+    "Local schema markup (LocalBusiness, Service)",
+    "Google Search Console setup and indexing review",
+    "Core technical SEO review (speed, mobile, sitemap)",
+    "Monthly keyword position tracking",
+    "Monthly reporting — what was done and what moved",
+  ],
+  pricing: [
+    {
+      name: "SEO Starter",
+      price: "$500–$900",
+      period: "/month",
+      bestFor: "Businesses just getting started with local SEO",
+      items: [
+        "Keyword research",
+        "On-page SEO optimization",
+        "Google Business Profile basics",
+        "Search Console monitoring",
+        "Monthly reporting",
+      ],
+    },
+    {
+      name: "Local SEO Growth",
+      price: "$900–$1,500",
+      period: "/month",
+      bestFor: "Service businesses that need consistent local visibility",
+      items: [
+        "Everything in Starter",
+        "Service area pages (up to 5)",
+        "Local citation building",
+        "Blog content (2/month)",
+        "Competitor gap analysis",
+        "GBP post management",
+      ],
+      highlighted: true,
+    },
+    {
+      name: "Custom SEO Campaign",
+      price: "$1,500+",
+      period: "/month",
+      bestFor: "Competitive markets or multi-location businesses",
+      items: [
+        "Custom keyword strategy",
+        "Advanced technical SEO",
+        "Content calendar (4+/month)",
+        "Link building outreach",
+        "Detailed monthly reporting",
+        "Priority support",
+      ],
+    },
+  ],
+  faq: [
+    {
+      question: "How long does SEO take to show results?",
+      answer:
+        "Local SEO typically shows meaningful ranking movement in 3–6 months. Highly competitive markets can take longer. SEO builds over time and keeps working even when you're not actively spending on ads.",
+    },
+    {
+      question: "What is the difference between SEO and Local SEO?",
+      answer:
+        "Standard SEO improves your visibility in general search results. Local SEO specifically targets location-based searches and helps your business appear in Google Maps results and searches like 'flooring installer near me.'",
+    },
+    {
+      question: "Do you guarantee first page rankings?",
+      answer:
+        "No. Anyone who guarantees specific rankings is not being honest — Google controls rankings and they change constantly. I do consistent, proven work focused on the signals Google uses for local rankings.",
+    },
+    {
+      question: "Do I need a new website to do SEO?",
+      answer:
+        "Not necessarily. SEO work can be done on your current site if it has a solid technical foundation. I'll audit your current site during the initial consultation to confirm.",
+    },
+    {
+      question: "How is Local SEO progress tracked?",
+      answer:
+        "Monthly reports include keyword position tracking, Google Business Profile insights, Search Console traffic data, and a summary of what was completed and what is planned next.",
+    },
+    {
+      question: "Do you work only with businesses in Vancouver WA?",
+      answer:
+        "My primary service area is Vancouver WA, Clark County, and the Portland Metro area. I work with businesses in Washington and Oregon more broadly for SEO.",
+    },
+    {
+      question: "Can you help with Google Ads alongside SEO?",
+      answer:
+        "Yes. Many clients combine SEO and Google Ads — SEO builds long-term organic visibility while ads generate leads immediately. Having both running together is more effective than either alone.",
+    },
+    {
+      question: "Can you improve an existing SEO setup?",
+      answer:
+        "Yes. If you have existing SEO work in place, I can audit it, identify gaps, and build on what's already working rather than starting from scratch.",
+    },
+  ],
+};
+---
+
+<ServiceLandingLayout {...data} />

@@ -1,0 +1,172 @@
+---
+import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+
+const data = {
+  metadata: {
+    title: "Tracking & Analytics Setup for Local Businesses | JMironov Studio",
+    description:
+      "GA4, Google Tag Manager, conversion tracking, phone click tracking, and Microsoft Clarity setup for local businesses in Vancouver WA. Know exactly where your leads come from.",
+  },
+  hero: {
+    tagline: "Tracking & Analytics",
+    headline: "Know Exactly Where Your Leads Are Coming From",
+    subheadline:
+      "JMironov Studio sets up GA4, Google Tag Manager, conversion tracking, and behavior analytics for local service businesses in Vancouver WA — so you can stop guessing and start making decisions based on real data.",
+    primaryCTA: { text: "Book a Free Consultation", href: "/contact" },
+    secondaryCTA: { text: "Get a Free Tracking Audit", href: "/contact" },
+    trustLine: "Vancouver WA • Portland Metro • GA4 • GTM • Clarity",
+    visual: "tracking" as const,
+  },
+  problems: [
+    {
+      icon: "lucide:eye-off",
+      title: "You have no idea where leads are actually coming from",
+      description:
+        "Without tracking, you can't tell if leads come from Google, Facebook, organic search, or a referral — which means you can't decide where to invest more.",
+    },
+    {
+      icon: "lucide:trending-down",
+      title: "Running ads without knowing which ones convert",
+      description:
+        "Paying for clicks without conversion tracking means optimizing for activity instead of actual calls and quote requests.",
+    },
+    {
+      icon: "lucide:settings-2",
+      title: "Analytics installed but not configured for your business",
+      description:
+        "Many websites have GA4 installed but no events, goals, or filters set up — so the data collected doesn't answer the questions that matter.",
+    },
+    {
+      icon: "lucide:timer-off",
+      title: "No visibility into how visitors use your website",
+      description:
+        "Without heatmaps or session recordings, you can't see where visitors drop off, what they click, or why they leave without contacting you.",
+    },
+  ],
+  solutions: [
+    {
+      icon: "lucide:chart-bar",
+      title: "GA4 setup configured for your business",
+      description:
+        "Google Analytics 4 installed with the right events, filters, and goals — not just the default out-of-the-box setup.",
+    },
+    {
+      icon: "lucide:tag",
+      title: "Google Tag Manager for clean, flexible tracking",
+      description:
+        "GTM container configured with proper triggers and tags so future tracking changes don't require editing your website's code.",
+    },
+    {
+      icon: "lucide:phone",
+      title: "Phone click tracking",
+      description:
+        "Every time a mobile visitor taps your phone number, it's tracked as a conversion — so you can see how many calls your site and ads generate.",
+    },
+    {
+      icon: "lucide:clipboard-check",
+      title: "Form submission tracking",
+      description:
+        "Contact form and quote request completions tracked as conversion events in GA4 and optionally in Google Ads.",
+    },
+    {
+      icon: "lucide:search",
+      title: "Google Search Console setup",
+      description:
+        "Search Console connected, sitemap submitted, and core web vitals reviewed — so you understand how Google sees your site.",
+    },
+    {
+      icon: "lucide:mouse-pointer-2",
+      title: "Microsoft Clarity for behavior insight",
+      description:
+        "Heatmaps and session recordings that show exactly how visitors navigate your site and where they stop before converting.",
+    },
+  ],
+  included: [
+    "GA4 property setup with event configuration",
+    "Google Tag Manager container with triggers and variables",
+    "Phone click tracking (mobile tap-to-call events)",
+    "Contact form submission tracking",
+    "Google Search Console setup and sitemap submission",
+    "Microsoft Clarity installation and session recording setup",
+    "Google Ads conversion import (if running ads)",
+    "Spam and bot filter configuration",
+    "Tag and trigger testing — confirmation everything fires correctly",
+    "Handoff documentation — what was set up and how to read the data",
+  ],
+  pricing: [
+    {
+      name: "Basic Tracking Setup",
+      price: "$300–$700",
+      period: "one-time",
+      bestFor: "Businesses that need foundational analytics and call tracking",
+      items: [
+        "GA4 setup",
+        "Google Search Console",
+        "Phone click tracking",
+        "Form submission tracking",
+        "Basic GTM configuration",
+      ],
+    },
+    {
+      name: "Advanced Tracking Setup",
+      price: "$700–$1,500+",
+      period: "one-time",
+      bestFor: "Businesses running ads that need full lead attribution",
+      items: [
+        "Everything in Basic",
+        "Full GTM configuration",
+        "Google Ads conversion import",
+        "Microsoft Clarity",
+        "Enhanced ecommerce or multi-step form tracking",
+        "Detailed handoff documentation",
+      ],
+      highlighted: true,
+    },
+  ],
+  faq: [
+    {
+      question: "Why is tracking setup so important?",
+      answer:
+        "Without tracking, you're making marketing decisions without data. You don't know which pages drive calls, which ads generate leads, or where visitors leave your site. Good tracking turns guesswork into clear, actionable information.",
+    },
+    {
+      question: "Is tracking setup a one-time project?",
+      answer:
+        "The initial setup is a one-time project. Tracking may need updates when you add new pages, run new ad campaigns, or change your website. I can provide ongoing support as needed.",
+    },
+    {
+      question: "Do I need Google Tag Manager?",
+      answer:
+        "GTM is strongly recommended. It makes future tracking changes much easier to manage without editing your website's code. It's especially important if you're running ads or planning to run ads in the future.",
+    },
+    {
+      question:
+        "What is GA4 and how is it different from the old Google Analytics?",
+      answer:
+        "GA4 is the current version of Google Analytics. The previous version (Universal Analytics) was shut down by Google. GA4 has a different data model with more flexibility for event-based tracking.",
+    },
+    {
+      question: "Can you set up tracking for calls and forms?",
+      answer:
+        "Yes. Phone click tracking and form submission tracking are included in both tracking packages. These are the most important conversions for local service businesses.",
+    },
+    {
+      question: "Can you fix my existing GA4 setup if it's not working?",
+      answer:
+        "Yes. If GA4 is installed but not configured correctly, I can audit the existing setup, identify what's wrong, and fix it — rather than starting over from scratch.",
+    },
+    {
+      question: "Do you work only with businesses in Vancouver WA?",
+      answer:
+        "My primary service area is Vancouver WA, Clark County, and the Portland Metro area. Tracking setup can be done remotely for businesses anywhere in Washington and Oregon.",
+    },
+    {
+      question: "How do I know if my current tracking is working correctly?",
+      answer:
+        "Book a free consultation and I'll do a quick audit of your current setup — checking if GA4 is receiving data, if events are firing, and if Search Console is connected.",
+    },
+  ],
+};
+---
+
+<ServiceLandingLayout {...data} />

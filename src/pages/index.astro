@@ -1,134 +1,535 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { siteConfig } from "@/config/site";
 import Hero from "@/components/widgets/Hero.astro";
 import Features from "@/components/widgets/Features.astro";
-import devImg from "@/assets/images/dev_balanced.png";
-import openSourceImg from "@/assets/images/open-source.png";
-import Content2 from "@/components/widgets/Content2.astro";
+import Values from "@/components/widgets/Values.astro";
+import CTASection from "@/components/widgets/CTASection.astro";
+import FAQSection from "@/components/widgets/FAQSection.astro";
+import PostItem from "@/components/blog/PostItem.astro";
+import { getCollection } from "astro:content";
+
 const metadata = {
-  title: `${siteConfig.name} — The next step for your project`,
+  title: "JMironov Studio | Websites, SEO & Ads for Local Businesses",
   description:
-    "A modern and professional template for your web projects with Astro and Tailwind CSS. Boost your development with a solid foundation.",
+    "JMironov Studio helps local businesses in Vancouver WA and Portland Metro with websites, SEO, Google Ads, tracking, and automation built to generate more leads.",
   ignoreTitleTemplate: true,
 };
+
+const recentPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const services = [
+  {
+    icon: "lucide:globe",
+    title: "Website Design",
+    description:
+      "Modern, fast, conversion-focused websites built for local service businesses.",
+    href: "/services/website-design-development",
+  },
+  {
+    icon: "lucide:search",
+    title: "SEO & Local SEO",
+    description:
+      "Help your business show up when local customers search for your services.",
+    href: "/services/seo-local-seo",
+  },
+  {
+    icon: "lucide:target",
+    title: "Google Ads",
+    description:
+      "Search campaigns with proper conversion tracking so you know what works.",
+    href: "/services/google-ads",
+  },
+  {
+    icon: "lucide:layout-grid",
+    title: "Meta Ads",
+    description:
+      "Facebook and Instagram lead generation campaigns for local businesses.",
+    href: "/services/meta-ads",
+  },
+  {
+    icon: "lucide:chart-bar",
+    title: "Tracking & Analytics",
+    description:
+      "GA4, Google Tag Manager, and call tracking so you can see real results.",
+    href: "/services/tracking-analytics",
+  },
+  {
+    icon: "lucide:workflow",
+    title: "CRM & Automation",
+    description:
+      "Simple lead capture and follow-up systems so you stop losing leads.",
+    href: "/services/crm-automation",
+  },
+];
+
+const whoIHelp = [
+  {
+    icon: "lucide:hard-hat",
+    title: "Contractors & Remodelers",
+    description:
+      "General contractors, remodelers, and home improvement businesses that need a stronger local presence and better lead flow.",
+  },
+  {
+    icon: "lucide:layers",
+    title: "Flooring Companies",
+    description:
+      "Flooring installation and supply businesses that need clear service pages, local SEO, and Google Ads to reach homeowners.",
+  },
+  {
+    icon: "lucide:home",
+    title: "Home Service Businesses",
+    description:
+      "HVAC, plumbing, electrical, cleaning, landscaping, and other home service businesses looking for more local leads.",
+  },
+  {
+    icon: "lucide:building-2",
+    title: "Construction Companies",
+    description:
+      "Small and mid-size construction companies that need a better website, project portfolio, and local search visibility.",
+  },
+  {
+    icon: "lucide:briefcase",
+    title: "Other Local Service Businesses",
+    description:
+      "Any service business in Vancouver WA, Clark County, or the Portland Metro area that needs a better online presence.",
+  },
+];
+
+const whyUs = [
+  {
+    icon: "lucide:wrench",
+    title: "I Implement, Not Just Advise",
+    description:
+      "Most of my work is hands-on. I build the website, set up the tracking, run the ads, and configure the automation.",
+    iconClass: "bg-blue-500/10 text-blue-400",
+  },
+  {
+    icon: "lucide:link",
+    title: "Marketing and Technical Together",
+    description:
+      "I understand both the technical side of websites and the marketing side of getting leads — not just one or the other.",
+    iconClass: "bg-green-500/10 text-green-400",
+  },
+  {
+    icon: "lucide:map-pin",
+    title: "Local Focus",
+    description:
+      "I work with businesses in Vancouver WA, Clark County, and the Portland Metro area. Local SEO and local ads are a core part of what I do.",
+    iconClass: "bg-orange-500/10 text-orange-400",
+  },
+  {
+    icon: "lucide:message-circle",
+    title: "Direct Communication",
+    description:
+      "No account managers. You work directly with me. I explain things in plain English without unnecessary jargon.",
+    iconClass: "bg-purple-500/10 text-purple-400",
+  },
+  {
+    icon: "lucide:trending-up",
+    title: "Focused on Lead Results",
+    description:
+      "The goal is more qualified leads for your business — not just a prettier website or a higher ranking that doesn't convert.",
+    iconClass: "bg-pink-500/10 text-pink-400",
+  },
+  {
+    icon: "lucide:shield-check",
+    title: "No Fluff, No Lock-In",
+    description:
+      "Clear scope, honest pricing, and no pressure tactics. I want you to work with me because the results are good.",
+    iconClass: "bg-teal-500/10 text-teal-400",
+  },
+];
+
+const faqItems = [
+  {
+    question: "How much does a website cost?",
+    answer:
+      "Starting prices range from $1,500 for a simple professional website to $5,000+ for a custom growth-focused build. The final price depends on the number of pages, content needs, and features required. See the Pricing page for a full breakdown.",
+  },
+  {
+    question: "What is the difference between SEO and Google Ads?",
+    answer:
+      "SEO improves your visibility in organic search results over time — it takes several months to build but brings in free traffic once established. Google Ads places your business at the top of search results immediately, but you pay per click. Many local businesses benefit from running both together.",
+  },
+  {
+    question: "Do you work with businesses outside Vancouver WA?",
+    answer:
+      "My primary service area is Vancouver WA, Clark County, and the Portland Metro area. I can work with businesses in Washington and Oregon more broadly for digital marketing services like SEO, Google Ads, and tracking setup.",
+  },
+  {
+    question: "How long does it take to build a website?",
+    answer:
+      "A standard local business website typically takes 3–6 weeks from kickoff to launch. Custom builds or larger projects can take longer. Timeline depends on how quickly content and feedback are provided.",
+  },
+  {
+    question: "Do I need a long-term contract?",
+    answer:
+      "No long-term contracts are required for one-time projects like website builds or tracking setup. For ongoing services like SEO or ad management, I work on a month-to-month basis with 30-day notice to cancel.",
+  },
+];
 ---
 
 <BaseLayout {metadata}>
+  <!-- Hero -->
   <Hero
-    title={`Starter Template for <br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Web Developers</span>`}
-    tagline="Astro v5 + Tailwind v4"
-    description={`${siteConfig.description}`}
+    title={`Websites, SEO & Ads Built to Help <br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-500 via-blue-400 to-blue-300 bg-clip-text text-transparent">Local Businesses Get More Leads</span>`}
+    tagline="Vancouver WA & Portland Metro"
+    description="JMironov Studio helps contractors, remodelers, flooring companies, and local service businesses improve their websites, local SEO, advertising, tracking, and lead follow-up systems."
     actions={[
       {
-        text: "Get Started",
-        href: "https://github.com/devgelo-labs/astro-starter-pro",
+        text: "Book a Free Consultation",
+        href: "/contact",
         variant: "primary",
-        icon: "lucide:github",
+        icon: "lucide:calendar",
       },
       {
-        text: "Our Services",
+        text: "View Services",
         href: "/services",
         variant: "secondary",
         icon: "lucide:arrow-right",
-        ariaLabel: "Learn more about our services",
+        ariaLabel: "View all services offered by JMironov Studio",
       },
     ]}
   />
+
+  <!-- Trust strip -->
+  <div class="border-y border-border bg-muted/30">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4 text-center">
+        <div class="py-2">
+          <p class="text-sm font-semibold text-foreground">Vancouver WA</p>
+          <p class="text-xs text-muted-foreground mt-1">& Portland Metro</p>
+        </div>
+        <div class="py-2 border-l border-border">
+          <p class="text-sm font-semibold text-foreground">6 Core Services</p>
+          <p class="text-xs text-muted-foreground mt-1">
+            From websites to automation
+          </p>
+        </div>
+        <div class="py-2 border-l border-border">
+          <p class="text-sm font-semibold text-foreground">End-to-End</p>
+          <p class="text-xs text-muted-foreground mt-1">
+            Strategy to implementation
+          </p>
+        </div>
+        <div class="py-2 border-l border-border">
+          <p class="text-sm font-semibold text-foreground">
+            Direct Communication
+          </p>
+          <p class="text-xs text-muted-foreground mt-1">No account managers</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Overview -->
   <Features
-    tagline="Features"
-    title="What's Included"
-    subtitle="A selection of tools and configurations to streamline your workflow."
-    features={[
-      {
-        title: "Optimized SEO",
-        description:
-          "Base configuration for Meta tags, Open Graph, and Sitemap generation.",
-        icon: "lucide:scan-search",
-        iconClass: "bg-blue-500/10 text-blue-400",
-      },
-      {
-        title: "High Performance",
-        description: "Lightweight structure for fast load times.",
-        icon: "lucide:zap",
-        iconClass: "bg-purple-500/10 text-purple-400",
-      },
-      {
-        title: "Tailwind v4",
-        description:
-          "Integrated configuration with the latest version of Tailwind CSS.",
-        icon: "lucide:palette",
-        iconClass: "bg-pink-500/10 text-pink-400",
-      },
-    ]}
+    tagline="Services"
+    title="What I Help With"
+    subtitle="From the first website visit to the follow-up call — here are the areas I work in."
+    features={services}
+    classes={{ container: "" }}
   />
-  <Content2
-    items={[
+
+  <!-- View all services CTA -->
+  <div class="text-center -mt-4 mb-8">
+    <a
+      href="/services"
+      class="inline-flex items-center gap-2 text-primary font-semibold hover:underline transition-all"
+    >
+      View all services
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  <!-- Who I Help -->
+  <Values
+    tagline="Who I Work With"
+    title="Built for Local Service Businesses"
+    subtitle="I work with small and local service businesses that need a better online presence and more leads."
+    items={whoIHelp}
+    columns={3}
+  />
+
+  <!-- Why JMironov Studio -->
+  <Features
+    tagline="Why JMironov Studio"
+    title="Practical Work, Not Just Promises"
+    subtitle="What makes working with JMironov Studio different from a generic agency."
+    features={whyUs}
+  />
+
+  <!-- Process -->
+  <div class="relative mx-auto max-w-7xl px-4 py-12 md:py-16 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 text-primary text-lg font-semibold mb-2"
+      >
+        How It Works
+      </div>
+      <h2
+        class="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4"
+      >
+        A Simple Process
+      </h2>
+      <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+        No long discovery phases or confusing project timelines. Here is how we
+        work together.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
       {
-        title: "Responsive Design",
-        description:
-          "Base configuration for Meta tags, Open Graph, and Sitemap generation.",
-        icon: "lucide:scan-search",
-        iconClass: "bg-blue-500/10 text-blue-400",
-      },
+        [
+          {
+            step: "01",
+            title: "Talk Through Your Situation",
+            desc: "We start with a free consultation where I learn about your business, your goals, and what is not working right now.",
+          },
+          {
+            step: "02",
+            title: "Build or Improve the Foundation",
+            desc: "Website, service pages, local SEO structure, and tracking are set up correctly before running paid ads.",
+          },
+          {
+            step: "03",
+            title: "Drive Targeted Traffic",
+            desc: "Once the foundation is solid, we add Google Ads, Meta Ads, or content to bring in more qualified visitors.",
+          },
+          {
+            step: "04",
+            title: "Track, Optimize, Improve",
+            desc: "We review what is working, fix what is not, and build on the wins — with clear reporting and no guesswork.",
+          },
+        ].map(({ step, title, desc }) => (
+          <div class="bg-card border border-border rounded-2xl p-6 shadow-sm reveal">
+            <div class="text-4xl font-extrabold text-primary/20 mb-4">
+              {step}
+            </div>
+            <h3 class="text-lg font-bold text-foreground mb-2">{title}</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Portfolio Preview -->
+  <div class="relative mx-auto max-w-7xl px-4 py-12 md:py-16 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 text-primary text-lg font-semibold mb-2"
+      >
+        Selected Work
+      </div>
+      <h2
+        class="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4"
+      >
+        Recent Projects
+      </h2>
+      <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+        A few examples of local business websites and marketing projects.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {
-        title: "High Performance",
-        description: "Lightweight structure for fast load times.",
-        icon: "lucide:zap",
-        iconClass: "bg-purple-500/10 text-purple-400",
-      },
-      {
-        title: "Tailwind v4",
-        description:
-          "Integrated configuration with the latest version of Tailwind CSS.",
-        icon: "lucide:palette",
-        iconClass: "bg-pink-500/10 text-pink-400",
-      },
-    ]}
-    image={devImg}
-    imageAlt="Development"
-  >
-    <Fragment>
-      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Development
-      </h3>
-      We provide a solid foundation to start your projects with best practices.
-    </Fragment>
-  </Content2>
-  <Content2
-    items={[
-      {
-        title: "Open Source",
-        description:
-          "Developed under the MIT license, free for personal and commercial use.",
-        icon: "lucide:github",
-        iconClass: "bg-indigo-500/10 text-indigo-400",
-      },
-      {
-        title: "Community Driven",
-        description:
-          "Built with the feedback and contributions of the developer community.",
-        icon: "lucide:users",
-        iconClass: "bg-orange-500/10 text-orange-400",
-      },
-      {
-        title: "Regular Updates",
-        description:
-          "Continuously improved with the latest technologies and best practices.",
-        icon: "lucide:refresh-cw",
-        iconClass: "bg-teal-500/10 text-teal-400",
-      },
-    ]}
-    image={openSourceImg}
-    imageAlt="Community and Open Source"
-    isReversed={true}
-  >
-    <Fragment>
-      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Open Source & Community
-      </h3>
-      Join the revolution of modern web development. This project is open for everyone
-      to use, learn from, and contribute to.
-    </Fragment>
-  </Content2>
+        [
+          {
+            name: "FreshFit Bath",
+            industry: "Bath & Shower Remodeling",
+            url: "https://freshfitbath.com/",
+            image: "/work/freshfit-bath.png",
+            services: "Website, SEO, tracking setup, ads support",
+            description:
+              "A local remodeling brand built around clear service pages, local SEO structure, and lead capture.",
+          },
+          {
+            name: "Dwell Installations",
+            industry: "Flooring Installation",
+            url: "https://dwellinc.net/",
+            image: "/work/dwell-installations.png",
+            services: "Website direction, Google Ads planning, local SEO",
+            description:
+              "A flooring installation business focused on local search visibility and lead generation across service areas.",
+          },
+          {
+            name: "AcreMaker NW",
+            industry: "Land Clearing & Outdoor Services",
+            url: "https://acremakernw.com/",
+            image: "/work/acremakernw-alt.png",
+            services: "Website structure, local SEO planning",
+            description:
+              "A local property services website structured to make services easy to understand and convert visitors into leads.",
+          },
+        ].map(({ name, industry, url, image, services, description }) => (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-card border border-border rounded-2xl overflow-hidden shadow-sm hover:border-primary/40 hover:shadow-md transition-all reveal group block"
+          >
+            <div class="h-40 overflow-hidden">
+              <img
+                src={image}
+                alt={`${name} website preview`}
+                class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-5">
+              <p class="text-xs font-semibold text-primary uppercase tracking-wider mb-1">
+                {industry}
+              </p>
+              <h3 class="text-lg font-bold text-foreground mb-2">{name}</h3>
+              <p class="text-sm text-muted-foreground mb-3 leading-relaxed">
+                {description}
+              </p>
+              <p class="text-xs text-muted-foreground">
+                <span class="font-medium text-foreground">Services:</span>{" "}
+                {services}
+              </p>
+              <p class="mt-3 text-xs text-primary font-semibold inline-flex items-center gap-1 group-hover:underline">
+                View site
+                <svg
+                  class="w-3 h-3"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+    <div class="text-center mt-8">
+      <a
+        href="/work"
+        class="inline-flex items-center gap-2 text-primary font-semibold hover:underline transition-all"
+      >
+        View all projects
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Pricing Preview -->
+  <div class="border-y border-border bg-muted/20">
+    <div class="mx-auto max-w-7xl px-4 py-12 md:py-16 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 text-primary text-lg font-semibold mb-2"
+        >
+          Pricing
+        </div>
+        <h2
+          class="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4"
+        >
+          Clear Starting Prices
+        </h2>
+        <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+          Every project is different, but here are common starting ranges.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        {
+          [
+            {
+              label: "Website Design",
+              range: "From $1,500",
+              note: "One-time project",
+            },
+            {
+              label: "SEO & Local SEO",
+              range: "From $500/mo",
+              note: "Monthly ongoing",
+            },
+            {
+              label: "Google Ads Mgmt.",
+              range: "From $500/mo",
+              note: "+ ad spend budget",
+            },
+          ].map(({ label, range, note }) => (
+            <div class="bg-card border border-border rounded-2xl p-6 text-center shadow-sm">
+              <p class="text-sm font-medium text-muted-foreground mb-1">
+                {label}
+              </p>
+              <p class="text-2xl font-bold text-foreground mb-1">{range}</p>
+              <p class="text-xs text-muted-foreground">{note}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="text-center mt-6">
+        <a
+          href="/pricing"
+          class="inline-flex items-center gap-2 text-primary font-semibold hover:underline transition-all"
+        >
+          See full pricing details
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blog Preview -->
+  {
+    recentPosts.length > 0 && (
+      <div class="mx-auto max-w-7xl px-4 py-12 md:py-16 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 text-primary text-lg font-semibold mb-2">
+            Blog
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
+            Resources for Local Businesses
+          </h2>
+          <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Practical articles about websites, SEO, Google Ads, and local
+            business marketing.
+          </p>
+        </div>
+        <div class="grid gap-8 md:grid-cols-3">
+          {recentPosts.map((post) => (
+            <PostItem post={post} />
+          ))}
+        </div>
+        <div class="text-center mt-8">
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-2 text-primary font-semibold hover:underline transition-all"
+          >
+            Read all articles
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    )
+  }
+
+  <!-- FAQ -->
+  <FAQSection
+    tagline="FAQ"
+    title="Common Questions"
+    subtitle="Quick answers to questions I hear often from local business owners."
+    items={faqItems}
+  />
+
+  <!-- Final CTA -->
+  <CTASection
+    title="Ready to Get More Leads for Your Business?"
+    subtitle="Book a free consultation. We'll talk through your website, SEO, ads, or lead follow-up — and figure out the best next step."
+    primaryText="Book a Free Consultation"
+    primaryHref="/contact"
+    secondaryText="View Services"
+    secondaryHref="/services"
+  />
 </BaseLayout>

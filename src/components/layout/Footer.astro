@@ -4,42 +4,181 @@ import { siteConfig } from "@/config/site";
 
 <footer class="mt-20 border-t border-border bg-card">
   <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-    <div class="flex flex-col items-center justify-between gap-8 md:flex-row">
-      <div class="flex flex-col items-center gap-2 md:items-start">
-        <span class="text-lg font-bold text-foreground">{siteConfig.name}</span>
-        <p class="text-sm text-muted-foreground">
-          {siteConfig.description}
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-4">
+      <!-- Brand column -->
+      <div class="md:col-span-1">
+        <a
+          href="/"
+          class="text-lg font-bold text-foreground hover:text-primary transition-colors"
+        >
+          {siteConfig.name}
+        </a>
+        <p class="mt-3 text-sm text-muted-foreground leading-relaxed">
+          Websites, SEO, and digital marketing for local businesses in Vancouver
+          WA and the Portland Metro area.
+        </p>
+        <p class="mt-3 text-sm text-muted-foreground">
+          <span class="font-medium text-foreground">Location:</span> Vancouver, WA
+        </p>
+        <p class="mt-1 text-sm text-muted-foreground">
+          <span class="font-medium text-foreground">Email:</span>
+          <a
+            href={`mailto:${siteConfig.contact.email}`}
+            class="hover:text-primary transition-colors ml-1"
+          >
+            {siteConfig.contact.email}
+          </a>
+        </p>
+        <p class="mt-1 text-sm text-muted-foreground">
+          <span class="font-medium text-foreground">Phone:</span>
+          <a
+            href={`tel:${siteConfig.contact.phone}`}
+            class="hover:text-primary transition-colors ml-1"
+          >
+            {siteConfig.contact.phone}
+          </a>
         </p>
       </div>
-      <div class="flex items-center gap-6">
-        <a
-          href={siteConfig.socialLinks.twitter}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-muted-foreground transition-colors hover:text-primary"
-          >Twitter</a
+
+      <!-- Services column -->
+      <div>
+        <h3
+          class="text-sm font-semibold text-foreground uppercase tracking-wider mb-4"
         >
-        <a
-          href={siteConfig.socialLinks.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-muted-foreground transition-colors hover:text-primary"
-          >GitHub</a
+          Services
+        </h3>
+        <ul class="space-y-2">
+          <li>
+            <a
+              href="/services/website-design-development"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >Website Design & Development</a>
+          </li>
+          <li>
+            <a
+              href="/services/seo-local-seo"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >SEO & Local SEO</a>
+          </li>
+          <li>
+            <a
+              href="/services/google-ads"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >Google Ads</a>
+          </li>
+          <li>
+            <a
+              href="/services/meta-ads"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >Meta Ads</a>
+          </li>
+          <li>
+            <a
+              href="/services/tracking-analytics"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >Tracking & Analytics</a>
+          </li>
+          <li>
+            <a
+              href="/services/crm-automation"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >CRM & Automation</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Quick links column -->
+      <div>
+        <h3
+          class="text-sm font-semibold text-foreground uppercase tracking-wider mb-4"
         >
-        <a
-          href={siteConfig.socialLinks.discord}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-muted-foreground transition-colors hover:text-primary"
-          >Discord</a
+          Company
+        </h3>
+        <ul class="space-y-2">
+          <li>
+            <a
+              href="/about"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >About</a>
+          </li>
+          <li>
+            <a
+              href="/work"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >Work</a>
+          </li>
+          <li>
+            <a
+              href="/pricing"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >Pricing</a>
+          </li>
+          <li>
+            <a
+              href="/blog"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >Blog</a>
+          </li>
+          <li>
+            <a
+              href="/contact"
+              class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >Contact</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- CTA column -->
+      <div>
+        <h3
+          class="text-sm font-semibold text-foreground uppercase tracking-wider mb-4"
         >
+          Get Started
+        </h3>
+        <p class="text-sm text-muted-foreground mb-4">
+          Ready to improve your website, SEO, or advertising? Book a free
+          consultation.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary/90 shadow-sm"
+        >
+          Book a Free Consultation
+        </a>
+        <div class="mt-6 flex items-center gap-4">
+          <a
+            href={siteConfig.socialLinks.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted-foreground transition-colors hover:text-primary text-sm"
+            >LinkedIn</a
+          >
+          <a
+            href={siteConfig.socialLinks.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted-foreground transition-colors hover:text-primary text-sm"
+            >Facebook</a
+          >
+          <a
+            href={siteConfig.socialLinks.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted-foreground transition-colors hover:text-primary text-sm"
+            >Twitter/X</a
+          >
+        </div>
       </div>
     </div>
+
     <div
-      class="mt-8 border-t border-border pt-8 text-center text-xs text-muted-foreground"
+      class="mt-10 border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground"
     >
-      &copy; {new Date().getFullYear()}
-      {siteConfig.author}. All rights reserved.
+      <p>
+        &copy; {new Date().getFullYear()}
+        {siteConfig.name}. All rights reserved.
+      </p>
+      <p>Serving Vancouver WA, Clark County, and the Portland Metro area.</p>
     </div>
   </div>
 </footer>
