@@ -1,5 +1,6 @@
 ---
 import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+import { googleAdsServicePricing } from "@/config/pricing";
 
 const data = {
   metadata: {
@@ -11,7 +12,7 @@ const data = {
     tagline: "Google Ads",
     headline: "Google Ads That Generate Calls and Leads — Not Just Clicks",
     subheadline:
-      "JMironov Studio sets up and manages Google Ads campaigns for contractors, remodelers, flooring companies, and local service businesses in Vancouver WA and Portland Metro — with conversion tracking from day one.",
+      "JMironov Studio sets up and manages Google Ads campaigns for local service businesses in Washington state — with conversion tracking from day one.",
     primaryCTA: { text: "Book a Free Consultation", href: "/contact" },
     secondaryCTA: { text: "Get a Free Campaign Audit", href: "/contact" },
     trustLine: "Vancouver WA • Portland Metro • Tracking-First Approach",
@@ -93,42 +94,12 @@ const data = {
     "Monthly optimization — bids, search term pruning, ad testing",
     "Monthly performance report with cost-per-lead data",
   ],
-  pricing: [
-    {
-      name: "Campaign Setup",
-      price: "$500–$1,500",
-      period: "one-time",
-      bestFor: "New campaigns needing a strong foundation before spending",
-      items: [
-        "Keyword research",
-        "Campaign structure",
-        "Negative keyword list",
-        "Ad copy",
-        "Conversion tracking",
-        "Landing page review",
-      ],
-    },
-    {
-      name: "Monthly Management",
-      price: "$500–$1,500",
-      period: "/month",
-      bestFor: "Ongoing optimization to improve cost-per-lead over time",
-      items: [
-        "Bid adjustments",
-        "Search term report review",
-        "Negative keyword updates",
-        "Ad copy testing",
-        "Monthly report with lead data",
-        "Recommendations for next month",
-      ],
-      highlighted: true,
-    },
-  ],
+  pricing: googleAdsServicePricing,
   faq: [
     {
       question: "How much should I budget for Google Ads?",
       answer:
-        "Most local service businesses in competitive markets should budget at least $500–$1,500/month in ad spend. The right budget depends on your market, competition, and how many leads you want per month. Ad spend is paid directly to Google, separate from management fees.",
+        "Most local service businesses in competitive markets should budget at least $300–$900/month in ad spend. The right budget depends on your market, competition, and how many leads you want per month. Ad spend is paid directly to Google, separate from management fees.",
     },
     {
       question: "How fast do Google Ads generate leads?",

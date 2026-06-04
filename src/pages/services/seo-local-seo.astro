@@ -1,17 +1,18 @@
 ---
 import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+import { seoServicePricing } from "@/config/pricing";
 
 const data = {
   metadata: {
     title: "SEO & Local SEO for Local Businesses | JMironov Studio",
     description:
-      "SEO and local SEO for contractors, remodelers, flooring companies, and service businesses in Vancouver WA and Portland Metro. Keyword research, on-page SEO, Google Business Profile, and service area pages.",
+      "SEO and local SEO for service businesses in Washington state. Keyword research, on-page SEO, Google Business Profile, and service area pages.",
   },
   hero: {
     tagline: "SEO & Local SEO",
     headline: "Help Local Customers Find Your Business on Google",
     subheadline:
-      "JMironov Studio builds local SEO strategies for contractors, flooring companies, and service businesses in Vancouver WA and Portland Metro — focused on the searches that bring in calls and quote requests.",
+      "JMironov Studio builds local SEO strategies for service businesses in Washington state — focused on the searches that bring in calls and quote requests.",
     primaryCTA: { text: "Book a Free Consultation", href: "/contact" },
     secondaryCTA: { text: "Get a Free SEO Review", href: "/contact" },
     trustLine: "Vancouver WA • Clark County • Portland Metro • Local-First SEO",
@@ -93,50 +94,7 @@ const data = {
     "Monthly keyword position tracking",
     "Monthly reporting — what was done and what moved",
   ],
-  pricing: [
-    {
-      name: "SEO Starter",
-      price: "$500–$900",
-      period: "/month",
-      bestFor: "Businesses just getting started with local SEO",
-      items: [
-        "Keyword research",
-        "On-page SEO optimization",
-        "Google Business Profile basics",
-        "Search Console monitoring",
-        "Monthly reporting",
-      ],
-    },
-    {
-      name: "Local SEO Growth",
-      price: "$900–$1,500",
-      period: "/month",
-      bestFor: "Service businesses that need consistent local visibility",
-      items: [
-        "Everything in Starter",
-        "Service area pages (up to 5)",
-        "Local citation building",
-        "Blog content (2/month)",
-        "Competitor gap analysis",
-        "GBP post management",
-      ],
-      highlighted: true,
-    },
-    {
-      name: "Custom SEO Campaign",
-      price: "$1,500+",
-      period: "/month",
-      bestFor: "Competitive markets or multi-location businesses",
-      items: [
-        "Custom keyword strategy",
-        "Advanced technical SEO",
-        "Content calendar (4+/month)",
-        "Link building outreach",
-        "Detailed monthly reporting",
-        "Priority support",
-      ],
-    },
-  ],
+  pricing: seoServicePricing,
   faq: [
     {
       question: "How long does SEO take to show results?",

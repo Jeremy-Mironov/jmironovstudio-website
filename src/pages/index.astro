@@ -7,6 +7,7 @@ import CTASection from "@/components/widgets/CTASection.astro";
 import FAQSection from "@/components/widgets/FAQSection.astro";
 import PostItem from "@/components/blog/PostItem.astro";
 import { getCollection } from "astro:content";
+import { pricingSummary } from "@/config/pricing";
 
 const metadata = {
   title: "JMironov Studio | Websites, SEO & Ads for Local Businesses",
@@ -72,22 +73,28 @@ const whoIHelp = [
       "General contractors, remodelers, and home improvement businesses that need a stronger local presence and better lead flow.",
   },
   {
-    icon: "lucide:layers",
-    title: "Flooring Companies",
+    icon: "lucide:car",
+    title: "Auto Repair & Service Shops",
     description:
-      "Flooring installation and supply businesses that need clear service pages, local SEO, and Google Ads to reach homeowners.",
+      "Local car repair shops, mechanics, detailing businesses, and auto service providers that need a professional website, stronger local visibility, and more customer calls or appointment requests.",
+  },
+  {
+    icon: "lucide:brush-cleaning",
+    title: "Cleaning & Maintenance Services",
+    description:
+      "Cleaning, maintenance, and property care businesses that want to look more trustworthy online and make it easier for customers to request a quote.",
+  },
+  {
+    icon: "lucide:store",
+    title: "Local Shops & Retail Businesses",
+    description:
+      "Small retail stores and local shops that need a stronger online presence, better visibility, and clear information for nearby customers.",
   },
   {
     icon: "lucide:home",
     title: "Home Service Businesses",
     description:
       "HVAC, plumbing, electrical, cleaning, landscaping, and other home service businesses looking for more local leads.",
-  },
-  {
-    icon: "lucide:building-2",
-    title: "Construction Companies",
-    description:
-      "Small and mid-size construction companies that need a better website, project portfolio, and local search visibility.",
   },
   {
     icon: "lucide:briefcase",
@@ -146,7 +153,7 @@ const faqItems = [
   {
     question: "How much does a website cost?",
     answer:
-      "Starting prices range from $1,500 for a simple professional website to $5,000+ for a custom growth-focused build. The final price depends on the number of pages, content needs, and features required. See the Pricing page for a full breakdown.",
+      "Starting prices range from $900 for a simple website to $3,000+ for a custom growth-focused build. The final price depends on the number of pages, content needs, and features required. See the Pricing page for a full breakdown.",
   },
   {
     question: "What is the difference between SEO and Google Ads?",
@@ -175,8 +182,8 @@ const faqItems = [
   <!-- Hero -->
   <Hero
     title={`Websites, SEO & Ads Built to Help <br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-500 via-blue-400 to-blue-300 bg-clip-text text-transparent">Local Businesses Get More Leads</span>`}
-    tagline="Vancouver WA & Portland Metro"
-    description="JMironov Studio helps contractors, remodelers, flooring companies, and local service businesses improve their websites, local SEO, advertising, tracking, and lead follow-up systems."
+    tagline="Washington State"
+    description="JMironov Studio helps local service businesses improve their websites, local SEO, advertising, tracking, and lead follow-up systems."
     actions={[
       {
         text: "Book a Free Consultation",
@@ -442,23 +449,7 @@ const faqItems = [
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
         {
-          [
-            {
-              label: "Website Design",
-              range: "From $1,500",
-              note: "One-time project",
-            },
-            {
-              label: "SEO & Local SEO",
-              range: "From $500/mo",
-              note: "Monthly ongoing",
-            },
-            {
-              label: "Google Ads Mgmt.",
-              range: "From $500/mo",
-              note: "+ ad spend budget",
-            },
-          ].map(({ label, range, note }) => (
+          pricingSummary.map(({ label, range, note }) => (
             <div class="bg-card border border-border rounded-2xl p-6 text-center shadow-sm">
               <p class="text-sm font-medium text-muted-foreground mb-1">
                 {label}

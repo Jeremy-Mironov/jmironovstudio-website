@@ -1,5 +1,6 @@
 ---
 import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+import { trackingServicePricing } from "@/config/pricing";
 
 const data = {
   metadata: {
@@ -93,36 +94,7 @@ const data = {
     "Tag and trigger testing — confirmation everything fires correctly",
     "Handoff documentation — what was set up and how to read the data",
   ],
-  pricing: [
-    {
-      name: "Basic Tracking Setup",
-      price: "$300–$700",
-      period: "one-time",
-      bestFor: "Businesses that need foundational analytics and call tracking",
-      items: [
-        "GA4 setup",
-        "Google Search Console",
-        "Phone click tracking",
-        "Form submission tracking",
-        "Basic GTM configuration",
-      ],
-    },
-    {
-      name: "Advanced Tracking Setup",
-      price: "$700–$1,500+",
-      period: "one-time",
-      bestFor: "Businesses running ads that need full lead attribution",
-      items: [
-        "Everything in Basic",
-        "Full GTM configuration",
-        "Google Ads conversion import",
-        "Microsoft Clarity",
-        "Enhanced ecommerce or multi-step form tracking",
-        "Detailed handoff documentation",
-      ],
-      highlighted: true,
-    },
-  ],
+  pricing: trackingServicePricing,
   faq: [
     {
       question: "Why is tracking setup so important?",

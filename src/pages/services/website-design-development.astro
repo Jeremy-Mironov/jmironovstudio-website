@@ -1,23 +1,24 @@
 ---
 import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+import { websiteServicePricing } from "@/config/pricing";
 
 const data = {
   metadata: {
     title:
       "Website Design & Development for Local Businesses | JMironov Studio",
     description:
-      "Professional websites for contractors, remodelers, flooring companies, and local service businesses in Vancouver WA. Mobile-friendly, SEO-ready, and built to generate leads.",
+      "Professional websites for local service businesses in Vancouver WA. Mobile-friendly, SEO-ready, and built to generate leads.",
   },
   hero: {
     tagline: "Website Design & Development",
     headline:
       "Professional Websites Built to Help Local Businesses Get More Leads",
     subheadline:
-      "JMironov Studio designs and builds modern, fast, conversion-focused websites for contractors, remodelers, flooring companies, and local service businesses in Vancouver WA and the Portland Metro area.",
+      "JMironov Studio designs and builds modern, fast, conversion-focused websites for local service businesses in Washington state.",
     primaryCTA: { text: "Book a Free Consultation", href: "/contact" },
     secondaryCTA: { text: "Get a Free Website Audit", href: "/contact" },
     trustLine:
-      "Vancouver WA • Local Business Friendly • WordPress, Astro & Elementor",
+      "Vancouver WA • Local Business Friendly • WordPress, Next.js, Astro",
     visual: "website" as const,
   },
   problems: [
@@ -96,57 +97,12 @@ const data = {
     "Speed optimization and basic technical SEO",
     "Sitemap and robots.txt configuration",
   ],
-  pricing: [
-    {
-      name: "Starter Website",
-      price: "$1,500–$2,500",
-      period: "one-time",
-      bestFor: "Simple professional websites with essential pages",
-      items: [
-        "Up to 5 pages",
-        "Mobile-friendly design",
-        "Basic on-page SEO",
-        "Contact form",
-        "GA4 setup",
-      ],
-    },
-    {
-      name: "Local Business Website",
-      price: "$2,500–$5,000",
-      period: "one-time",
-      bestFor:
-        "Service businesses that need a stronger lead-generating website",
-      items: [
-        "Up to 10 pages",
-        "Service pages with local SEO structure",
-        "Conversion-focused layout",
-        "Click-to-call + quote forms",
-        "GA4 + phone click tracking",
-        "Google Search Console setup",
-      ],
-      highlighted: true,
-    },
-    {
-      name: "Custom Growth Website",
-      price: "$5,000+",
-      period: "one-time",
-      bestFor:
-        "Businesses needing custom layouts, landing pages, and strong lead strategy",
-      items: [
-        "Custom page count",
-        "Landing pages for ads",
-        "Advanced content structure",
-        "Full tracking setup",
-        "CRM/form integration",
-        "SEO content strategy",
-      ],
-    },
-  ],
+  pricing: websiteServicePricing,
   faq: [
     {
       question: "How much does a local business website cost?",
       answer:
-        "Starting prices range from $1,500 for a simple 5-page site to $5,000+ for a custom growth-focused build. The final price depends on the number of pages, content needs, and features required.",
+        "Starting prices range from $900 for a simple website to $3,000+ for a custom growth-focused build. The final price depends on the number of pages, content needs, and features required.",
     },
     {
       question: "Do you include SEO with website design?",

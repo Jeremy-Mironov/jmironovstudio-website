@@ -1,5 +1,6 @@
 ---
 import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+import { crmServicePricing } from "@/config/pricing";
 
 const data = {
   metadata: {
@@ -11,7 +12,7 @@ const data = {
     tagline: "CRM & Automation",
     headline: "Stop Losing Leads With a Simple Follow-Up System",
     subheadline:
-      "JMironov Studio builds simple, practical lead capture and follow-up systems for contractors, remodelers, flooring companies, and local service businesses in Vancouver WA — so no lead falls through the cracks.",
+      "JMironov Studio builds simple, practical lead capture and follow-up systems for local service businesses in Washington state — so no lead falls through the cracks.",
     primaryCTA: { text: "Book a Free Consultation", href: "/contact" },
     secondaryCTA: { text: "Map Out Your Lead Flow", href: "/contact" },
     trustLine: "Vancouver WA • Portland Metro • Built for Small Teams",
@@ -93,37 +94,7 @@ const data = {
     "Testing and confirmation the full flow works end-to-end",
     "Documentation of what was set up and how to maintain it",
   ],
-  pricing: [
-    {
-      name: "Simple Lead Workflow",
-      price: "$500–$1,000",
-      period: "one-time",
-      bestFor: "Small teams that need basic lead capture and notification",
-      items: [
-        "Lead notification setup",
-        "Auto-acknowledgment email",
-        "Follow-up reminder",
-        "Google Sheets tracker",
-        "Basic Zapier integration",
-      ],
-    },
-    {
-      name: "Custom Automation System",
-      price: "$1,000–$2,500+",
-      period: "one-time",
-      bestFor:
-        "Businesses that need a full CRM, multi-step automation, and lead tracking",
-      items: [
-        "CRM setup (Go High Level, HubSpot, or similar)",
-        "Multi-step follow-up sequences",
-        "Pipeline stage automation",
-        "Custom Zapier integrations",
-        "Lead source tracking",
-        "Team training and documentation",
-      ],
-      highlighted: true,
-    },
-  ],
+  pricing: crmServicePricing,
   faq: [
     {
       question: "Do I need complex CRM software?",

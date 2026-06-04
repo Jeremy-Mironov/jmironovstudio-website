@@ -1,5 +1,6 @@
 ---
 import ServiceLandingLayout from "@/layouts/ServiceLandingLayout.astro";
+import { metaAdsServicePricing } from "@/config/pricing";
 
 const data = {
   metadata: {
@@ -12,7 +13,7 @@ const data = {
     tagline: "Meta Ads",
     headline: "Facebook & Instagram Ads That Generate Local Service Leads",
     subheadline:
-      "JMironov Studio sets up and manages Meta Ads campaigns for contractors, remodelers, flooring companies, and local service businesses in Vancouver WA and Portland Metro — built around lead generation, not just awareness.",
+      "JMironov Studio sets up and manages Meta Ads campaigns for local service businesses in Washington state — built around lead generation, not just awareness.",
     primaryCTA: { text: "Book a Free Consultation", href: "/contact" },
     secondaryCTA: { text: "Get a Free Campaign Review", href: "/contact" },
     trustLine: "Vancouver WA • Portland Metro • Lead Generation Focus",
@@ -94,42 +95,12 @@ const data = {
     "Monthly optimization — budget, audience, creative",
     "Monthly report with reach, clicks, leads, and cost per lead",
   ],
-  pricing: [
-    {
-      name: "Campaign Setup",
-      price: "$500–$1,000",
-      period: "one-time",
-      bestFor: "New campaigns needing proper structure before spending",
-      items: [
-        "Audience research",
-        "Campaign structure",
-        "Creative direction",
-        "Lead form setup",
-        "Pixel verification",
-        "Notification system",
-      ],
-    },
-    {
-      name: "Monthly Management",
-      price: "$500–$1,200",
-      period: "/month",
-      bestFor: "Ongoing optimization to improve lead quality and cost",
-      items: [
-        "Budget optimization",
-        "Audience refinement",
-        "Creative testing",
-        "Lead quality monitoring",
-        "Monthly performance report",
-        "Recommendations for next month",
-      ],
-      highlighted: true,
-    },
-  ],
+  pricing: metaAdsServicePricing,
   faq: [
     {
       question: "Do Meta Ads work for local service businesses?",
       answer:
-        "Yes — especially for visual services like remodeling, flooring, landscaping, and similar businesses where before-and-after photos build trust. Meta Ads work best for generating early-stage interest rather than capturing someone actively searching right now.",
+        "Yes — especially for visual services like remodeling, car repair, landscaping, and similar businesses where before-and-after photos build trust. Meta Ads work best for generating early-stage interest rather than capturing someone actively searching right now.",
     },
     {
       question: "What is the difference between Meta Ads and Google Ads?",
