@@ -1,21 +1,22 @@
 ---
-title: "Local SEO Basics for Contractors and Home Service Companies"
-description: "A practical overview of local SEO for contractors and home service businesses. Covers Google Business Profile, service area pages, on-page SEO, and what actually moves the needle for local search rankings."
+title: "Local SEO Basics for Small and Medium Businesses"
+description: "A practical overview of local SEO for small and medium businesses. Covers Google Business Profile, service area pages, on-page SEO, and what actually moves the needle for local search rankings."
 pubDate: "2026-05-27"
 author: "Jeremy Mironov"
+image: "https://picsum.photos/seed/localseo/1200/630"
 category: "SEO"
-tags: ["local SEO", "contractors", "Google Business Profile", "home services"]
+tags: ["local SEO", "small business", "Google Business Profile", "SMB"]
 ---
 
-# Local SEO Basics for Contractors and Home Service Companies
+# Local SEO Basics for Small and Medium Businesses
 
-If you run a contracting or home service business, local SEO is one of the highest-leverage marketing activities you can invest in. The goal is straightforward: show up when local customers search for your services on Google.
+If you run a small or medium business, local SEO is one of the highest-leverage marketing activities you can invest in. The goal is straightforward: show up when local customers search for your services on Google.
 
-Here is a practical overview of what local SEO involves and what actually matters for contractors and home service businesses.
+Here is a practical overview of what local SEO involves and what actually matters for small and medium businesses.
 
 ## What Is Local SEO?
 
-Local SEO is the process of improving your business's visibility in location-based searches. When someone in Vancouver WA searches "general contractor near me" or "flooring installation Clark County," Google shows a mix of organic results and a map pack — the three-business box that appears near the top of results.
+Local SEO is the process of improving your business's visibility in location-based searches. When someone in Vancouver WA searches "[your service] near me" or "[your service] Clark County," Google shows a mix of organic results and a map pack — the three-business box that appears near the top of results.
 
 Appearing in that map pack and in organic results for local searches is the goal of local SEO.
 
@@ -36,7 +37,7 @@ If you serve multiple cities or neighborhoods, you need dedicated pages for each
 
 A good service area page includes:
 
-- The city and service type in the title and headings (e.g., "Flooring Installation in Camas WA")
+- The city and service type in the title and headings (e.g., "[Your Service] in Camas WA")
 - Content that is genuinely useful to a customer in that area
 - Your phone number and a contact form
 - A mention of other cities you serve nearby
@@ -45,7 +46,7 @@ A good service area page includes:
 
 Your website pages need basic on-page optimization to rank for local searches:
 
-- **Title tags** should include your service and location (e.g., "Bathroom Remodeling Vancouver WA | Your Business Name")
+- **Title tags** should include your service and location (e.g., "[Your Service] Vancouver WA | Your Business Name")
 - **H1 headings** should clearly state what the page is about
 - **Meta descriptions** should summarize the page in a way that makes people want to click
 - **NAP consistency** — your name, address, and phone number should be identical everywhere online
@@ -68,4 +69,4 @@ The fundamentals — a complete GBP, proper on-page SEO, service area pages, and
 
 ---
 
-**If you want help improving your local SEO as a contractor or home service business in Vancouver WA, [book a free consultation](/contact).**
+**If you want help improving your local SEO as a small or medium business in Vancouver WA, [book a free consultation](/contact).**

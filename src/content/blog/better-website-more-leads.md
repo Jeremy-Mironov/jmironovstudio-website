@@ -3,6 +3,7 @@ title: "How a Better Website Helps Local Service Businesses Get More Leads"
 description: "A better website is not just about looking professional. This post covers the specific ways website structure, speed, and content affect how many leads a local service business gets."
 pubDate: "2026-05-20"
 author: "Jeremy Mironov"
+image: "https://picsum.photos/seed/webdesign/1200/630"
 category: "Website Design"
 tags: ["website", "local business", "lead generation", "conversion"]
 ---
@@ -20,11 +21,11 @@ One of the most common website problems I see is that all services are listed on
 - Google cannot understand what specific services you offer, which limits rankings
 - Visitors cannot quickly find the specific service they need, which increases the likelihood they leave
 
-A better approach is separate pages for each service you offer. Each page should explain what the service includes, who it is for, and how to contact you. This structure also makes it easier to rank for specific search terms like "bathroom remodeling Vancouver WA" instead of just "remodeling."
+A better approach is separate pages for each service you offer. Each page should explain what the service includes, who it is for, and how to contact you. This structure also makes it easier to rank for specific search terms like "[your service] Vancouver WA" instead of just a generic category.
 
 ## 2. Mobile-Friendly Design
 
-Most local searches happen on phones. When someone searches "flooring contractor near me" while standing in their house deciding whether to replace the floors, they are almost certainly on a mobile device.
+Most local searches happen on phones. When someone searches for your service on their phone while deciding who to hire, they are almost certainly on a mobile device.
 
 If your website is hard to navigate on mobile — small text, buttons that are too close together, forms that are difficult to fill out — you are losing leads to competitors with better mobile experiences.
 

@@ -3,13 +3,14 @@ title: "Google Ads for Local Service Businesses: What to Set Up Before Spending 
 description: "Before increasing your Google Ads budget, there are several foundational things every local service business should have in place. This post covers the checklist."
 pubDate: "2026-06-03"
 author: "Jeremy Mironov"
+image: "https://picsum.photos/seed/googleads/1200/630"
 category: "Google Ads"
 tags: ["Google Ads", "local business", "lead generation", "contractors"]
 ---
 
 # Google Ads for Local Service Businesses: What to Set Up Before Spending More
 
-Google Ads can be a strong source of leads for local service businesses. When someone searches "bathroom remodeling contractor near me" or "flooring installation Vancouver WA," they are actively looking to hire. Being at the top of those results matters.
+Google Ads can be a strong source of leads for local service businesses. When someone searches "[your service] near me" or "[your service] Vancouver WA," they are actively looking to hire. Being at the top of those results matters.
 
 But many local businesses start spending on ads before the foundational pieces are in place — and end up frustrated with the results. This post covers what to set up first.
 
@@ -21,7 +22,7 @@ Do not send ad traffic to your homepage. A dedicated landing page that matches t
 
 A good local service landing page includes:
 
-- A clear headline that matches the ad (e.g., "Bathroom Remodeling in Vancouver WA")
+- A clear headline that matches the ad (e.g., "[Your Service] in Vancouver WA")
 - A short description of what you do and who you serve
 - A phone number prominently displayed at the top
 - A simple quote request form
@@ -84,4 +85,4 @@ Expect the first 30 days to be somewhat inefficient as the algorithm learns. If 
 
 ---
 
-**If you want help setting up or auditing your Google Ads campaigns, [book a free consultation](/contact).** I work with contractors, flooring companies, and other local service businesses in Vancouver WA and Portland Metro.
+**If you want help setting up or auditing your Google Ads campaigns, [book a free consultation](/contact).** I work with small and medium businesses in Vancouver WA and Portland Metro.
