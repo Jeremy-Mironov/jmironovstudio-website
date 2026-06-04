@@ -3,7 +3,7 @@ title: "Why Conversion Tracking Matters Before Scaling Google Ads"
 description: "Many local businesses run Google Ads without proper conversion tracking in place. This post explains what conversion tracking is, why it matters, and what you need before increasing your ad budget."
 pubDate: "2026-06-02"
 author: "Jeremy Mironov"
-image: "/public/blog/conversion-tracking-google-ads.png"
+image: "/blog/conversion-tracking-google-ads.png"
 category: "Google Ads"
 tags: ["Google Ads", "conversion tracking", "analytics", "local business"]
 ---

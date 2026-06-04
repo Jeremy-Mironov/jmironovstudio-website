@@ -3,7 +3,7 @@ title: "Simple CRM and Follow-Up Automation Ideas for Small Businesses"
 description: "Most small service businesses lose leads not because of bad marketing but because of no follow-up system. This post covers simple CRM and automation ideas that work for small teams."
 pubDate: "2026-06-03"
 author: "Jeremy Mironov"
-image: "/public/blog/crm-automation-small-businesses.png"
+image: "/blog/crm-automation-small-businesses.png"
 category: "Automation"
 tags:
   ["CRM", "automation", "lead follow-up", "small business", "local business"]
