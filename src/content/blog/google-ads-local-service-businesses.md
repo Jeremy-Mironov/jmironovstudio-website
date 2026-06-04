@@ -3,7 +3,7 @@ title: "Google Ads for Local Service Businesses: What to Set Up Before Spending 
 description: "Before increasing your Google Ads budget, there are several foundational things every local service business should have in place. This post covers the checklist."
 pubDate: "2026-06-03"
 author: "Jeremy Mironov"
-image: "https://picsum.photos/seed/googleads/1200/630"
+image: "/public/blog/google-ads-local-service-businesses.png"
 category: "Google Ads"
 tags: ["Google Ads", "local business", "lead generation", "contractors"]
 ---

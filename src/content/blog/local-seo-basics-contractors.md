@@ -3,7 +3,7 @@ title: "Local SEO Basics for Small and Medium Businesses"
 description: "A practical overview of local SEO for small and medium businesses. Covers Google Business Profile, service area pages, on-page SEO, and what actually moves the needle for local search rankings."
 pubDate: "2026-05-27"
 author: "Jeremy Mironov"
-image: "https://picsum.photos/seed/localseo/1200/630"
+image: "/public/blog/local-seo-basics-contractors.png"
 category: "SEO"
 tags: ["local SEO", "small business", "Google Business Profile", "SMB"]
 ---

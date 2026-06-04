@@ -3,7 +3,7 @@ title: "How a Better Website Helps Local Service Businesses Get More Leads"
 description: "A better website is not just about looking professional. This post covers the specific ways website structure, speed, and content affect how many leads a local service business gets."
 pubDate: "2026-05-20"
 author: "Jeremy Mironov"
-image: "https://picsum.photos/seed/webdesign/1200/630"
+image: "/public/blog/better-website-more-leads.png"
 category: "Website Design"
 tags: ["website", "local business", "lead generation", "conversion"]
 ---
