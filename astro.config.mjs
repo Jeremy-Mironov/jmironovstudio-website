@@ -7,6 +7,9 @@ import remarkReadingTime from "remark-reading-time";
 
 export default defineConfig({
   site: "https://www.jmironovstudio.com/",
+  redirects: {
+    "/work": "/projects",
+  },
   integrations: [sitemap(), icon(), mdx()],
   markdown: {
     remarkPlugins: [

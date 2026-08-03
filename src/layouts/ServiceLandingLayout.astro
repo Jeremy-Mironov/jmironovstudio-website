@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 import { siteConfig } from "@/config/site";
+import { projects } from "@/data/projects";
 
 interface ServiceHero {
   tagline: string;
@@ -47,36 +48,6 @@ interface Props {
 
 const { metadata, hero, problems, solutions, included, pricing, faq } =
   Astro.props as Props;
-
-const portfolioProjects = [
-  {
-    name: "FreshFit Bath",
-    industry: "Bath & Shower Remodeling",
-    url: "https://freshfitbath.com/",
-    image: "/work/freshfit-bath.png",
-    services: "Website, SEO, tracking setup, ads support",
-    description:
-      "A local remodeling brand focused on clear service pages, lead capture, and advertising support.",
-  },
-  {
-    name: "Dwell Installations",
-    industry: "Flooring Installation",
-    url: "https://dwellinc.net/",
-    image: "/work/dwell-installations.png",
-    services: "Website direction, Google Ads planning, local SEO",
-    description:
-      "A flooring installation business focused on local search visibility and lead generation.",
-  },
-  {
-    name: "AcreMaker NW",
-    industry: "Land Clearing & Outdoor Services",
-    url: "https://acremakernw.com/",
-    image: "/work/acremakernw-alt.png",
-    services: "Website structure, local SEO planning",
-    description:
-      "A local service business project focused on clearer service presentation and stronger online visibility.",
-  },
-];
 
 const processSteps = [
   {
@@ -943,17 +914,15 @@ const serviceSchema = JSON.stringify({
       </div>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         {
-          portfolioProjects.map((project) => (
+          projects.map((project) => (
             <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/projects/${project.slug}`}
               class="reveal group block overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
             >
               <div class="h-40 overflow-hidden">
                 <img
-                  src={project.image}
-                  alt={`${project.name} website preview`}
+                  src={project.cardImage}
+                  alt={project.cardImageAlt}
                   class="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
                 />
@@ -966,14 +935,10 @@ const serviceSchema = JSON.stringify({
                   {project.name}
                 </h3>
                 <p class="mb-3 text-sm text-muted-foreground leading-relaxed">
-                  {project.description}
-                </p>
-                <p class="text-xs text-muted-foreground">
-                  <span class="font-medium text-foreground">Services:</span>{" "}
-                  {project.services}
+                  {project.summary}
                 </p>
                 <p class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:underline">
-                  Visit site
+                  Learn more
                   <svg
                     class="h-3 w-3"
                     fill="none"
@@ -985,7 +950,7 @@ const serviceSchema = JSON.stringify({
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
                     />
                   </svg>
                 </p>
@@ -996,7 +961,7 @@ const serviceSchema = JSON.stringify({
       </div>
       <div class="mt-8 text-center">
         <a
-          href="/work"
+          href="/projects"
           class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
         >
           View all projects

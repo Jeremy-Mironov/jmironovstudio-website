@@ -1,0 +1,53 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  overlayCount?: number;
+}
+
+const { src, alt, class: className = "", overlayCount } = Astro.props;
+---
+
+<button
+  type="button"
+  data-lightbox-trigger
+  data-src={src}
+  data-alt={alt}
+  aria-label={`Open screenshot: ${alt}`}
+  class:list={[
+    "group relative overflow-hidden rounded-2xl border border-border shadow-sm cursor-zoom-in text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+    className,
+  ]}
+>
+  <img
+    src={src}
+    alt={alt}
+    class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+    loading="lazy"
+  />
+  {
+    overlayCount ? (
+      <span class="absolute inset-0 flex items-center justify-center bg-black/60 text-xl font-bold text-white">
+        +{overlayCount}
+      </span>
+    ) : (
+      <span class="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/30">
+        <svg
+          class="h-8 w-8 text-white opacity-0 transition-opacity group-hover:opacity-100"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0zM11 8v6M8 11h6"
+          />
+        </svg>
+      </span>
+    )
+  }
+</button>
