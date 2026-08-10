@@ -161,6 +161,49 @@ export const projects: Project[] = [
     result:
       "The finished design gives AcreMaker NW a straightforward, easy-to-navigate site where services are easy to understand and the path to contact is never more than a click away.",
   },
+  {
+    slug: "power-professor",
+    name: "Power Professor",
+    industry: "Electrical Contracting",
+    url: "https://powerprofessor.vercel.app/",
+    tags: ["Website", "SEO", "Tracking"],
+    technologies: [
+      "Website Design & Development",
+      "Service Page Strategy",
+      "Local SEO",
+      "Google Analytics 4",
+      "Google Tag Manager",
+    ],
+    cardImage: "/work/power-professor.png",
+    cardImageAlt:
+      "Power Professor homepage — licensed residential and commercial electrical contractors based in Portland, OR",
+    images: [
+      {
+        src: "/work/power-professor.png",
+        alt: "Power Professor homepage hero — Expertise section with licensing, guarantees, and company stats",
+      },
+      {
+        src: "/work/power-professor-2.png",
+        alt: "Power Professor services grid — commercial electrical, emergency service, wiring, panel upgrades, EV chargers, and solar",
+      },
+      {
+        src: "/work/power-professor-3.png",
+        alt: "Power Professor Projects page — recent electrical work across residential and commercial jobs",
+      },
+    ],
+    summary:
+      "A licensed electrical contracting company offering residential and commercial services, including 24/7 emergency response, across the Pacific Northwest and beyond.",
+    goal: "Power Professor needed a website that could establish trust for high-stakes electrical work, clearly separate its many service lines (from panel upgrades to solar and EV charger installs), and make it easy for a homeowner or property manager to reach someone fast — especially during an emergency.",
+    whatIDid: [
+      "Designed and built the website around Power Professor's full service lineup, from residential wiring to commercial and emergency electrical work",
+      "Structured a dedicated services grid so each offering (panel upgrades, tenant improvement work, EV chargers, solar, emergency service) has its own clear entry point",
+      "Built out a service area section covering the multiple states and cities the company serves",
+      "Added a projects gallery to showcase completed residential and commercial jobs and build trust with prospective clients",
+      "Set up the technical foundation for local SEO and conversion tracking ahead of future marketing campaigns",
+    ],
+    result:
+      "The result is a professional, trust-building site that makes Power Professor's licensing, guarantees, and emergency availability immediately clear, with a service structure built to support future SEO and lead generation work. The site is live on a temporary domain and will move to powerprofessor.co.",
+  },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
