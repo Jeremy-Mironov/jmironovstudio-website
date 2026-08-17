@@ -2,14 +2,38 @@
 import Button from "./Button.astro";
 
 interface Props {
+  /** Where the form posts. Defaults to the Web3Forms API. */
   action?: string;
   method?: "GET" | "POST";
+  /** Subject line for the notification email. */
+  subject?: string;
 }
 
-const { action = "#", method = "POST" } = Astro.props;
+const {
+  action = "https://api.web3forms.com/submit",
+  method = "POST",
+  subject = "New message — jmironovstudio.com",
+} = Astro.props;
+
+const accessKey = import.meta.env.WEB3FORMS_ACCESS_KEY ?? "";
 ---
 
-<form action={action} method={method} class="space-y-6">
+<form {action} {method} class="space-y-6">
+  <input type="hidden" name="access_key" value={accessKey} />
+  <input type="hidden" name="subject" value={subject} />
+  <input type="hidden" name="from_name" value="JMironov Studio Site" />
+
+  <!-- Honeypot: hidden from humans, tempting to bots -->
+  <input
+    type="checkbox"
+    name="botcheck"
+    class="hidden"
+    style="display:none"
+    tabindex="-1"
+    autocomplete="off"
+    aria-hidden="true"
+  />
+
   <div>
     <label for="name" class="block text-sm font-medium text-foreground/80 mb-2"
       >Name</label

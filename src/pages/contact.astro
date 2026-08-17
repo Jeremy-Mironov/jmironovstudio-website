@@ -8,6 +8,18 @@ const metadata = {
   description:
     "Contact JMironov Studio to discuss your website, SEO, Google Ads, tracking, or automation project. Based in Vancouver, WA.",
 };
+
+// Web3Forms access key. Set WEB3FORMS_ACCESS_KEY in .env (and in the Vercel
+// project's environment variables). The key is public by design — it only
+// identifies which inbox submissions are delivered to.
+const accessKey = import.meta.env.WEB3FORMS_ACCESS_KEY ?? "";
+
+if (!accessKey) {
+  console.warn(
+    "\n[contact.astro] WEB3FORMS_ACCESS_KEY is not set — the contact form will not deliver submissions.\n" +
+      "Get a key at https://web3forms.com and add WEB3FORMS_ACCESS_KEY=... to .env\n",
+  );
+}
 ---
 
 <BaseLayout {metadata}>
@@ -110,7 +122,79 @@ const metadata = {
           <h2 class="text-xl font-bold text-foreground mb-6">
             Tell Me About Your Project
           </h2>
-          <form action="#" method="POST" class="space-y-6">
+
+          <!-- Success panel (revealed after a successful submission) -->
+          <div
+            id="contact-success"
+            class="hidden"
+            role="status"
+            aria-live="polite"
+          >
+            <div
+              class="rounded-2xl border border-primary/30 bg-primary/5 p-8 text-center"
+            >
+              <div
+                class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15"
+                aria-hidden="true"
+              >
+                <svg
+                  class="h-6 w-6 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-foreground mb-2">
+                Thanks — your message is on its way.
+              </h3>
+              <p class="text-sm text-muted-foreground max-w-md mx-auto">
+                I'll review what you sent and get back to you within one
+                business day. If it's urgent, call or text
+                <a
+                  href={`tel:${siteConfig.contact.phone}`}
+                  class="text-primary font-semibold hover:underline"
+                  >{siteConfig.contact.phone}</a
+                >.
+              </p>
+            </div>
+          </div>
+
+          <form
+            id="contact-form"
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            class="space-y-6"
+          >
+            <!-- Web3Forms configuration -->
+            <input type="hidden" name="access_key" value={accessKey} />
+            <input
+              type="hidden"
+              name="subject"
+              value="New consultation request — jmironovstudio.com"
+            />
+            <input
+              type="hidden"
+              name="from_name"
+              value="JMironov Studio Site"
+            />
+
+            <!-- Honeypot: hidden from humans, tempting to bots -->
+            <input
+              type="checkbox"
+              name="botcheck"
+              class="hidden"
+              style="display:none"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label
@@ -174,6 +258,7 @@ const metadata = {
                   type="text"
                   name="business"
                   id="business"
+                  autocomplete="organization"
                   class="block w-full rounded-xl border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20 transition-all border outline-none focus:ring-4"
                   placeholder="Your business name"
                 />
@@ -238,17 +323,46 @@ const metadata = {
                 id="message"
                 rows="5"
                 required
+                minlength="10"
                 class="block w-full rounded-xl border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20 transition-all border outline-none focus:ring-4 resize-none"
                 placeholder="What does your business do? What is not working right now? What are you trying to improve?"
               ></textarea>
             </div>
 
+            <!-- Error message -->
+            <p
+              id="contact-error"
+              class="hidden rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-400"
+              role="alert"
+            >
+            </p>
+
             <div>
               <button
+                id="contact-submit"
                 type="submit"
-                class="w-full sm:w-auto inline-flex items-center justify-center font-bold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-xl bg-primary text-white hover:bg-primary/90 transform hover:scale-105 shadow-lg shadow-primary/20 px-8 py-4 text-lg"
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 font-bold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-xl bg-primary text-white hover:bg-primary/90 transform hover:scale-105 shadow-lg shadow-primary/20 px-8 py-4 text-lg disabled:opacity-60 disabled:pointer-events-none disabled:transform-none"
               >
-                Book a Free Consultation
+                <svg
+                  id="contact-spinner"
+                  class="hidden h-5 w-5 animate-spin motion-reduce:animate-none"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                <span id="contact-submit-label">Book a Free Consultation</span>
               </button>
               <p class="mt-3 text-xs text-muted-foreground">
                 No obligation. I'll respond within one business day.
@@ -260,3 +374,106 @@ const metadata = {
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  const ENDPOINT = "https://api.web3forms.com/submit";
+
+  interface Web3FormsResponse {
+    success?: boolean;
+    message?: string;
+  }
+
+  function initContactForm() {
+    const form = document.getElementById(
+      "contact-form",
+    ) as HTMLFormElement | null;
+    if (!form || form.dataset.bound === "true") return;
+    form.dataset.bound = "true";
+
+    const submit = document.getElementById(
+      "contact-submit",
+    ) as HTMLButtonElement | null;
+    const label = document.getElementById("contact-submit-label");
+    const spinner = document.getElementById("contact-spinner");
+    const errorBox = document.getElementById("contact-error");
+    const successBox = document.getElementById("contact-success");
+
+    const setBusy = (busy: boolean) => {
+      if (submit) submit.disabled = busy;
+      spinner?.classList.toggle("hidden", !busy);
+      if (label)
+        label.textContent = busy ? "Sending…" : "Book a Free Consultation";
+    };
+
+    const showError = (message: string) => {
+      if (!errorBox) return;
+      errorBox.textContent = message;
+      errorBox.classList.remove("hidden");
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      errorBox?.classList.add("hidden");
+
+      if (!form.reportValidity()) return;
+
+      const payload = Object.fromEntries(new FormData(form));
+
+      if (!payload.access_key) {
+        showError(
+          "This form isn't configured yet. Please email Jeremymironov@gmail.com or call (971) 326-7264.",
+        );
+        return;
+      }
+
+      setBusy(true);
+
+      try {
+        const response = await fetch(ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result: Web3FormsResponse = await response
+          .json()
+          .catch(() => ({ success: false }));
+
+        if (response.ok && result.success) {
+          form.classList.add("hidden");
+          successBox?.classList.remove("hidden");
+          successBox?.scrollIntoView({ behavior: "smooth", block: "center" });
+
+          // Conversion event — inert until GTM/GA4 is installed.
+          const w = window as unknown as {
+            dataLayer?: Record<string, unknown>[];
+          };
+          w.dataLayer = w.dataLayer || [];
+          w.dataLayer.push({
+            event: "generate_lead",
+            form_name: "contact",
+            service: payload.service,
+            budget: payload.budget,
+          });
+          return;
+        }
+
+        showError(
+          result.message ||
+            "Something went wrong sending your message. Please email Jeremymironov@gmail.com or call (971) 326-7264.",
+        );
+      } catch {
+        showError(
+          "Couldn't reach the server. Check your connection and try again, or email Jeremymironov@gmail.com.",
+        );
+      } finally {
+        setBusy(false);
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", initContactForm);
+</script>
