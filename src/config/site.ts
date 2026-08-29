@@ -11,7 +11,6 @@ export const siteConfig = {
   twitter: "@JMironovStudio",
   ogImage: ogImage,
   socialLinks: {
-    twitter: "https://twitter.com/",
     linkedin: "https://www.linkedin.com/in/eremei-mironov-8253452b5",
     facebook:
       "https://www.facebook.com/people/Eremei-Mironov/pfbid0vkrTmin2Ua6FfLctAC9y5qucvjnn7LrK9b4DAELX7HbajZLXB4Hxd1PdMsZfwRtil/",

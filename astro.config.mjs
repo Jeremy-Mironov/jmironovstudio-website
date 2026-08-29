@@ -10,7 +10,11 @@ export default defineConfig({
   redirects: {
     "/work": "/projects",
   },
-  integrations: [sitemap(), icon(), mdx()],
+  integrations: [
+    sitemap({ filter: (page) => !page.includes("/widgets") }),
+    icon(),
+    mdx(),
+  ],
   markdown: {
     remarkPlugins: [
       remarkReadingTime,

@@ -165,12 +165,13 @@ export const projects: Project[] = [
     slug: "power-professor",
     name: "Power Professor",
     industry: "Electrical Contracting",
-    url: "https://powerprofessor.vercel.app/",
+    url: "https://powerprofessor.co/",
     tags: ["Website", "SEO", "Tracking"],
     technologies: [
       "Website Design & Development",
       "Service Page Strategy",
       "Local SEO",
+      "Technical SEO (canonical, sitemap, structured data)",
       "Google Analytics 4",
       "Google Tag Manager",
     ],
@@ -202,7 +203,7 @@ export const projects: Project[] = [
       "Set up the technical foundation for local SEO and conversion tracking ahead of future marketing campaigns",
     ],
     result:
-      "The result is a professional, trust-building site that makes Power Professor's licensing, guarantees, and emergency availability immediately clear, with a service structure built to support future SEO and lead generation work. The site is live on a temporary domain and will move to powerprofessor.co.",
+      "The result is a professional, trust-building site that makes Power Professor's licensing, guarantees, and emergency availability immediately clear, with a service structure built to support future SEO and lead generation work. The site is live at powerprofessor.co. After the move from its temporary deployment address I re-verified the technical foundation on the permanent domain \u2014 self-referencing canonical URLs, robots directives, a generated sitemap, and LocalBusiness, Service, BreadcrumbList and FAQPage structured data across 14 service pages and 27 service-area pages.",
   },
 ];
 
