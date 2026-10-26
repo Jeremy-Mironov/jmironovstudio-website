@@ -1736,8 +1736,9 @@ body {
   left: 0;
   width: 100%;
 }
-.bk-face,
-.bk-face * {
+/* only on the faces themselves: on everything inside them it makes a compositing layer
+   of every line and photo, and browsers start dropping parts of pages */
+.bk-face {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }

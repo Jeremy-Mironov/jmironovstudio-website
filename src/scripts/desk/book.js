@@ -453,8 +453,12 @@ export function createBook(box, host, onOwner) {
       r.S.el.classList.add("go");
     });
     animate(to, pose, function () {
+      // put the sheets away empty: six copies of a page each are a lot to keep
       run.forEach(function (r) {
         r.S.el.classList.remove("go");
+        r.S.parts.forEach(function (p) {
+          p.f.firstChild.innerHTML = p.b.firstChild.innerHTML = "";
+        });
       });
     });
   }
