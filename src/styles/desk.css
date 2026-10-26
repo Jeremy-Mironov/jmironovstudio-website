@@ -1484,6 +1484,10 @@ body {
   margin-top: 4px !important;
   text-align: center;
 }
+/* not a mistake: the letter is ready to go out by email */
+.err.ok {
+  color: #233f8c;
+}
 .hp {
   display: none;
 }

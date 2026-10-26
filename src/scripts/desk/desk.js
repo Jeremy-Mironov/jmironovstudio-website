@@ -429,6 +429,13 @@ function mailto(d) {
     encodeURIComponent(body)
   );
 }
+// the letter, filled in, ready to go out from the visitor's own email app
+function offerMail(err, d, lead) {
+  err.textContent = lead;
+  var a = el("a", "sk-link", err);
+  a.href = mailto(d);
+  a.textContent = "send it from your email ✉";
+}
 function sendNote(f) {
   var err = f.querySelector(".err"),
     btn = f.querySelector("[type=submit]"),
@@ -460,44 +467,49 @@ function sendNote(f) {
           ]
         : null;
   err.textContent = "";
+  err.classList.remove("ok");
   if (miss) {
     err.textContent = miss[1];
     f.elements[miss[0]].focus({ preventScroll: true });
     return;
   }
   if (f.elements.botcheck.checked) return;
+  // no inbox key in this build: offer the email app straight away
+  if (!key) {
+    err.classList.add("ok");
+    offerMail(err, d, "Your letter is ready — ");
+    return;
+  }
   btn.disabled = true;
   btn.textContent = "Sending…";
-  (key
-    ? fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(
+      Object.assign(
+        {
+          access_key: key,
+          subject: "New letter from jmironovstudio.com",
+          from_name: "JMironov Studio website",
+          botcheck: false,
         },
-        body: JSON.stringify(
-          Object.assign(
-            {
-              access_key: key,
-              subject: "New letter from jmironovstudio.com",
-              from_name: "JMironov Studio website",
-              botcheck: false,
-            },
-            d,
-          ),
-        ),
-      }).then(function (r) {
-        return r
-          .json()
-          .catch(function () {
-            return {};
-          })
-          .then(function (j) {
-            if (!r.ok || !j.success) throw new Error("fail");
-          });
-      })
-    : Promise.reject(new Error("nokey"))
-  )
+        d,
+      ),
+    ),
+  })
+    .then(function (r) {
+      return r
+        .json()
+        .catch(function () {
+          return {};
+        })
+        .then(function (j) {
+          if (!r.ok || !j.success) throw new Error("fail");
+        });
+    })
     .then(
       function () {
         objEl("envelope").classList.add("sealed");
@@ -507,14 +519,8 @@ function sendNote(f) {
           service: d.service,
         });
       },
-      function (x) {
-        err.textContent =
-          x.message === "nokey"
-            ? "This copy of the site can't send letters. "
-            : "Couldn't send it just now. ";
-        var a = el("a", "sk-link", err);
-        a.href = mailto(d);
-        a.textContent = "Send it by email instead ✉";
+      function () {
+        offerMail(err, d, "Couldn't send it just now — ");
       },
     )
     .then(function () {
