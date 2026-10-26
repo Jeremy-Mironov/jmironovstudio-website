@@ -79,9 +79,9 @@ export function createBook(box, host, onOwner) {
       cw +
       "px;column-gap:" +
       g +
-      "px;transform:translateX(" +
+      "px;left:" +
       -k * (fw + g) +
-      "px)"
+      "px"
     );
   }
   function colsOf(t) {
@@ -97,12 +97,14 @@ export function createBook(box, host, onOwner) {
       "position:absolute;left:-12000px;top:0;visibility:hidden;pointer-events:none;transform:none;rotate:none";
     var pg = el("div", "bk-page bk-r", m);
     host.appendChild(m);
+    // stand-ins with text in them, so the running heads and feet take the height
+    // they will have on a real page
     pg.innerHTML = fillIn(shell.innerHTML, {
-      n: "",
-      of: "",
-      kick: "",
-      title: "",
-      owner: "",
+      n: "0",
+      of: "0",
+      kick: "X",
+      title: "X",
+      owner: "/x",
       flow: "",
     });
     var fb = pg.querySelector(".flowbox"),
@@ -356,6 +358,10 @@ export function createBook(box, host, onOwner) {
           (th > 90 ? i : k - i);
         r.S.f.lastChild.style.opacity = sh;
         r.S.b.lastChild.style.opacity = sh;
+        // only the side facing up is drawn: some browsers let a page's photos and
+        // columns show through from the other side when left to backface-visibility
+        r.S.f.style.visibility = th < 90 ? "visible" : "hidden";
+        r.S.b.style.visibility = th < 90 ? "hidden" : "visible";
       });
       return done;
     }

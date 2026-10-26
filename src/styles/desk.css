@@ -1736,7 +1736,8 @@ body {
   left: 0;
   width: 100%;
 }
-.bk-face {
+.bk-face,
+.bk-face * {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
