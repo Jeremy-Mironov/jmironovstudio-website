@@ -17,10 +17,14 @@ var SECS = ["/", "/services", "/pricing"];
 var OBJS = ["notebook", "folder", "magazine", "resume", "envelope"];
 // The objects lie still and choosing one moves the camera to it: up a little, across
 // and down, turning to square the object up. Offsets and tilts match the --x/--y/--r of
-// each .obj in the CSS; cy is the height the camera centres on.
+// each .obj in the CSS. On a desk the camera zooms until the open object fills `fit` of
+// the screen below the dock: box is the object with its page controls, [left, top,
+// width, height] in its own 1600×1000 cell. On a phone the objects are drawn to fill it
+// at z, centred on cy.
 var DESK = {
   dk: {
-    z: 0.84,
+    fit: 0.9,
+    dock: 92,
     lift: 0.64,
     at: {
       notebook: [0, 0, 0],
@@ -29,12 +33,12 @@ var DESK = {
       resume: [-1380, 250, -2],
       envelope: [-30, 890, -2],
     },
-    cy: {
-      notebook: 496,
-      folder: 482,
-      magazine: 510,
-      resume: 520,
-      envelope: 525,
+    box: {
+      notebook: [145, 140, 1310, 740],
+      folder: [205, 82, 1190, 852],
+      magazine: [230, 118, 1140, 794],
+      resume: [160, 24, 1278, 953],
+      envelope: [420, 70, 760, 910],
     },
   },
   mb: {
@@ -53,6 +57,8 @@ var DESK = {
 var mob = null,
   SW = 0,
   SH = 0,
+  VW = 0,
+  VH = 0,
   cur = null,
   cam = null,
   camAnim = null,
@@ -192,13 +198,27 @@ function camFor(name) {
   var D = DESK[mob ? "mb" : "dk"],
     a = D.at[name],
     r = (a[2] * Math.PI) / 180,
-    dy = (D.cy[name] || SH / 2) - SH / 2;
-  return {
-    x: a[0] + SW / 2 - dy * Math.sin(r),
-    y: a[1] + SH / 2 + dy * Math.cos(r),
-    z: D.z,
-    r: a[2],
-  };
+    cos = Math.cos(r),
+    sin = Math.sin(r),
+    b = D.box && D.box[name],
+    z = D.z,
+    oy = 0,
+    q = [0, b ? 0 : (D.cy[name] || SH / 2) - SH / 2];
+  if (b) {
+    // the whole window in stage pixels, centred on the stage; the dock keeps its top
+    var s = Math.min(VW / SW, VH / SH),
+      w = VW / s,
+      h = VH / s,
+      top = D.dock - SH / 2;
+    z = D.fit * Math.min(w / b[2], (h / 2 - top) / b[3]);
+    oy = (top + h / 2) / 2;
+    q = [b[0] + b[2] / 2 - SW / 2, b[1] + b[3] / 2 - SH / 2];
+  }
+  // the object's centre on the desk, then the camera shifted so that it lands oy
+  // below the middle of the window
+  var px = a[0] + SW / 2 + q[0] * cos - q[1] * sin,
+    py = a[1] + SH / 2 + q[0] * sin + q[1] * cos;
+  return { x: px + (oy * sin) / z, y: py - (oy * cos) / z, z: z, r: a[2] };
 }
 function camTf(c) {
   return (
@@ -278,6 +298,8 @@ function layout() {
     vh = window.innerHeight;
   var m =
     qmode === "mobile" || (qmode !== "desktop" && (vw < 760 || vw / vh < 0.78));
+  VW = vw;
+  VH = vh;
   if (m !== mob) {
     mob = m;
     root.classList.toggle("mb", mob);
@@ -289,10 +311,11 @@ function layout() {
     stage.style.width = SW + "px";
     stage.style.height = SH + "px";
     pages();
-    if (cur) moveCam(camFor(cur), false);
   }
   stage.style.transform =
     "translate(-50%,-50%) scale(" + Math.min(vw / SW, vh / SH).toFixed(4) + ")";
+  // the zoom that fills the window depends on its shape
+  if (cur) moveCam(camFor(cur), false);
 }
 function pages() {
   for (var n in books) books[n].build(mob);
