@@ -1,0 +1,273 @@
+---
+// Contact: a letter to fill in, tucked into an air-mail envelope. The Web3Forms key is
+// public by design (it only lets the form post to this inbox); without one the letter
+// falls back to the visitor’s email app.
+interface Props {
+  formKey: string;
+}
+const { formKey } = Astro.props;
+---
+
+<div class="obj o-envelope" data-name="envelope">
+  <div class="ob-body" role="region" aria-label="Contact — a letter to Jeremy">
+    <div class="efaq dsk">
+      <div class="ttl">Before you write…</div>
+      <div class="sticky y" style="rotate: -3deg">
+        <div class="b">How long does a website take?</div><div>
+          A standard local business site usually takes 3–6 weeks from kickoff to
+          launch.
+        </div><div
+          class="tape"
+          style="left: 96px; top: -12px; width: 76px; rotate: 3deg"
+        >
+        </div>
+      </div>
+      <div class="sticky bl" style="rotate: 2deg; margin: 22px 0 0 26px">
+        <div class="b">Outside Vancouver WA?</div><div>
+          My main area is Vancouver WA, Clark County &amp; Portland Metro — SEO,
+          Ads and tracking work across Washington &amp; Oregon.
+        </div><div
+          class="tape"
+          style="left: 90px; top: -12px; width: 70px; rotate: -3deg"
+        >
+        </div>
+      </div>
+    </div>
+    <div class="bcard dsk">
+      <div class="bc-name">JMironov Studio</div>
+      <div class="typed">Jeremy Mironov · websites · SEO · ads</div>
+      <div class="hand bc-l">
+        <a class="sk-link" href="mailto:Jeremymironov@gmail.com"
+          >Jeremymironov@gmail.com</a
+        >
+      </div>
+      <div class="hand bc-l">
+        <a class="sk-link" href="tel:+19713267264">(971) 326-7264</a>
+      </div>
+      <div class="hand pencil xs">
+        Vancouver, WA · Clark County &amp; Portland Metro
+      </div>
+    </div>
+    <div class="env">
+      <svg
+        class="e-flap"
+        viewBox="0 0 760 250"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        ><defs
+          ><pattern
+            id="airmail"
+            width="36"
+            height="36"
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(45)"
+            ><rect width="36" height="36" fill="#f4efe4"></rect><rect
+              width="12"
+              height="36"
+              fill="#d8423a"></rect><rect
+              x="18"
+              width="12"
+              height="36"
+              fill="#2f6bb3"></rect></pattern
+          ></defs
+        ><polygon
+          points="4,248 380,10 756,248"
+          fill="#ece5d6"
+          stroke="url(#airmail)"
+          stroke-width="20"
+          stroke-linejoin="round"></polygon><polygon
+          points="4,248 380,10 756,248"
+          fill="none"
+          stroke="#c9bfae"
+          stroke-width="1.5"
+          stroke-linejoin="round"></polygon></svg
+      >
+      <div class="e-in"></div>
+      <div class="lsheet">
+        <div class="lhead hand">Dear Jeremy,</div>
+        <form class="letter hand" novalidate data-key={formKey}>
+          <label class="fld"
+            ><span class="lbl">Name <b class="req">*</b></span><input
+              class="blank"
+              name="name"
+              autocomplete="name"
+              placeholder="your name"
+            /></label
+          >
+          <label class="fld"
+            ><span class="lbl">Phone</span><input
+              class="blank"
+              type="tel"
+              name="phone"
+              autocomplete="tel"
+              placeholder="optional"
+            /></label
+          >
+          <label class="fld"
+            ><span class="lbl">Email <b class="req">*</b></span><input
+              class="blank"
+              type="email"
+              name="email"
+              autocomplete="email"
+              placeholder="you@email.com"
+            /></label
+          >
+          <label class="fld"
+            ><span class="lbl">Business</span><input
+              class="blank"
+              name="business"
+              autocomplete="organization"
+              placeholder="optional"
+            /></label
+          >
+          <div class="fld top">
+            <span class="lbl">Help with</span>
+            <div class="picks" role="group" aria-label="Help with">
+              <label class="pick"
+                ><input type="checkbox" name="service" value="Website" /><span
+                  >website</span
+                ></label
+              >
+              <label class="pick"
+                ><input type="checkbox" name="service" value="SEO" /><span
+                  >SEO</span
+                ></label
+              >
+              <label class="pick"
+                ><input
+                  type="checkbox"
+                  name="service"
+                  value="Google Ads"
+                /><span>Google Ads</span></label
+              >
+              <label class="pick"
+                ><input type="checkbox" name="service" value="Meta Ads" /><span
+                  >Meta Ads</span
+                ></label
+              >
+              <label class="pick"
+                ><input type="checkbox" name="service" value="Tracking" /><span
+                  >tracking</span
+                ></label
+              >
+              <label class="pick"
+                ><input
+                  type="checkbox"
+                  name="service"
+                  value="CRM & automation"
+                /><span>CRM</span></label
+              >
+              <label class="pick"
+                ><input
+                  type="checkbox"
+                  name="service"
+                  value="Not sure yet"
+                /><span>not sure</span></label
+              >
+            </div>
+          </div>
+          <label class="fld col"
+            ><span class="lbl">Message <b class="req">*</b></span><textarea
+              class="lines"
+              name="message"
+              rows="3"
+              placeholder="what your business does, what isn't working, what you'd like to improve…"
+            ></textarea></label
+          >
+          <input
+            class="hp"
+            type="checkbox"
+            name="botcheck"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+          <div class="sendrow">
+            <button class="sk-btn red" type="submit">Send message ✈</button
+            ><span class="pencil xs"
+              >no obligation · I reply within one business day</span
+            >
+          </div>
+          <p class="err red xs" role="alert"></p>
+        </form>
+      </div>
+      <div class="e-pocket"></div>
+      <svg
+        class="e-lines"
+        viewBox="0 0 760 440"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        ><path
+          d="M2 2 L380 229 L758 2 M2 438 L380 229 L758 438"
+          fill="none"
+          stroke="#c9bfae"
+          stroke-width="1.6"></path></svg
+      >
+      <div class="e-label">Par avion · by air mail</div>
+      <div class="e-addr hand">
+        <span class="pencil">from:</span> Jeremy Mironov · JMironov Studio<br
+        /><a class="sk-link" href="mailto:Jeremymironov@gmail.com"
+          >Jeremymironov@gmail.com</a
+        > · <a class="sk-link" href="tel:+19713267264">(971) 326-7264</a>
+      </div>
+      <svg class="e-post" viewBox="0 0 120 120" aria-hidden="true"
+        ><circle
+          cx="60"
+          cy="60"
+          r="44"
+          fill="none"
+          stroke="#5f6f99"
+          stroke-width="2.4"
+          stroke-dasharray="5 3"></circle><circle
+          cx="60"
+          cy="60"
+          r="34"
+          fill="none"
+          stroke="#5f6f99"
+          stroke-width="1.6"></circle><text
+          x="60"
+          y="55"
+          text-anchor="middle"
+          font-family="ui-monospace, Menlo, Consolas, monospace"
+          font-size="11"
+          letter-spacing="1.5"
+          fill="#5f6f99">VANCOUVER</text
+        ><text
+          x="60"
+          y="71"
+          text-anchor="middle"
+          font-family="ui-monospace, Menlo, Consolas, monospace"
+          font-size="11"
+          letter-spacing="1.5"
+          fill="#5f6f99">WA · 2026</text
+        ></svg
+      >
+      <div class="e-seal" aria-hidden="true">sent ✓</div>
+      <div class="ptag" style="left: 30px; top: -440px; rotate: -4deg">
+        contact
+      </div>
+    </div>
+    <div class="thanks sticky y" role="status" aria-live="polite">
+      <div class="b">Sent — thank you!</div><div>
+        Your letter is on its way. I'll read it and write back within one
+        business day. Urgent? Call or text <a
+          class="sk-link"
+          href="tel:+19713267264">(971) 326-7264</a
+        >.
+      </div><button class="sk-link" data-env="again"
+        >write another letter</button
+      ><div
+        class="tape"
+        style="left: 96px; top: -12px; width: 76px; rotate: -3deg"
+      >
+      </div>
+    </div>
+  </div>
+  <a
+    class="grab"
+    href="/contact"
+    data-obj="envelope"
+    data-keep
+    aria-label="Open the contact envelope"
+    style="left: 400px; top: 60px; width: 800px; height: 930px"></a>
+</div>

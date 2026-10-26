@@ -1,0 +1,23 @@
+{
+  "redirects": [
+    { "source": "/work", "destination": "/projects", "permanent": true },
+    { "source": "/notebook/:path*", "destination": "/", "permanent": true },
+    { "source": "/widgets", "destination": "/", "permanent": true },
+    {
+      "source": "/services/:path+",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/blog/category/:path*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tags/:path*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    { "source": "/blog/:page(\\d+)", "destination": "/blog", "permanent": true }
+  ]
+}

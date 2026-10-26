@@ -1,0 +1,11 @@
+---
+// The pencil-line filter and the little drawings the dock and the notebook use.
+import rough from "./props/rough.html?raw";
+import icons from "./props/icons.html?raw";
+
+const resume =
+  '<symbol id="ic-resume" viewBox="0 0 48 40"><path d="M12 3.5 h18 l8 8 v25.5 a1.5 1.5 0 0 1 -1.5 1.5 h-24.5 a1.5 1.5 0 0 1 -1.5 -1.5 v-32 a1.5 1.5 0 0 1 1.5 -1.5 z" fill="#fffdf8" stroke="#233f8c" stroke-width="2" stroke-linejoin="round"/><path d="M30 3.5 v8 h8" fill="none" stroke="#233f8c" stroke-width="1.6" stroke-linejoin="round"/><rect x="15" y="9" width="9" height="10" rx="1" fill="#f2b8a8"/><path d="M15 24.5 h18 M15 29 h18 M15 33.5 h12" stroke="#8fb0d8" stroke-width="1.6" stroke-linecap="round"/></symbol>';
+---
+
+<Fragment set:html={rough} />
+<Fragment set:html={icons.replace("</svg>", resume + "\n</svg>")} />

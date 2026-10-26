@@ -1,0 +1,265 @@
+---
+// The projects folder: the index card on the left flap and an overview sheet on the
+// right, then every case study as a stapled set of sheets turned over the fold.
+import pencil from "./props/pencil.html?raw";
+import { projects } from "@/data/projects";
+import { deskImage } from "@/data/desk";
+
+const CLIP =
+  '<svg class="clip" viewBox="0 0 24 64" aria-hidden="true"><path d="M8 20 V 52 a6 6 0 0 0 12 0 V 12 a8 8 0 0 0 -16 0 V 46 a4 4 0 0 0 8 0 V 18" fill="none" stroke="#7d858e" stroke-width="2.8" stroke-linecap="round"/><path d="M8 20 V 52 a6 6 0 0 0 12 0 V 12 a8 8 0 0 0 -16 0 V 46 a4 4 0 0 0 8 0 V 18" fill="none" stroke="#eef2f6" stroke-width="1" stroke-linecap="round" transform="translate(-.7 -.7)"/></svg>';
+const TABS = ["#8fc1ec", "#9ed6a4", "#f4d36b", "#f3a9b3", "#d8c3f2", "#ffb4a2"];
+const pad = (n: number) => String(n).padStart(2, "0");
+const files = projects.map((p, i) => ({
+  p,
+  href: `/projects/${p.slug}`,
+  no: `${pad(i + 1)} / ${pad(projects.length)}`,
+  short: p.name.split(" ")[0],
+  color: TABS[i % TABS.length],
+  hero: deskImage(p.images[0]?.src ?? p.cardImage, "work"),
+  card: deskImage(p.cardImage, "work"),
+  more: p.images
+    .slice(1)
+    .map((im) => ({ src: deskImage(im.src, "work"), alt: im.alt })),
+}));
+---
+
+<div class="obj o-folder" data-name="folder">
+  <div
+    class="ob-body"
+    role="region"
+    aria-label="Projects folder — case studies"
+  >
+    <div class="fold">
+      <div class="flap dsk"></div>
+      <div class="fback"><div class="ftab">Client work</div></div>
+      <div class="dtabs" role="navigation" aria-label="Case studies">
+        {
+          files.map((f) => (
+            <a class="dtab" href={f.href} data-mark style={`--tc: ${f.color}`}>
+              <span>{f.short}</span>
+            </a>
+          ))
+        }
+      </div>
+      <div class="book fbook">
+        <div class="bk-page bk-l"></div>
+        <div class="bk-page bk-r"></div>
+        <button class="mcorner l" data-step="-1" aria-label="Previous pages"
+        ></button>
+        <button class="mcorner r" data-step="1" aria-label="Next pages"
+        ></button>
+        <div class="mnav">
+          <button class="sk-btn" data-step="-1">‹ back</button>
+          <span class="bk-num hand"></span>
+          <button class="sk-btn" data-step="1">next ›</button>
+          <a class="sk-btn bk-home" href="/projects">all projects</a>
+        </div>
+
+        <template data-page data-owner="/projects" data-mode="dk">
+          <div class="fp-bare">
+            <div class="icard">
+              <div class="typed">Client work · 2025–2026</div>
+              <h2 class="ic-title">Projects</h2>
+              <ol class="ilist">
+                {
+                  files.map((f) => (
+                    <li>
+                      <a href={f.href}>
+                        <b>{f.p.name}</b>
+                        <span>
+                          {f.p.industry.toLowerCase()} · p.{" "}
+                          <i data-pn={f.href} />
+                        </span>
+                      </a>
+                    </li>
+                  ))
+                }
+              </ol>
+              <div class="hand pencil xs">
+                pick a file — or pull a colored tab on the right →
+              </div>
+            </div>
+            <div class="sticky y fnote">
+              <div class="b">Want yours in this folder?</div>
+              <div>
+                Tell me what you're working on — I reply within one business
+                day.
+              </div>
+              <a class="sk-link" href="/contact">write me a letter ✉</a>
+              <div
+                class="tape"
+                style="left: 84px; top: -12px; width: 76px; rotate: -4deg"
+              >
+              </div>
+            </div>
+            <div class="flags" aria-hidden="true">
+              <i></i><i></i><i></i><i></i>
+            </div>
+            <div class="pen" aria-hidden="true">
+              <Fragment set:html={pencil} />
+            </div>
+          </div>
+        </template>
+        <template data-page data-owner="/projects" data-mode="dk">
+          <section class="fp fover">
+            <div class="fhead typed">
+              <span>Client work</span><span>{projects.length} case studies</span
+              >
+            </div>
+            <div class="fgrid">
+              {
+                files.map((f, i) => (
+                  <a
+                    class="fcard"
+                    href={f.href}
+                    style={`rotate: ${[-1.6, 1.2, 0.9, -1.1][i % 4]}deg`}
+                  >
+                    <img src={f.card} alt="" />
+                    <b>{f.p.name}</b>
+                    <span>{f.p.industry}</span>
+                  </a>
+                ))
+              }
+            </div>
+            <div class="hand pencil sm fhint">
+              open a file to read the whole story ↗
+            </div>
+          </section>
+        </template>
+        <template data-page data-owner="/projects" data-mode="mb">
+          <section class="fp findex">
+            <div class="typed">Client work · 2025–2026</div>
+            <h2 class="ic-title">Projects</h2>
+            <ol class="ilist">
+              {
+                files.map((f) => (
+                  <li>
+                    <a href={f.href}>
+                      <img src={f.card} alt="" />
+                      <b>{f.p.name}</b>
+                      <span>{f.p.industry.toLowerCase()}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ol>
+            <a class="sk-link hand sm" href="/contact"
+              >want yours in this folder? write me ✉</a
+            >
+          </section>
+        </template>
+
+        {
+          files.map((f) => (
+            <template
+              data-flow="cflow"
+              data-owner={f.href}
+              data-kick={f.p.industry}
+              data-title={f.p.name}
+            >
+              <div class="typed">
+                Project file {f.no} · {f.p.industry}
+              </div>
+              <h2 class="pname">{f.p.name}</h2>
+              <div class="stamps">
+                {f.p.tags.map((t) => (
+                  <span>{t}</span>
+                ))}
+              </div>
+              <figure class="pshot lbable">
+                <img
+                  src={f.hero}
+                  alt={f.p.images[0]?.alt ?? f.p.cardImageAlt}
+                />
+                <Fragment set:html={CLIP} />
+              </figure>
+              <p class="psum">{f.p.summary}</p>
+              <h3 class="ch">The goal</h3>
+              <p>{f.p.goal}</p>
+              <h3 class="ch">What I did</h3>
+              <ul class="list">
+                {f.p.whatIDid.map((w) => (
+                  <li>
+                    <span>{w}</span>
+                  </li>
+                ))}
+              </ul>
+              <h3 class="ch">The result</h3>
+              <p>{f.p.result}</p>
+              <h3 class="ch">On the job</h3>
+              <ul class="tools">
+                {f.p.technologies.map((t) => (
+                  <li>{t}</li>
+                ))}
+              </ul>
+              {f.more.length > 0 && <h3 class="ch">More screens</h3>}
+              {f.more.map((m) => (
+                <figure class="pshot sm lbable">
+                  <img src={m.src} alt={m.alt} />
+                  <figcaption>{m.alt.split(" — ")[1] ?? m.alt}</figcaption>
+                </figure>
+              ))}
+              <p class="plinks">
+                <a
+                  class="sk-link"
+                  href={f.p.url}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  visit the live site ↗
+                </a>
+              </p>
+            </template>
+          ))
+        }
+
+        <template data-shell>
+          <section class="fp">
+            <div class="fhead typed">
+              <span>Client work</span><span>%title%</span>
+            </div>
+            <div class="flowbox">%flow%</div>
+            <div class="ffoot">
+              <a class="sk-link hand xs" href="/projects">← all projects</a
+              ><span class="hand pencil xs">p. %n%</span>
+            </div>
+          </section>
+        </template>
+        <template data-filler>
+          <section class="fp fp-note">
+            <div class="fhead typed"><span>Notes</span><span></span></div>
+            <div class="fnotes hand">
+              <p class="fn-h">Notes</p>
+              <p class="fl-next">
+                Next in the folder:<br /><a class="sk-link" href="/projects"
+                  ><span class="fl-title"></span> →</a
+                >
+              </p>
+              <p>
+                <a class="sk-link" href="/projects">← back to all projects</a>
+              </p>
+              <p>
+                <a class="sk-link red" href="/contact"
+                  >a project like this for you? write me ✉</a
+                >
+              </p>
+            </div>
+            <div class="ffoot">
+              <span></span><span class="hand pencil xs">p. %n%</span>
+            </div>
+          </section>
+        </template>
+      </div>
+      <div class="ptag" style="left: 26px; top: 40px; rotate: -4deg">
+        projects
+      </div>
+    </div>
+  </div>
+  <a
+    class="grab"
+    href="/projects"
+    data-obj="folder"
+    data-keep
+    aria-label="Open the projects folder"
+    style="left: 200px; top: 80px; width: 1240px; height: 800px"></a>
+</div>

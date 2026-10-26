@@ -1,0 +1,54 @@
+---
+// The shelf of desk objects: along the top on a desk, along the bottom on a phone.
+// data-keep links return to the page each object was left open on.
+const items = [
+  {
+    obj: "notebook",
+    href: "/",
+    icon: "ic-notebook",
+    label: "home",
+    keep: false,
+  },
+  {
+    obj: "folder",
+    href: "/projects",
+    icon: "ic-folder",
+    label: "projects",
+    keep: true,
+  },
+  {
+    obj: "magazine",
+    href: "/blog",
+    icon: "ic-magazine",
+    label: "blog",
+    keep: true,
+  },
+  {
+    obj: "resume",
+    href: "/about",
+    icon: "ic-resume",
+    label: "about",
+    keep: true,
+  },
+  {
+    obj: "envelope",
+    href: "/contact",
+    icon: "ic-envelope",
+    label: "contact",
+    keep: true,
+  },
+];
+---
+
+<nav class="dock" aria-label="Pages on the desk">
+  {
+    items.map((i) => (
+      <a href={i.href} data-obj={i.obj} data-keep={i.keep ? "" : undefined}>
+        <svg aria-hidden="true">
+          <use href={`#${i.icon}`} />
+        </svg>
+        <span>{i.label}</span>
+      </a>
+    ))
+  }
+</nav>

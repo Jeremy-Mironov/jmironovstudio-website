@@ -1,0 +1,94 @@
+---
+// The whole site as one desk. Every page renders all of it; the address picks which
+// object the camera opens on and which page of it lies open (scripts/desk/desk.js).
+import Defs from "./Defs.astro";
+import Notebook from "./Notebook.astro";
+import Folder from "./Folder.astro";
+import Magazine from "./Magazine.astro";
+import Resume from "./Resume.astro";
+import Envelope from "./Envelope.astro";
+import Dock from "./Dock.astro";
+import eraser from "./props/eraser.html?raw";
+import { siteConfig } from "@/config/site";
+import type { DeskRoute } from "@/data/desk";
+
+interface Props {
+  routes: Record<string, DeskRoute>;
+  lost?: boolean;
+}
+
+const { routes, lost = false } = Astro.props;
+const formKey = import.meta.env.WEB3FORMS_ACCESS_KEY ?? "";
+---
+
+<div
+  id="nb"
+  class={lost ? "scene dk lost" : "scene dk"}
+  tabindex="0"
+  role="region"
+  aria-label="JMironov Studio — a desk with a sketchbook, a project folder, a blog magazine, a résumé and a contact envelope"
+  data-site={siteConfig.url}
+>
+  <div class="stage" id="stage">
+    <Defs />
+    <div class="desk" id="desk">
+      <div class="surf" aria-hidden="true"></div>
+      <div class="obj o-notebook" data-name="notebook">
+        <div
+          class="ob-body"
+          role="region"
+          aria-label="Sketchbook — home, services and pricing"
+        >
+          <Fragment set:html={eraser} />
+          <div class="world" id="world"></div>
+          <div class="ptag" style="left: 1290px; top: 800px; rotate: 5deg">
+            home
+          </div>
+        </div>
+        <a
+          class="grab"
+          href="/"
+          data-obj="notebook"
+          data-keep
+          aria-label="Open the sketchbook"
+          style="left: 174px; top: 96px; width: 1252px; height: 800px"></a>
+      </div>
+      <Folder />
+      <Magazine />
+      <Resume />
+      <Envelope formKey={formKey} />
+    </div>
+    <Dock />
+    <div class="sticky p lost-note" role="status">
+      <div class="b">That page isn't on the desk.</div>
+      <div>
+        It may have moved — everything is in the sketchbook, the folder and the
+        magazine.
+      </div>
+      <a class="sk-link" href="/">open the sketchbook →</a>
+      <div
+        class="tape"
+        style="left: 150px; top: -12px; width: 80px; rotate: -3deg"
+      >
+      </div>
+    </div>
+  </div>
+  <noscript>
+    <p class="nojs">
+      This desk needs JavaScript to open its pages. You can still
+      <a href="mailto:Jeremymironov@gmail.com">email Jeremy</a> or call <a
+        href="tel:+19713267264">(971) 326-7264</a
+      >.
+    </p>
+  </noscript>
+</div>
+<Notebook />
+<script
+  is:inline
+  type="application/json"
+  id="routes"
+  set:html={JSON.stringify(routes).replace(/</g, "\\u003c")}
+/>
+<script>
+  import "@/scripts/desk/desk.js";
+</script>

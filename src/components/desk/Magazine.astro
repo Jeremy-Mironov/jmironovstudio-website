@@ -1,0 +1,208 @@
+---
+// The blog as a magazine: cover and contents first, then every post, each starting on
+// a left-hand page. Posts are paginated in the browser (see scripts/desk/book.js).
+import { render } from "astro:content";
+import { blogPosts, deskImage, postDate } from "@/data/desk";
+
+const posts = await blogPosts();
+const issues = await Promise.all(
+  posts.map(async (post) => {
+    const { Content, remarkPluginFrontmatter } = await render(post);
+    const minutes = remarkPluginFrontmatter?.minutesRead as number | undefined;
+    return {
+      post,
+      Content,
+      href: `/blog/${post.id}`,
+      kick: post.data.category ?? "Field Notes",
+      image: post.data.image ? deskImage(post.data.image, "blog") : "",
+      read: minutes ? `${Math.ceil(minutes)} min read` : "",
+    };
+  }),
+);
+const latest = issues[0];
+const year = posts.length
+  ? posts[0].data.pubDate.getUTCFullYear()
+  : new Date().getFullYear();
+---
+
+<div class="obj o-magazine" data-name="magazine">
+  <div class="ob-body" role="region" aria-label="Field Notes — the blog">
+    <div class="book mag">
+      <div class="bk-page bk-l"></div>
+      <div class="bk-page bk-r"></div>
+      <button class="mcorner l" data-step="-1" aria-label="Previous pages"
+      ></button>
+      <button class="mcorner r" data-step="1" aria-label="Next pages"></button>
+      <div class="mnav">
+        <button class="sk-btn" data-step="-1">‹ back</button>
+        <span class="bk-num hand"></span>
+        <button class="sk-btn" data-step="1">next ›</button>
+        <a class="sk-btn bk-home" href="/blog">contents</a>
+      </div>
+      <div class="ptag" style="left: 30px; top: 40px; rotate: -6deg">blog</div>
+
+      <template data-page data-owner="/blog" data-mode="dk">
+        <section class="mp mp-cover">
+          <div class="mhead">
+            <span>Field Notes</span><span
+              >Issue {String(posts.length).padStart(2, "0")} · {year}</span
+            >
+          </div>
+          <div class="mmast">Field<br /><em>Notes</em></div>
+          <p class="msub">
+            The JMironov Studio journal — plain-English notes on websites, local
+            SEO, ads and follow-up for local service businesses.
+          </p>
+          {
+            latest && (
+              <a class="mlead" href={latest.href}>
+                {latest.image && <img src={latest.image} alt="" />}
+                <span class="mk">Inside · {latest.kick}</span>
+                <span class="mt">{latest.post.data.title}</span>
+              </a>
+            )
+          }
+          <div class="mfoot">
+            <span>— Jeremy Mironov, editor</span><span>%n%</span>
+          </div>
+        </section>
+      </template>
+      <template data-page data-owner="/blog" data-mode="dk">
+        <section class="mp mp-toc">
+          <div class="mhead"><span>Field Notes</span><span>Contents</span></div>
+          <div class="mtoc-h">In this issue</div>
+          <ol class={posts.length > 6 ? "mtoc many" : "mtoc"}>
+            {
+              issues.map((i) => (
+                <li>
+                  <a href={i.href}>
+                    <span class="mk">
+                      {i.kick} · {postDate(i.post.data.pubDate, "short")}
+                    </span>
+                    <span class="mt">{i.post.data.title}</span>
+                    <span class="md">{i.post.data.description}</span>
+                    <span class="mn" data-pn={i.href} />
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+          <div class="mfoot">
+            <span>jmironovstudio.com/blog</span><span>%n%</span>
+          </div>
+        </section>
+      </template>
+      <template data-page data-owner="/blog" data-mode="mb">
+        <section class="mp mp-cover">
+          <div class="mhead">
+            <span>Field Notes</span><span
+              >Issue {String(posts.length).padStart(2, "0")} · {year}</span
+            >
+          </div>
+          <div class="mmast">Field<br /><em>Notes</em></div>
+          <p class="msub">
+            Plain-English notes on websites, local SEO, ads and follow-up for
+            local businesses.
+          </p>
+          <div class="mtoc-h">In this issue</div>
+          <ol class="mtoc">
+            {
+              issues.map((i) => (
+                <li>
+                  <a href={i.href}>
+                    <span class="mk">
+                      {i.kick} · {postDate(i.post.data.pubDate, "short")}
+                    </span>
+                    <span class="mt">{i.post.data.title}</span>
+                    <span class="mn" data-pn={i.href} />
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+          <div class="mfoot">
+            <span>— Jeremy Mironov, editor</span><span>%n%</span>
+          </div>
+        </section>
+      </template>
+
+      {
+        issues.map((i) => (
+          <template
+            data-flow="mflow"
+            data-owner={i.href}
+            data-kick={i.kick}
+            data-title={i.post.data.title}
+          >
+            <article class="mart">
+              <div class="mkick">
+                {i.kick} · {postDate(i.post.data.pubDate)}
+              </div>
+              <h2 class="mtitle">{i.post.data.title}</h2>
+              <p class="mdeck">{i.post.data.description}</p>
+              {i.image && (
+                <figure class="mfig lbable">
+                  <img src={i.image} alt={i.post.data.title} />
+                </figure>
+              )}
+              <div class="mby">
+                By {i.post.data.author}
+                {i.read && ` · ${i.read}`}
+              </div>
+              <div class="mbody">
+                <i.Content />
+              </div>
+              <p class="mend">
+                <span>■</span>{" "}
+                <a href="/contact">
+                  Questions about your own site? Write me a letter →
+                </a>
+              </p>
+            </article>
+          </template>
+        ))
+      }
+
+      <template data-shell>
+        <section class="mp">
+          <div class="mhead"><span>Field Notes</span><span>%kick%</span></div>
+          <div class="flowbox">%flow%</div>
+          <div class="mfoot">
+            <span>jmironovstudio.com%owner%</span><span>%n%</span>
+          </div>
+        </section>
+      </template>
+      <template data-filler>
+        <section class="mp mp-ad">
+          <div class="mhead">
+            <span>Field Notes</span><span>Advertisement</span>
+          </div>
+          <div class="ad">
+            <div class="ad-k">JMironov Studio · Vancouver, WA</div>
+            <div class="ad-h">Get found.<br /><em>Get called.</em></div>
+            <p class="ad-p">
+              Websites, local SEO, Google Ads and tracking for local service
+              businesses in Vancouver WA &amp; Portland Metro.
+            </p>
+            <a class="ad-cta" href="/contact">Book a free consultation →</a>
+          </div>
+          <p class="fl-next">
+            Next in this issue: <a href="/blog"
+              ><span class="fl-title"></span> →</a
+            >
+          </p>
+          <div class="mfoot">
+            <span>jmironovstudio.com</span><span>%n%</span>
+          </div>
+        </section>
+      </template>
+    </div>
+  </div>
+  <a
+    class="grab"
+    href="/blog"
+    data-obj="magazine"
+    data-keep
+    aria-label="Open the blog magazine"
+    style="left: 226px; top: 128px; width: 1150px; height: 748px"></a>
+</div>

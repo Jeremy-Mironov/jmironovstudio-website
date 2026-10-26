@@ -15,7 +15,8 @@
     "check": "astro check",
     "typecheck": "tsc --noEmit",
     "build-preview": "npm run build && npm run preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "desk:images": "node scripts/desk-images.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",

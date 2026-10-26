@@ -1,0 +1,68 @@
+---
+// Every page of the site is the desk, opened at its own address.
+import Seo from "@/components/seo/Seo.astro";
+import Schema from "@/components/seo/Schema.astro";
+import Desk from "@/components/desk/Desk.astro";
+import Analytics from "@vercel/analytics/astro";
+import { siteConfig } from "@/config/site";
+import { deskRoutes } from "@/data/desk";
+import "@/styles/desk.css";
+
+interface Props {
+  path: string;
+  lost?: boolean;
+}
+
+const { path, lost = false } = Astro.props;
+const routes = await deskRoutes();
+const page = lost
+  ? {
+      title: "Page not found | JMironov Studio",
+      description: "The page you're looking for isn't on the desk.",
+      image: undefined,
+    }
+  : routes[path];
+if (!page) throw new Error(`No desk route for ${path}`);
+---
+
+<!doctype html>
+<html lang={siteConfig.lang}>
+  <head>
+    <Seo
+      title={page.title}
+      description={page.description}
+      ogImage={page.image}
+      canonical={lost ? undefined : siteConfig.url + path.replace(/\/?$/, "/")}
+      ignoreTitleTemplate
+    />
+    {lost && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#a87745" />
+    <link
+      rel="preload"
+      href="/fonts/caveat-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/caveat-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/amatic-sc-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <Schema type="WebSite" data={{}} />
+    <slot name="head" />
+  </head>
+  <body>
+    <Desk routes={routes} lost={lost} />
+    <Analytics />
+  </body>
+</html>
