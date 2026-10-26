@@ -1,10 +1,11 @@
 // Paper on the desk: the blog magazine, the project folder and the résumé.
 // Pages come from <template>s inside the book: whole pages as they are, and long pieces
 // (an article, a case study) poured into page-sized columns and cut into as many pages
-// as they fill. A bound book shows a spread on the desk and one page on a phone; every
-// turn is the same sheet going over the spine, and a jump riffles a few of them. A loose
-// stack (.stack, the résumé) shows its top sheet: turning on slides that sheet off and
-// tucks it under the pile, turning back pulls the bottom sheet out and lays it on top.
+// as they fill. A bound book (the magazine) shows a spread on the desk and one page on a
+// phone; every turn is the same sheet bending over the spine, and a jump riffles a few
+// of them. A loose stack (.stack: the folder, the résumé) shows its top sheet: turning
+// on slides that sheet off and tucks it under the pile, turning back pulls the bottom
+// sheet out and lays it on top.
 //
 //   template[data-page]   a whole page
 //   template[data-flow]   a piece to paginate (data-flow names the flow class;
@@ -13,13 +14,32 @@
 //   template[data-filler] a page that fills the gap before a data-start page
 // data-owner is the address a page belongs to; data-mode="dk"/"mb" keeps a page to the
 // desk or the phone; data-start makes a page open on the left of a spread. %n% is the
-// page number and %of% the pages its address has, %kick% and %title% come from the
-// flow, and any [data-pn="/address"] is filled with the page that address starts on.
+// page number, %pg% its number within its address and %of% the pages that address has;
+// %kick% and %title% come from the flow, and any [data-pn="/address"] is filled with
+// the page that address starts on.
 import { el, esc, ease, markLB, reduce } from "./util.js";
 
 var SHEETS = 3,
   GAP = 40,
-  COL_GAP = 28;
+  COL_GAP = 28,
+  // A turning sheet bends like the sketchbook's leaves: three hinged strips (shares of
+  // the page width) that curl as it lifts and lie flat again as it lands.
+  STRIPS = [0.45, 0.3, 0.25],
+  BEND = [15, 21],
+  LIGHT = [-0.4, 1];
+
+function curl(u) {
+  return Math.sin(Math.PI * Math.pow(u, 0.8)) * (1 - 0.4 * u);
+}
+function shade(a, b) {
+  return a + b < 0.004
+    ? "none"
+    : "linear-gradient(90deg,rgba(33,23,10," +
+        a.toFixed(3) +
+        "),rgba(33,23,10," +
+        b.toFixed(3) +
+        "))";
+}
 
 // onOwner(address) hears where the book was turned to.
 export function createBook(box, host, onOwner) {
@@ -53,9 +73,41 @@ export function createBook(box, host, onOwner) {
     var s = el("div", "bk-sheet", box);
     s.inert = true;
     s.setAttribute("aria-hidden", "true");
-    s.innerHTML =
-      '<div class="bk-face bk-front"><div class="bk-in"></div><i class="bk-shade"></i></div><div class="bk-face bk-back"><div class="bk-in"></div><i class="bk-shade"></i></div>';
-    return { el: s, f: s.firstChild, b: s.lastChild };
+    var parts = STRIPS.map(function () {
+      var p = el("div", "bk-strip", s);
+      p.innerHTML =
+        '<div class="bk-face bk-front"><div class="bk-in"></div><i class="bk-shade"></i></div><div class="bk-face bk-back"><div class="bk-in"></div><i class="bk-shade"></i></div>';
+      return { el: p, f: p.firstChild, b: p.lastChild, w: 0 };
+    });
+    return { el: s, parts: parts };
+  }
+  // Cut a sheet into its strips for pages pw wide: each strip's windows show its
+  // slice of the front page and, mirrored, the matching slice of the back one.
+  function cut(S, pw) {
+    var off = 0;
+    S.parts.forEach(function (P, k) {
+      var w = k < STRIPS.length - 1 ? Math.round(pw * STRIPS[k]) : pw - off;
+      P.w = w;
+      P.el.style.width = w + "px";
+      // a pixel of overlap keeps the seams shut
+      P.f.style.width = P.b.style.width = w + 1 + "px";
+      P.f.firstChild.style.cssText = "left:" + -off + "px;width:" + pw + "px";
+      P.b.firstChild.style.cssText =
+        "left:" + (off + w + 1 - pw) + "px;width:" + pw + "px";
+      off += w;
+    });
+  }
+  function faces(S, front, back) {
+    var fh = pageHTML(front),
+      bh = pageHTML(back);
+    S.parts.forEach(function (P) {
+      P.f.firstChild.innerHTML = fh;
+      P.b.firstChild.innerHTML = bh;
+      P.f.classList.toggle("blank", !pages[front]);
+      P.b.classList.toggle("blank", !pages[back]);
+      numbers(P.f);
+      numbers(P.b);
+    });
   }
   function fillIn(h, map) {
     return h.replace(/%(\w+)%/g, function (m, k) {
@@ -101,6 +153,7 @@ export function createBook(box, host, onOwner) {
     // they will have on a real page
     pg.innerHTML = fillIn(shell.innerHTML, {
       n: "0",
+      pg: "0",
       of: "0",
       kick: "X",
       title: "X",
@@ -198,6 +251,7 @@ export function createBook(box, host, onOwner) {
     if (!P) return "";
     var map = {
       n: i + 1,
+      pg: i - (starts[P.owner] || 0) + 1,
       of: pages.filter(function (Q) {
         return Q.owner === P.owner;
       }).length,
@@ -255,11 +309,6 @@ export function createBook(box, host, onOwner) {
     numbers(c);
     markLB(c, true);
     clipFocus(c);
-  }
-  function face(f, i) {
-    f.firstChild.innerHTML = pageHTML(i);
-    f.classList.toggle("blank", !pages[i]);
-    numbers(f);
   }
   function status() {
     var n = count();
@@ -330,13 +379,19 @@ export function createBook(box, host, onOwner) {
       k = Math.min(SHEETS, d),
       dur = reduce ? 260 : 900,
       stag = reduce ? 0 : 150,
-      run = [];
+      run = [],
+      pw = pageR.offsetWidth,
+      lr = LIGHT[0],
+      lz = LIGHT[1],
+      ln = Math.sqrt(lr * lr + lz * lz);
+    lr /= ln;
+    lz /= ln;
     for (var i = 0; i < k; i++) {
       var j = k > 1 ? Math.round((i * (d - 1)) / (k - 1)) : 0,
         s = fwd ? from + j : from - 1 - j,
         S = sheets[i];
-      face(S.f, ri(s));
-      face(S.b, li(s + 1));
+      cut(S, pw);
+      faces(S, ri(s), li(s + 1));
       run.push({ S: S, a: fwd ? 0 : 180, b: fwd ? 180 : 0, t: i * stag });
     }
     // what each lifted sheet uncovers is already lying underneath
@@ -348,20 +403,48 @@ export function createBook(box, host, onOwner) {
       run.forEach(function (r, i) {
         var u = Math.min(1, Math.max(0, (now - t0 - r.t) / dur)),
           th = r.a + (r.b - r.a) * ease(u),
-          sh = (0.36 * Math.sin((th * Math.PI) / 180)).toFixed(3);
+          c = reduce ? 0 : curl(u),
+          dir = r.b > r.a ? 1 : -1,
+          b1 = c * BEND[0] * dir,
+          b2 = c * BEND[1] * dir,
+          P = r.S.parts,
+          s1 = "translateX(" + P[0].w + "px) rotateY(" + b1.toFixed(2) + "deg)";
         if (u < 1) done = false;
         r.S.el.style.transform = "rotateY(" + (-th).toFixed(2) + "deg)";
+        P[1].el.style.transform = s1;
+        P[2].el.style.transform =
+          s1 +
+          " translateX(" +
+          P[1].w +
+          "px) rotateY(" +
+          b2.toFixed(2) +
+          "deg)";
         // the sheet standing up most is nearest the eye; flat ones keep their stacking
         r.S.el.style.zIndex =
           10 +
           Math.round((90 - Math.abs(th - 90)) * 10) +
           (th > 90 ? i : k - i);
-        r.S.f.lastChild.style.opacity = sh;
-        r.S.b.lastChild.style.opacity = sh;
-        // only the side facing up is drawn: some browsers let a page's photos and
-        // columns show through from the other side when left to backface-visibility
-        r.S.f.style.visibility = th < 90 ? "visible" : "hidden";
-        r.S.b.style.visibility = th < 90 ? "hidden" : "visible";
+        // Shade each strip by how far it has turned from the light, blending across
+        // the hinges so the curl reads as one sheet; back windows are mirrored.
+        var turned = [th, th - b1, th - b1 - b2],
+          df = [],
+          db = [];
+        turned.forEach(function (deg) {
+          var an = (deg * Math.PI) / 180,
+            dot = -Math.sin(an) * lr + Math.cos(an) * lz;
+          df.push(0.5 * Math.min(1, Math.max(0, 1 - dot / lz)));
+          db.push(0.5 * Math.min(1, Math.max(0, 1 + dot / lz)));
+        });
+        var ef = [df[0], (df[0] + df[1]) / 2, (df[1] + df[2]) / 2, df[2]],
+          eb = [db[0], (db[0] + db[1]) / 2, (db[1] + db[2]) / 2, db[2]];
+        P.forEach(function (p, n) {
+          p.f.lastChild.style.background = shade(ef[n], ef[n + 1]);
+          p.b.lastChild.style.background = shade(eb[n + 1], eb[n]);
+          // only the side facing up is drawn: some browsers let a page's photos and
+          // columns show through from the other side when left to backface-visibility
+          p.f.style.visibility = turned[n] < 90 ? "visible" : "hidden";
+          p.b.style.visibility = turned[n] < 90 ? "hidden" : "visible";
+        });
       });
       return done;
     }

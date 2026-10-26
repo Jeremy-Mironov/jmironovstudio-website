@@ -1748,9 +1748,20 @@ body {
   position: absolute;
   inset: 0;
   z-index: 5;
-  background: #28190a;
-  opacity: 0;
   pointer-events: none;
+}
+/* the hinged strips a turning sheet bends at; each window shows its slice of a page */
+.bk-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform-origin: 0 50%;
+}
+.bk-strip .bk-face {
+  overflow: hidden;
+  overflow: clip;
 }
 /* a long piece is poured into page-sized columns; each page shows one of them */
 .flowbox {
@@ -2704,19 +2715,22 @@ body {
   font-size: 11px;
   line-height: 28px;
 }
+/* the papers lie in a stack on the right of the open folder (book.js .stack) */
 .dk .fbook {
-  left: 52px;
+  left: 612px;
   top: 22px;
-  width: 1120px;
+  width: 560px;
   height: 720px;
-  perspective: 2600px;
 }
 .mb .fbook {
   left: 8px;
   top: 38px;
   width: 330px;
   height: 640px;
-  perspective: 1600px;
+}
+.fbook.stack::before,
+.fbook.stack::after {
+  background: #fffefa;
 }
 .dk .fbook .mnav {
   top: calc(100% + 20px);
@@ -2923,6 +2937,14 @@ body {
   position: absolute;
   inset: 0;
 }
+/* the index card and the stationery lie on the flap, under the left half */
+.fp-flap {
+  inset: auto;
+  left: 52px;
+  top: 22px;
+  width: 560px;
+  height: 720px;
+}
 .icard {
   position: absolute;
   left: 8px;
@@ -2992,8 +3014,12 @@ body {
   font-style: normal;
 }
 .ilist a:hover b,
-.ilist a.hov b {
+.ilist a.hov b,
+.ilist a.on b {
   color: #b8352a;
+}
+.pnext {
+  margin-top: 6px !important;
 }
 .fnote {
   position: absolute !important;
