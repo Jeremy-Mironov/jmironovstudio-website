@@ -1,6 +1,6 @@
 ---
-// About: a two-page résumé lying on the desk. On a phone the same text is one stapled
-// set of pages to turn.
+// About: a résumé printed on A4 and left in a loose stack on the desk. Turning on slides
+// the top sheet off and tucks it under the pile; turning back brings the bottom one up.
 import { siteConfig } from "@/config/site";
 
 const contact = siteConfig.contact;
@@ -10,59 +10,32 @@ const contactLine = `${contact.location} · <a href="mailto:${contact.email}">${
 const CLIP =
   "M8 20 V 52 a6 6 0 0 0 12 0 V 12 a8 8 0 0 0 -16 0 V 46 a4 4 0 0 0 8 0 V 18";
 const tools = [
-  [
-    "WordPress & Elementor",
-    "Custom websites for local businesses that need easy content management.",
-  ],
-  [
-    "Astro",
-    "Fast, modern static sites for businesses that need high performance and custom structure.",
-  ],
-  [
-    "Google Ads",
-    "Search campaign setup, keyword strategy, conversion tracking and optimization.",
-  ],
-  [
-    "Meta Ads",
-    "Facebook and Instagram lead generation campaigns for local service businesses.",
-  ],
-  [
-    "GA4 & Google Tag Manager",
-    "Analytics and tag management, so you know where leads come from.",
-  ],
-  [
-    "Google Search Console",
-    "Search performance monitoring and technical SEO issue finding.",
-  ],
-  [
-    "Microsoft Clarity",
-    "Behavior tracking and heatmaps to see how visitors use your website.",
-  ],
-  [
-    "CRM & Automation",
-    "Google Sheets workflows, CRM integrations and simple lead follow-up automation.",
-  ],
-  [
-    "Local SEO",
-    "Google Business Profile optimization, service area pages and local keyword strategy.",
-  ],
+  ["WordPress & Elementor", "sites owners can edit themselves"],
+  ["Astro", "fast static sites with a custom structure"],
+  ["Google Ads", "search campaigns, keywords, conversion tracking"],
+  ["Meta Ads", "Facebook and Instagram lead campaigns"],
+  ["GA4 & Tag Manager", "where the leads actually come from"],
+  ["Search Console", "search performance and technical SEO"],
+  ["Microsoft Clarity", "heatmaps of how visitors use a site"],
+  ["CRM & automation", "Sheets workflows and lead follow-up"],
+  ["Local SEO", "Business Profile, service-area pages, local keywords"],
 ];
 const values = [
   [
     "Implementation over advice",
-    "I build things. When you hire me, I set up the website, configure the tracking, run the ads and build the automation — not just tell you what to do.",
+    "I set up the site, the tracking, the ads and the automation — not just a list of things to do.",
   ],
   [
     "Marketing built into the website",
-    "Good websites are built with marketing in mind from the start — proper structure, clear service pages, fast load times and forms that work.",
+    "Clear service pages, fast pages and forms that work, planned from the start.",
   ],
   [
     "Honest about what works",
-    "I will tell you if something is not a good investment for your business size or situation. The goal is results, not selling more services.",
+    "If something isn't worth it at your size, I'll say so. The goal is results.",
   ],
   [
     "Simple systems for small teams",
-    "Local businesses do not need enterprise tools. I build simple, practical systems a small team can actually use and maintain.",
+    "Practical tools a small team can actually use and keep running.",
   ],
 ];
 ---
@@ -73,165 +46,52 @@ const values = [
     role="region"
     aria-label="About — Jeremy Mironov's résumé"
   >
+    <figure class="r-photo lbable">
+      <img
+        src="/desk/img/about-office.jpg"
+        alt="The JMironov Studio workspace in Vancouver, WA"
+      />
+      <figcaption>the studio, Vancouver WA</figcaption>
+      <svg class="clip" viewBox="0 0 24 64" aria-hidden="true">
+        <path
+          d={CLIP}
+          fill="none"
+          stroke="#7d858e"
+          stroke-width="2.8"
+          stroke-linecap="round"></path>
+        <path
+          d={CLIP}
+          fill="none"
+          stroke="#eef2f6"
+          stroke-width="1"
+          stroke-linecap="round"
+          transform="translate(-.7 -.7)"></path>
+      </svg>
+    </figure>
+    <div class="sticky y r-note">
+      <div class="b">Need the PDF?</div>
+      <div>Ask and I'll send my full résumé.</div>
+      <a class="sk-link" href="/contact">request my résumé ✉</a>
+      <div
+        class="tape"
+        style="left: 60px; top: -12px; width: 70px; rotate: 3deg"
+      >
+      </div>
+    </div>
     <div class="r-ring" aria-hidden="true"></div>
-    <div class="book rsm">
+    <div class="book rsm stack">
       <div class="bk-page bk-l"></div>
       <div class="bk-page bk-r"></div>
-      <button class="mcorner l" data-step="-1" aria-label="Previous page"
+      <button class="mcorner l" data-step="-1" aria-label="Previous sheet"
       ></button>
-      <button class="mcorner r" data-step="1" aria-label="Next page"></button>
+      <button class="mcorner r" data-step="1" aria-label="Next sheet"></button>
       <div class="mnav">
         <button class="sk-btn" data-step="-1">‹ back</button>
         <span class="bk-num hand"></span>
         <button class="sk-btn" data-step="1">next ›</button>
       </div>
 
-      <template data-page data-owner="/about" data-mode="dk">
-        <section class="rp">
-          <figure class="r-photo lbable">
-            <img
-              src="/desk/img/about-office.jpg"
-              alt="The JMironov Studio workspace in Vancouver, WA"
-            />
-            <figcaption>the studio, Vancouver WA</figcaption>
-            <svg class="clip" viewBox="0 0 24 64" aria-hidden="true">
-              <path
-                d={CLIP}
-                fill="none"
-                stroke="#7d858e"
-                stroke-width="2.8"
-                stroke-linecap="round"></path>
-              <path
-                d={CLIP}
-                fill="none"
-                stroke="#eef2f6"
-                stroke-width="1"
-                stroke-linecap="round"
-                transform="translate(-.7 -.7)"></path>
-            </svg>
-          </figure>
-          <div class="r-top">
-            <h2 class="r-name">Jeremy Mironov</h2>
-            <div class="r-role">
-              Web development &amp; digital marketing · JMironov Studio
-            </div>
-            <div class="r-contact" set:html={contactLine} />
-          </div>
-          <h3 class="r-h">Profile</h3>
-          <p>
-            Hi, I'm Jeremy. I run JMironov Studio, a small digital marketing and
-            web development studio based in Vancouver, WA. I help local service
-            businesses get more leads through better websites, local SEO,
-            advertising, tracking and simple automation systems.
-          </p>
-          <h3 class="r-h">Background — technical and marketing together</h3>
-          <p>
-            My background is in computer science and web development. I have
-            been building websites and working on digital marketing for several
-            years, primarily for local and small service businesses.
-          </p>
-          <p>
-            Most agencies are strong on strategy but hand off the technical
-            work. Most web developers build clean sites but don't think about
-            how customers find them. I work at the intersection of both —
-            websites built with marketing in mind, not just pages that look
-            good.
-          </p>
-          <p>
-            I understand how websites are built, how Google ranks local
-            businesses, how ad campaigns are structured, and how to set up
-            tracking that shows where your leads actually come from.
-          </p>
-          <h3 class="r-h">Education</h3>
-          <div class="r-entry">
-            <div class="r-row">
-              <b>Associate in Applied Technology — Web Development</b><span
-                >exp. 2026</span
-              >
-            </div>
-            <div class="r-sub">Clark College, Vancouver, WA</div>
-            <p>
-              Web development, JavaScript, PHP &amp; MySQL, WordPress,
-              databases, web servers, cloud fundamentals and portfolio
-              development, finishing with the CTEC 293 Web Development Capstone.
-            </p>
-          </div>
-          <div class="r-entry">
-            <div class="r-row">
-              <b>Bachelor's degree — Computer Science</b><span>2019–2023</span>
-            </div>
-            <div class="r-sub">Tambov State Technical University</div>
-          </div>
-          <h3 class="r-h">Training &amp; recognition</h3>
-          <p>
-            AWS Academy Cloud Foundations · Phi Theta Kappa member · Oswald
-            Award recipient
-          </p>
-          <div class="r-pn">1 / 2</div>
-        </section>
-      </template>
-      <template data-page data-owner="/about" data-mode="dk">
-        <section class="rp">
-          <h3 class="r-h r-first">Tools &amp; platforms</h3>
-          <ul class="r-tools">
-            {
-              tools.map(([t, d]) => (
-                <li>
-                  <b>{t}</b> — {d}
-                </li>
-              ))
-            }
-          </ul>
-          <h3 class="r-h">How I work</h3>
-          <div class="r-values">
-            {
-              values.map(([t, d]) => (
-                <div>
-                  <b>{t}</b>
-                  <p>{d}</p>
-                </div>
-              ))
-            }
-          </div>
-          <blockquote class="r-quote">
-            “I build websites with marketing in mind — not just pages that look
-            good, but websites structured to help people find your business,
-            understand your services, and contact you.”
-          </blockquote>
-          <div class="r-sign">Jeremy Mironov</div>
-          <div class="r-links">
-            <a
-              href={siteConfig.socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer">LinkedIn ↗</a
-            >
-            <a
-              href={siteConfig.socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer">GitHub ↗</a
-            >
-            <a href="/projects">Project case studies</a>
-          </div>
-          <div class="r-pn">2 / 2</div>
-          <div class="sticky y r-note">
-            <div class="b">Need the PDF?</div>
-            <div>Ask and I'll send my full résumé.</div>
-            <a class="sk-link" href="/contact">request my résumé ✉</a>
-            <div
-              class="tape"
-              style="left: 70px; top: -12px; width: 70px; rotate: 3deg"
-            >
-            </div>
-          </div>
-        </section>
-      </template>
-
-      <template
-        data-flow="rflow"
-        data-owner="/about"
-        data-mode="mb"
-        data-title="Résumé"
-      >
+      <template data-flow="rflow" data-owner="/about" data-title="Résumé">
         <div class="r-top">
           <h2 class="r-name">Jeremy Mironov</h2>
           <div class="r-role">
@@ -239,55 +99,42 @@ const values = [
           </div>
           <div class="r-contact" set:html={contactLine} />
         </div>
-        <figure class="r-photo lbable">
-          <img
-            src="/desk/img/about-office.jpg"
-            alt="The JMironov Studio workspace in Vancouver, WA"
-          />
-        </figure>
         <h3 class="r-h">Profile</h3>
         <p>
-          Hi, I'm Jeremy. I run JMironov Studio, a small digital marketing and
-          web development studio based in Vancouver, WA. I help local service
-          businesses get more leads through better websites, local SEO,
-          advertising, tracking and simple automation systems.
+          I run JMironov Studio, a small web development and digital marketing
+          studio in Vancouver, WA. I help local service businesses get more
+          leads through better websites, local SEO, advertising, tracking and
+          simple automation.
         </p>
         <h3 class="r-h">Background</h3>
         <p>
-          My background is in computer science and web development. I have been
-          building websites and working on digital marketing for several years,
-          primarily for local and small service businesses.
+          Computer science and web development, then several years of building
+          websites and running marketing for local and small service businesses.
         </p>
         <p>
-          Most agencies are strong on strategy but hand off the technical work.
-          Most web developers build clean sites but don't think about how
-          customers find them. I work at the intersection of both — websites
+          Agencies tend to hand off the technical work; developers tend to
+          forget how customers find a site. I work where the two meet: websites
           built with marketing in mind, not just pages that look good.
-        </p>
-        <p>
-          I understand how websites are built, how Google ranks local
-          businesses, how ad campaigns are structured, and how to set up
-          tracking that shows where your leads actually come from.
         </p>
         <h3 class="r-h">Education</h3>
         <div class="r-entry">
-          <b>Associate in Applied Technology — Web Development</b>
-          <div class="r-sub">Clark College, Vancouver, WA · exp. 2026</div>
+          <div class="r-row">
+            <b>AAT — Web Development</b><span>exp. 2026</span>
+          </div>
+          <div class="r-sub">Clark College, Vancouver, WA</div>
           <p>
-            Web development, JavaScript, PHP &amp; MySQL, WordPress, databases,
-            web servers, cloud fundamentals and portfolio development, finishing
-            with the CTEC 293 Web Development Capstone.
+            JavaScript, PHP &amp; MySQL, WordPress, databases, web servers and
+            cloud fundamentals; CTEC 293 capstone.
           </p>
         </div>
         <div class="r-entry">
-          <b>Bachelor's degree — Computer Science</b>
-          <div class="r-sub">Tambov State Technical University · 2019–2023</div>
+          <div class="r-row">
+            <b>Bachelor's — Computer Science</b><span>2019–2023</span>
+          </div>
+          <div class="r-sub">Tambov State Technical University</div>
         </div>
         <h3 class="r-h">Training &amp; recognition</h3>
-        <p>
-          AWS Academy Cloud Foundations · Phi Theta Kappa member · Oswald Award
-          recipient
-        </p>
+        <p>AWS Academy Cloud Foundations · Phi Theta Kappa · Oswald Award</p>
         <h3 class="r-h">Tools &amp; platforms</h3>
         <ul class="r-tools">
           {
@@ -310,25 +157,26 @@ const values = [
           }
         </div>
         <blockquote class="r-quote">
-          “I build websites with marketing in mind — not just pages that look
-          good, but websites structured to help people find your business,
-          understand your services, and contact you.”
+          “I build websites with marketing in mind — structured to help people
+          find your business, understand your services, and contact you.”
         </blockquote>
         <div class="r-sign">Jeremy Mironov</div>
-        <div class="r-links">
-          <a
-            href={siteConfig.socialLinks.linkedin}
-            target="_blank"
-            rel="noopener noreferrer">LinkedIn ↗</a
-          >
-          <a
-            href={siteConfig.socialLinks.github}
-            target="_blank"
-            rel="noopener noreferrer">GitHub ↗</a
-          >
-          <a href="/projects">Case studies</a>
-          <a href="/contact">Request my résumé</a>
-        </div>
+        <ul class="r-links">
+          <li>
+            <a
+              href={siteConfig.socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer">LinkedIn ↗</a>
+          </li>
+          <li>
+            <a
+              href={siteConfig.socialLinks.github}
+              target="_blank"
+              rel="noopener noreferrer">GitHub ↗</a>
+          </li>
+          <li><a href="/projects">Case studies</a></li>
+          <li><a href="/contact">Request my résumé</a></li>
+        </ul>
       </template>
       <template data-shell>
         <section class="rp">
@@ -336,14 +184,11 @@ const values = [
             <span>Jeremy Mironov</span><span>Résumé</span>
           </div>
           <div class="flowbox">%flow%</div>
-          <div class="r-pn">page %n%</div>
+          <div class="r-pn">%n% / %of%</div>
         </section>
       </template>
-      <template data-filler>
-        <section class="rp"><div class="r-pn">page %n%</div></section>
-      </template>
     </div>
-    <div class="ptag" style="left: 1240px; top: 40px; rotate: 4deg">about</div>
+    <div class="ptag" style="left: 1150px; top: 60px; rotate: 4deg">about</div>
   </div>
   <a
     class="grab"
@@ -351,5 +196,5 @@ const values = [
     data-obj="resume"
     data-keep
     aria-label="Open the résumé"
-    style="left: 150px; top: 50px; width: 1300px; height: 920px"></a>
+    style="left: 470px; top: 30px; width: 660px; height: 930px"></a>
 </div>

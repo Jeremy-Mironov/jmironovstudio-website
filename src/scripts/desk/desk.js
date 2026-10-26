@@ -35,11 +35,13 @@ var DESK = {
     },
     box: {
       notebook: [145, 140, 1310, 740],
-      folder: [205, 82, 1190, 852],
-      magazine: [230, 118, 1140, 794],
-      resume: [160, 24, 1278, 953],
+      folder: [185, 82, 1230, 838],
+      magazine: [222, 118, 1156, 794],
+      resume: [480, 34, 640, 937],
       envelope: [420, 70, 760, 910],
     },
+    // objects that may come closer than `fit`
+    fits: { folder: 0.95, resume: 0.93 },
   },
   mb: {
     z: 1,
@@ -64,6 +66,7 @@ var mob = null,
   camAnim = null,
   ready = false,
   wheelT = 0,
+  wheelUsed = false,
   touch = null;
 // where each object was left open: the dock and the objects on the desk link back there
 var last = {
@@ -210,7 +213,9 @@ function camFor(name) {
       w = VW / s,
       h = VH / s,
       top = D.dock - SH / 2;
-    z = D.fit * Math.min(w / b[2], (h / 2 - top) / b[3]);
+    z =
+      ((D.fits && D.fits[name]) || D.fit) *
+      Math.min(w / b[2], (h / 2 - top) / b[3]);
     oy = (top + h / 2) / 2;
     q = [b[0] + b[2] / 2 - SW / 2, b[1] + b[3] / 2 - SH / 2];
   }
@@ -667,15 +672,20 @@ root.addEventListener("click", function (e) {
 root.addEventListener(
   "wheel",
   function (e) {
-    var now = Date.now();
+    // One swipe or burst of wheel clicks turns one page, however long a trackpad
+    // keeps coasting: a gesture only ends after a pause in the wheel events.
+    var now = Date.now(),
+      fresh = now - wheelT > 260;
+    wheelT = now;
+    if (fresh) wheelUsed = false;
     if (
       lb ||
+      wheelUsed ||
       Math.abs(e.deltaY) < 4 ||
-      now - wheelT < 420 ||
       e.target.closest("textarea")
     )
       return;
-    wheelT = now;
+    wheelUsed = true;
     step(e.deltaY > 0 ? 1 : -1);
   },
   { passive: true },

@@ -1,6 +1,8 @@
 ---
-// The blog as a magazine: cover and contents first, then every post, each starting on
-// a left-hand page. Posts are paginated in the browser (see scripts/desk/book.js).
+// The blog as a magazine issue: a photo cover and the contents, then every post as a
+// feature: an opener page with its photo and headline on the left of a spread, the text
+// set in two columns from the facing page on. Text pages are cut in the browser (see
+// scripts/desk/book.js).
 import { render } from "astro:content";
 import { blogPosts, deskImage, postDate } from "@/data/desk";
 
@@ -20,14 +22,21 @@ const issues = await Promise.all(
   }),
 );
 const latest = issues[0];
-const year = posts.length
-  ? posts[0].data.pubDate.getUTCFullYear()
-  : new Date().getFullYear();
+const issue = String(posts.length).padStart(2, "0");
+const dated = posts.length
+  ? posts[0].data.pubDate.toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    })
+  : "";
 ---
 
 <div class="obj o-magazine" data-name="magazine">
   <div class="ob-body" role="region" aria-label="Field Notes — the blog">
     <div class="book mag">
+      <div class="bk-edge l" aria-hidden="true"></div>
+      <div class="bk-edge r" aria-hidden="true"></div>
       <div class="bk-page bk-l"></div>
       <div class="bk-page bk-r"></div>
       <button class="mcorner l" data-step="-1" aria-label="Previous pages"
@@ -41,114 +50,115 @@ const year = posts.length
       </div>
       <div class="ptag" style="left: 30px; top: 40px; rotate: -6deg">blog</div>
 
-      <template data-page data-owner="/blog" data-mode="dk">
+      <template data-page data-owner="/blog">
         <section class="mp mp-cover">
-          <div class="mhead">
-            <span>Field Notes</span><span
-              >Issue {String(posts.length).padStart(2, "0")} · {year}</span
-            >
+          {latest?.image && <img class="cv-img" src={latest.image} alt="" />}
+          <div class="cv-shade"></div>
+          <div class="cv-top">
+            <div class="cv-mast">Field <em>Notes</em></div>
+            <div class="cv-line">
+              <span>The JMironov Studio journal</span>
+              <span>No. {issue} · {dated}</span>
+            </div>
           </div>
-          <div class="mmast">Field<br /><em>Notes</em></div>
-          <p class="msub">
-            The JMironov Studio journal — plain-English notes on websites, local
-            SEO, ads and follow-up for local service businesses.
-          </p>
           {
             latest && (
-              <a class="mlead" href={latest.href}>
-                {latest.image && <img src={latest.image} alt="" />}
-                <span class="mk">Inside · {latest.kick}</span>
-                <span class="mt">{latest.post.data.title}</span>
+              <a class="cv-lead" href={latest.href}>
+                <span class="cv-k">{latest.kick}</span>
+                <span class="cv-t">{latest.post.data.title}</span>
               </a>
             )
           }
-          <div class="mfoot">
-            <span>— Jeremy Mironov, editor</span><span>%n%</span>
-          </div>
+          <ul class="cv-more">
+            {
+              issues.slice(1, 4).map((i) => (
+                <li>
+                  <a href={i.href}>
+                    <b>{i.kick}</b>
+                    {i.post.data.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <div class="cv-bar" aria-hidden="true"><i></i>free · no. {issue}</div>
         </section>
       </template>
-      <template data-page data-owner="/blog" data-mode="dk">
+      <template data-page data-owner="/blog">
         <section class="mp mp-toc">
-          <div class="mhead"><span>Field Notes</span><span>Contents</span></div>
-          <div class="mtoc-h">In this issue</div>
-          <ol class={posts.length > 6 ? "mtoc many" : "mtoc"}>
+          <div class="mhead">
+            <span>Field Notes</span><span>No. {issue}</span>
+          </div>
+          <h2 class="toc-h">Contents</h2>
+          <ol class={posts.length > 5 ? "mtoc many" : "mtoc"}>
             {
               issues.map((i) => (
                 <li>
                   <a href={i.href}>
-                    <span class="mk">
-                      {i.kick} · {postDate(i.post.data.pubDate, "short")}
-                    </span>
-                    <span class="mt">{i.post.data.title}</span>
-                    <span class="md">{i.post.data.description}</span>
                     <span class="mn" data-pn={i.href} />
+                    {i.image && <img src={i.image} alt="" />}
+                    <span class="mtx">
+                      <span class="mk">{i.kick}</span>
+                      <span class="mt">{i.post.data.title}</span>
+                      <span class="md">{i.post.data.description}</span>
+                    </span>
                   </a>
                 </li>
               ))
             }
           </ol>
+          <p class="ed-note">
+            <b>From the editor.</b> Plain-English notes on websites, local SEO, ads
+            and follow-up, written for people who run local service businesses.
+            <span class="sig">Jeremy</span>
+          </p>
           <div class="mfoot">
             <span>jmironovstudio.com/blog</span><span>%n%</span>
-          </div>
-        </section>
-      </template>
-      <template data-page data-owner="/blog" data-mode="mb">
-        <section class="mp mp-cover">
-          <div class="mhead">
-            <span>Field Notes</span><span
-              >Issue {String(posts.length).padStart(2, "0")} · {year}</span
-            >
-          </div>
-          <div class="mmast">Field<br /><em>Notes</em></div>
-          <p class="msub">
-            Plain-English notes on websites, local SEO, ads and follow-up for
-            local businesses.
-          </p>
-          <div class="mtoc-h">In this issue</div>
-          <ol class="mtoc">
-            {
-              issues.map((i) => (
-                <li>
-                  <a href={i.href}>
-                    <span class="mk">
-                      {i.kick} · {postDate(i.post.data.pubDate, "short")}
-                    </span>
-                    <span class="mt">{i.post.data.title}</span>
-                    <span class="mn" data-pn={i.href} />
-                  </a>
-                </li>
-              ))
-            }
-          </ol>
-          <div class="mfoot">
-            <span>— Jeremy Mironov, editor</span><span>%n%</span>
           </div>
         </section>
       </template>
 
       {
         issues.map((i) => (
-          <template
-            data-flow="mflow"
-            data-owner={i.href}
-            data-kick={i.kick}
-            data-title={i.post.data.title}
-          >
-            <article class="mart">
-              <div class="mkick">
-                {i.kick} · {postDate(i.post.data.pubDate)}
-              </div>
-              <h2 class="mtitle">{i.post.data.title}</h2>
-              <p class="mdeck">{i.post.data.description}</p>
-              {i.image && (
-                <figure class="mfig lbable">
-                  <img src={i.image} alt={i.post.data.title} />
-                </figure>
-              )}
-              <div class="mby">
-                By {i.post.data.author}
-                {i.read && ` · ${i.read}`}
-              </div>
+          <Fragment>
+            <template
+              data-page
+              data-start
+              data-owner={i.href}
+              data-title={i.post.data.title}
+            >
+              <section class="mp mp-open">
+                {i.image && (
+                  <figure class="op-fig lbable">
+                    <img src={i.image} alt={i.post.data.title} />
+                  </figure>
+                )}
+                <div class="op-text">
+                  <div class="mkick">
+                    {i.kick} · {postDate(i.post.data.pubDate)}
+                  </div>
+                  <h2 class="op-title">{i.post.data.title}</h2>
+                  <p class="op-deck">{i.post.data.description}</p>
+                  <div class="mby">
+                    By {i.post.data.author}
+                    {i.read && ` · ${i.read}`}
+                  </div>
+                </div>
+                <div class="mfoot">
+                  <>
+                    <span>Field Notes · {i.kick}</span>
+                    <span>%n%</span>
+                  </>
+                </div>
+              </section>
+            </template>
+            <template
+              data-flow="mflow"
+              data-cols="2"
+              data-owner={i.href}
+              data-kick={i.kick}
+              data-title={i.post.data.title}
+            >
               <div class="mbody">
                 <i.Content />
               </div>
@@ -158,8 +168,8 @@ const year = posts.length
                   Questions about your own site? Write me a letter →
                 </a>
               </p>
-            </article>
-          </template>
+            </template>
+          </Fragment>
         ))
       }
 
@@ -167,9 +177,7 @@ const year = posts.length
         <section class="mp">
           <div class="mhead"><span>Field Notes</span><span>%kick%</span></div>
           <div class="flowbox">%flow%</div>
-          <div class="mfoot">
-            <span>jmironovstudio.com%owner%</span><span>%n%</span>
-          </div>
+          <div class="mfoot"><span>%title%</span><span>%n%</span></div>
         </section>
       </template>
       <template data-filler>
@@ -188,8 +196,7 @@ const year = posts.length
           </div>
           <p class="fl-next">
             Next in this issue: <a href="/blog"
-              ><span class="fl-title"></span> →</a
-            >
+              ><span class="fl-title"></span> →</a>
           </p>
           <div class="mfoot">
             <span>jmironovstudio.com</span><span>%n%</span>

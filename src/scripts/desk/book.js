@@ -1,20 +1,25 @@
-// Paper books on the desk: the blog magazine, the project folder and the résumé.
+// Paper on the desk: the blog magazine, the project folder and the résumé.
 // Pages come from <template>s inside the book: whole pages as they are, and long pieces
 // (an article, a case study) poured into page-sized columns and cut into as many pages
-// as they fill. The desk shows a spread, a phone one page. Every turn is the same sheet
-// going over the spine; a jump riffles a few of them, one after the other.
+// as they fill. A bound book shows a spread on the desk and one page on a phone; every
+// turn is the same sheet going over the spine, and a jump riffles a few of them. A loose
+// stack (.stack, the résumé) shows its top sheet: turning on slides that sheet off and
+// tucks it under the pile, turning back pulls the bottom sheet out and lays it on top.
 //
 //   template[data-page]   a whole page
-//   template[data-flow]   a piece to paginate (data-flow names the flow class)
+//   template[data-flow]   a piece to paginate (data-flow names the flow class;
+//                         data-cols="2" sets it in two columns per page on the desk)
 //   template[data-shell]  the page a flow is poured into: %flow% marks the spot
-//   template[data-filler] a page that keeps every piece starting on a left-hand page
+//   template[data-filler] a page that fills the gap before a data-start page
 // data-owner is the address a page belongs to; data-mode="dk"/"mb" keeps a page to the
-// desk or the phone. %n% is the page number, %kick% and %title% come from the flow, and
-// any [data-pn="/address"] is filled with the page that address starts on.
+// desk or the phone; data-start makes a page open on the left of a spread. %n% is the
+// page number and %of% the pages its address has, %kick% and %title% come from the
+// flow, and any [data-pn="/address"] is filled with the page that address starts on.
 import { el, esc, ease, markLB, reduce } from "./util.js";
 
 var SHEETS = 3,
-  GAP = 40;
+  GAP = 40,
+  COL_GAP = 28;
 
 // onOwner(address) hears where the book was turned to.
 export function createBook(box, host, onOwner) {
@@ -25,7 +30,8 @@ export function createBook(box, host, onOwner) {
     filler = box.querySelector(":scope > template[data-filler]");
   var pageL = box.querySelector(".bk-l"),
     pageR = box.querySelector(".bk-r"),
-    num = box.querySelector(".bk-num");
+    num = box.querySelector(".bk-num"),
+    stack = box.classList.contains("stack");
   var mob = false,
     pages = [],
     starts = {},
@@ -35,8 +41,13 @@ export function createBook(box, host, onOwner) {
     raf = 0,
     fw = 0,
     fh = 0,
-    sheets = [];
-  for (var i = 0; i < SHEETS; i++) sheets.push(makeSheet());
+    sheets = [],
+    mover = null;
+  if (stack) {
+    mover = el("div", "bk-page bk-mover", box);
+    mover.inert = true;
+    mover.setAttribute("aria-hidden", "true");
+  } else for (var i = 0; i < SHEETS; i++) sheets.push(makeSheet());
 
   function makeSheet() {
     var s = el("div", "bk-sheet", box);
@@ -51,20 +62,30 @@ export function createBook(box, host, onOwner) {
       return k in map ? map[k] : m;
     });
   }
-  function flowCSS(k) {
+  // one page at a time: a phone, or a loose stack anywhere
+  function one() {
+    return mob || stack;
+  }
+  // Columns of a page share its width; the next page's columns lie one gap further on.
+  function flowCSS(k, cols) {
+    var g = cols > 1 ? COL_GAP : GAP,
+      cw = (fw - (cols - 1) * g) / cols;
     return (
       "width:" +
       fw +
       "px;height:" +
       fh +
       "px;column-width:" +
-      fw +
+      cw +
       "px;column-gap:" +
-      GAP +
+      g +
       "px;transform:translateX(" +
-      -k * (fw + GAP) +
+      -k * (fw + g) +
       "px)"
     );
+  }
+  function colsOf(t) {
+    return (!one() && +t.getAttribute("data-cols")) || 1;
   }
 
   // A copy of the book off screen, untransformed, with one empty flow page in it: the
@@ -78,6 +99,7 @@ export function createBook(box, host, onOwner) {
     host.appendChild(m);
     pg.innerHTML = fillIn(shell.innerHTML, {
       n: "",
+      of: "",
       kick: "",
       title: "",
       owner: "",
@@ -88,12 +110,16 @@ export function createBook(box, host, onOwner) {
     fw = fb.clientWidth;
     fh = fb.clientHeight;
     function measure(t) {
+      var cols = colsOf(t),
+        g = cols > 1 ? COL_GAP : GAP,
+        cw = (fw - (cols - 1) * g) / cols;
       f.className = "flow " + (t.getAttribute("data-flow") || "");
-      f.style.cssText = flowCSS(0);
+      f.style.cssText = flowCSS(0, cols);
       f.innerHTML = t.innerHTML + '<div class="fend"></div>';
       var a = f.getBoundingClientRect().left,
-        b = f.lastChild.getBoundingClientRect().left;
-      return Math.max(1, Math.floor((b - a) / (fw + GAP) + 0.02) + 1);
+        b = f.lastChild.getBoundingClientRect().left,
+        col = Math.floor((b - a) / (cw + g) + 0.02);
+      return Math.max(1, Math.floor(col / cols) + 1);
     }
     measure.done = function () {
       m.remove();
@@ -102,25 +128,25 @@ export function createBook(box, host, onOwner) {
   }
 
   function count() {
-    return mob ? pages.length : pages.length / 2;
+    return one() ? pages.length : pages.length / 2;
   }
   function li(s) {
-    return mob ? -1 : 2 * s;
+    return one() ? -1 : 2 * s;
   }
   function ri(s) {
-    return mob ? s : 2 * s + 1;
+    return one() ? s : 2 * s + 1;
   }
   function ownerOf(s) {
-    var P = pages[mob ? s : 2 * s];
+    var P = pages[one() ? s : 2 * s];
     return P ? P.owner : "";
   }
   function spreadOf(owner) {
     var i = starts[owner] || 0;
-    return mob ? i : i >> 1;
+    return one() ? i : i >> 1;
   }
   function lastOf(owner) {
     for (var i = pages.length - 1; i >= 0; i--)
-      if (pages[i].owner === owner) return mob ? i : i >> 1;
+      if (pages[i].owner === owner) return one() ? i : i >> 1;
     return 0;
   }
 
@@ -147,17 +173,17 @@ export function createBook(box, host, onOwner) {
         owner = t.getAttribute("data-owner");
       if (!flow && !t.hasAttribute("data-page")) return;
       if (mode && mode !== (mob ? "mb" : "dk")) return;
-      if (flow && !mob && pages.length % 2) pad(t);
+      if (t.hasAttribute("data-start") && !one() && pages.length % 2) pad(t);
       if (!(owner in starts)) starts[owner] = pages.length;
       if (!flow) {
         pages.push({ owner: owner, t: t });
         return;
       }
       if (!meas) meas = measurer();
-      for (var k = 0, n = meas(t); k < n; k++)
-        pages.push({ owner: owner, t: t, k: k });
+      for (var k = 0, cols = colsOf(t), n = meas(t); k < n; k++)
+        pages.push({ owner: owner, t: t, k: k, cols: cols });
     });
-    if (!mob && pages.length % 2) pad(null);
+    if (!one() && pages.length % 2) pad(null);
     if (meas) meas.done();
     at = goal =
       keep in starts ? Math.min(spreadOf(keep) + off, lastOf(keep)) : 0;
@@ -168,7 +194,13 @@ export function createBook(box, host, onOwner) {
   function pageHTML(i) {
     var P = pages[i];
     if (!P) return "";
-    var map = { n: i + 1, owner: P.owner };
+    var map = {
+      n: i + 1,
+      of: pages.filter(function (Q) {
+        return Q.owner === P.owner;
+      }).length,
+      owner: P.owner,
+    };
     if (P.fill) {
       var d = el("div");
       d.innerHTML = fillIn(filler.innerHTML, map);
@@ -187,7 +219,7 @@ export function createBook(box, host, onOwner) {
       '<div class="flow ' +
       (P.t.getAttribute("data-flow") || "") +
       '" style="' +
-      flowCSS(P.k) +
+      flowCSS(P.k, P.cols) +
       '">' +
       P.t.innerHTML +
       "</div>";
@@ -232,14 +264,15 @@ export function createBook(box, host, onOwner) {
     box.classList.toggle("bk-first", goal === 0);
     box.classList.toggle("bk-last", goal >= n - 1);
     box.classList.toggle("bk-one", n <= 1);
+    // how many pages lie either side shows as the thickness of the page edges
+    box.style.setProperty("--done", n > 1 ? (goal / (n - 1)).toFixed(3) : 0);
     if (num)
-      num.textContent = mob
+      num.textContent = one()
         ? goal + 1 + " / " + n
         : 2 * goal + 1 + "–" + (2 * goal + 2) + " / " + pages.length;
   }
   function render() {
-    if (!mob) put(pageL, li(at));
-    else put(pageL, -1);
+    put(pageL, li(at));
     put(pageR, ri(at));
     status();
   }
@@ -252,6 +285,7 @@ export function createBook(box, host, onOwner) {
     sheets.forEach(function (S) {
       S.el.classList.remove("go");
     });
+    if (mover) mover.className = "bk-page bk-mover";
   }
   // Turn to spread `to`. o.instant skips the animation; o.delay holds it back.
   function turn(to, o) {
@@ -269,7 +303,23 @@ export function createBook(box, host, onOwner) {
       render();
       return;
     }
-    flip(at, to, o.delay || 0);
+    (stack ? shuffle : flip)(at, to, o.delay || 0);
+  }
+  // Run pose(now) every frame until it says it is done, then land on `to`.
+  function animate(to, pose, done) {
+    function frame(now) {
+      raf = 0;
+      if (!pose(now)) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
+      done();
+      busy = false;
+      at = to;
+      render();
+      if (goal !== at) (stack ? shuffle : flip)(at, goal, 0);
+    }
+    raf = requestAnimationFrame(frame);
   }
   function flip(from, to, delay) {
     busy = true;
@@ -313,21 +363,50 @@ export function createBook(box, host, onOwner) {
     run.forEach(function (r) {
       r.S.el.classList.add("go");
     });
-    function frame(now) {
-      raf = 0;
-      if (!pose(now)) {
-        raf = requestAnimationFrame(frame);
-        return;
-      }
+    animate(to, pose, function () {
       run.forEach(function (r) {
         r.S.el.classList.remove("go");
       });
-      busy = false;
-      at = to;
-      render();
-      if (goal !== at) flip(at, goal, 0);
+    });
+  }
+  // The loose stack: the sheet slides out to the side, then back in under the pile
+  // (turning on) or on top of it (turning back). Poses are [x %, y %, turn deg].
+  var TOP = [0, 0, 0],
+    OUT = [64, -5, 7],
+    UNDER = [1.4, 1.1, 1.6];
+  function shuffle(from, to, delay) {
+    busy = true;
+    var fwd = to > from,
+      dur = reduce ? 300 : 950,
+      t0 = performance.now() + delay;
+    mover.innerHTML = pageHTML(fwd ? from : to);
+    // turning on, the next sheet is already lying under the one that leaves
+    if (fwd) put(pageR, to);
+    function pose(now) {
+      var u = Math.min(1, Math.max(0, (now - t0) / dur)),
+        first = u < 0.5,
+        p = ease(first ? u * 2 : (u - 0.5) * 2),
+        a = first ? (fwd ? TOP : UNDER) : OUT,
+        b = first ? OUT : fwd ? UNDER : TOP,
+        lift = Math.sin(Math.PI * u);
+      mover.style.transform =
+        "translate(" +
+        (a[0] + (b[0] - a[0]) * p).toFixed(2) +
+        "%," +
+        (a[1] + (b[1] - a[1]) * p).toFixed(2) +
+        "%) rotate(" +
+        (a[2] + (b[2] - a[2]) * p).toFixed(2) +
+        "deg)";
+      mover.style.setProperty("--lift", lift.toFixed(3));
+      // above the pile while it is on top, below it while it is underneath
+      mover.classList.toggle("under", fwd ? !first : first);
+      return u >= 1;
     }
-    raf = requestAnimationFrame(frame);
+    pose(t0);
+    mover.classList.add("go");
+    animate(to, pose, function () {
+      mover.className = "bk-page bk-mover";
+    });
   }
 
   return {
