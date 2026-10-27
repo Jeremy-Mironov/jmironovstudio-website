@@ -2547,8 +2547,9 @@ body {
   font-style: normal;
   color: #b8352a;
 }
-/* the house ad that fills a left-over page */
-.ad {
+/* the house ad that fills a left-over page; nothing on it is called "ad": ad blockers
+   hide .mp-ad and .ad-cta, and took the whole page off the magazine */
+.house {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -2561,7 +2562,7 @@ body {
     inset 0 0 0 6px #fdf8f2,
     inset 0 0 0 8px #233f8c;
 }
-.ad-k {
+.house-k {
   font:
     600 11px ui-monospace,
     Menlo,
@@ -2571,33 +2572,33 @@ body {
   text-transform: uppercase;
   opacity: 0.8;
 }
-.ad-h {
+.house-h {
   margin-top: 16px;
   font:
     700 58px/0.95 Georgia,
     serif;
   letter-spacing: -1.5px;
 }
-.ad-h em {
+.house-h em {
   font-weight: 400;
   color: #ffd76a;
 }
-.mb .ad-h {
+.mb .house-h {
   font-size: 42px;
 }
-.ad-p {
+.house-p {
   margin: 18px 0 0;
   font:
     italic 17px/1.45 Georgia,
     serif;
 }
-.mb .ad {
+.mb .house {
   padding: 24px 20px;
 }
-.mb .ad-p {
+.mb .house-p {
   font-size: 15px;
 }
-.ad-cta {
+.house-cta {
   align-self: flex-start;
   margin-top: 24px;
   padding: 11px 16px;
@@ -2612,8 +2613,8 @@ body {
   text-transform: uppercase;
   text-decoration: none;
 }
-.ad-cta:hover,
-.ad-cta.hov {
+.house-cta:hover,
+.house-cta.hov {
   background: #ffd76a;
 }
 .fl-next {
